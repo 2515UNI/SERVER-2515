@@ -8,12 +8,13 @@
 body {
   margin:0;
   font-family: Arial;
-  background:#0b1a24;
   color:white;
   text-align:center;
+  background: linear-gradient(#0b1a24, #02080c);
+  overflow-x:hidden;
 }
 
-/* 눈 효과 */
+/* 눈 효과 (클릭 방해 제거) */
 .snow {
   position:fixed;
   width:100%;
@@ -21,7 +22,8 @@ body {
   background-image: radial-gradient(white 1px, transparent 1px);
   background-size:20px 20px;
   animation:snow 20s linear infinite;
-  opacity:0.2;
+  opacity:0.25;
+  pointer-events:none; /* ⭐ 핵심: 클릭 안막음 */
 }
 
 @keyframes snow {
@@ -29,9 +31,11 @@ body {
   to { transform: translateY(100vh); }
 }
 
+/* 제목 */
 h1 {
-  margin-top:50px;
-  font-size:45px;
+  margin-top:40px;
+  font-size:50px;
+  text-shadow:0 0 20px #00ccff;
 }
 
 /* 메뉴 */
@@ -39,20 +43,28 @@ h1 {
   margin:30px;
 }
 
+/* 버튼 */
 .btn {
   display:block;
-  width:220px;
-  margin:10px auto;
-  padding:12px;
-  background:#1f3a4a;
-  border-radius:10px;
-  color:white;
-  text-decoration:none;
+  width:240px;
+  margin:12px auto;
+  padding:14px;
+  border-radius:12px;
+  background: linear-gradient(135deg, #1f3a4a, #12232e);
   cursor:pointer;
+  transition:0.3s;
+  font-weight:bold;
 }
 
 .btn:hover {
-  background:#00ccff;
+  transform:scale(1.05);
+  background: linear-gradient(135deg, #00ccff, #0077aa);
+}
+
+/* 선택된 버튼 */
+.active {
+  background: linear-gradient(135deg, #00ccff, #005577);
+  box-shadow:0 0 15px #00ccff;
 }
 
 /* 내용 */
@@ -62,23 +74,28 @@ h1 {
 
 /* 박스 */
 .box {
-  width:320px;
+  width:330px;
   margin:20px auto;
-  padding:15px;
-  background:#1a2a35;
-  border-radius:10px;
+  padding:20px;
+  border-radius:15px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter: blur(5px);
   text-align:left;
+  box-shadow:0 0 20px rgba(0,200,255,0.2);
 }
 
 .title {
   text-align:center;
-  font-size:22px;
+  font-size:24px;
   color:#00ccff;
+  margin-bottom:15px;
 }
 
+/* 섹션 */
 .section {
-  margin-top:10px;
+  margin-top:15px;
   font-weight:bold;
+  color:#00ccff;
 }
 </style>
 </head>
@@ -87,51 +104,62 @@ h1 {
 
 <div class="snow"></div>
 
-<h1>SERVER 2515</h1>
+<h1>🔥 SERVER 2515 🔥</h1>
 
 <!-- 메뉴 -->
 <div class="menu">
-  <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">이민 문의</a>
-  <div class="btn" onclick="showUNI()">UNI 연맹소개</div>
-  <div class="btn" onclick="showKOR()">KOR 연맹소개</div>
+  <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">💬 이민 문의</a>
+  <div class="btn" id="btnUNI" onclick="showUNI()">🛡 UNI 연맹소개</div>
+  <div class="btn" id="btnKOR" onclick="showKOR()">⚔ KOR 연맹소개</div>
 </div>
 
-<!-- 내용 표시 -->
+<!-- 내용 -->
 <div class="content" id="content">
   <p>연맹을 선택하세요</p>
 </div>
 
 <script>
+function resetActive() {
+  document.getElementById("btnUNI").classList.remove("active");
+  document.getElementById("btnKOR").classList.remove("active");
+}
+
 function showUNI() {
+  resetActive();
+  document.getElementById("btnUNI").classList.add("active");
+
   document.getElementById("content").innerHTML = `
     <div class="box">
-      <div class="title">UNI 연맹</div>
+      <div class="title">🛡 UNI 연맹</div>
 
-      <div class="section">곰</div>
+      <div class="section">🐻 곰</div>
       <p>곰 1 : 21:00</p>
       <p>곰 2 : 22:00</p>
       <p>곰 3 : 23:10</p>
 
-      <div class="section">무기공장</div>
+      <div class="section">⚙ 무기공장</div>
       <p>1군 : 21:00</p>
       <p>2군 : 22:00</p>
 
-      <div class="section">협곡</div>
+      <div class="section">🏔 협곡</div>
       <p>1군 : 21:00</p>
       <p>2군 : 22:00</p>
 
-      <div class="section">조이</div>
+      <div class="section">🎉 조이</div>
       <p>22:00</p>
     </div>
   `;
 }
 
 function showKOR() {
+  resetActive();
+  document.getElementById("btnKOR").classList.add("active");
+
   document.getElementById("content").innerHTML = `
     <div class="box">
-      <div class="title">KOR 연맹</div>
+      <div class="title">⚔ KOR 연맹</div>
 
-      <div class="section">곰</div>
+      <div class="section">🐻 곰</div>
       <p>곰 1 : 22:30</p>
       <p>곰 2 : 24:00</p>
     </div>
