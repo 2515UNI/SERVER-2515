@@ -29,30 +29,35 @@ body {
   to { transform: translateY(100vh); }
 }
 
-/* 제목 */
 h1 {
   margin-top:50px;
   font-size:45px;
-  text-shadow:0 0 10px #00ccff;
 }
 
-/* 버튼 */
+/* 메뉴 */
 .menu {
-  margin:20px;
+  margin:30px;
 }
 
 .btn {
-  display:inline-block;
-  margin:5px;
-  padding:10px 20px;
+  display:block;
+  width:220px;
+  margin:10px auto;
+  padding:12px;
   background:#1f3a4a;
-  border-radius:8px;
+  border-radius:10px;
   color:white;
   text-decoration:none;
+  cursor:pointer;
 }
 
 .btn:hover {
   background:#00ccff;
+}
+
+/* 내용 */
+.content {
+  margin-top:20px;
 }
 
 /* 박스 */
@@ -69,7 +74,6 @@ h1 {
   text-align:center;
   font-size:22px;
   color:#00ccff;
-  margin-bottom:10px;
 }
 
 .section {
@@ -85,42 +89,55 @@ h1 {
 
 <h1>SERVER 2515</h1>
 
-<!-- 버튼 -->
+<!-- 메뉴 -->
 <div class="menu">
   <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">이민 문의</a>
-  <a class="btn" href="#">UNI 연맹소개</a>
-  <a class="btn" href="#">KOR 연맹소개</a>
+  <div class="btn" onclick="showUNI()">UNI 연맹소개</div>
+  <div class="btn" onclick="showKOR()">KOR 연맹소개</div>
 </div>
 
-<!-- UNI -->
-<div class="box">
-  <div class="title">UNI 연맹</div>
-
-  <div class="section">곰</div>
-  <p>곰 1 : 21:00</p>
-  <p>곰 2 : 22:00</p>
-  <p>곰 3 : 23:10</p>
-
-  <div class="section">무기공장</div>
-  <p>1군 : 21:00</p>
-  <p>2군 : 22:00</p>
-
-  <div class="section">협곡</div>
-  <p>1군 : 21:00</p>
-  <p>2군 : 22:00</p>
-
-  <div class="section">조이</div>
-  <p>22:00</p>
+<!-- 내용 표시 -->
+<div class="content" id="content">
+  <p>연맹을 선택하세요</p>
 </div>
 
-<!-- KOR -->
-<div class="box">
-  <div class="title">KOR 연맹</div>
+<script>
+function showUNI() {
+  document.getElementById("content").innerHTML = `
+    <div class="box">
+      <div class="title">UNI 연맹</div>
 
-  <div class="section">곰</div>
-  <p>곰 1 : 22:30</p>
-  <p>곰 2 : 24:00</p>
-</div>
+      <div class="section">곰</div>
+      <p>곰 1 : 21:00</p>
+      <p>곰 2 : 22:00</p>
+      <p>곰 3 : 23:10</p>
+
+      <div class="section">무기공장</div>
+      <p>1군 : 21:00</p>
+      <p>2군 : 22:00</p>
+
+      <div class="section">협곡</div>
+      <p>1군 : 21:00</p>
+      <p>2군 : 22:00</p>
+
+      <div class="section">조이</div>
+      <p>22:00</p>
+    </div>
+  `;
+}
+
+function showKOR() {
+  document.getElementById("content").innerHTML = `
+    <div class="box">
+      <div class="title">KOR 연맹</div>
+
+      <div class="section">곰</div>
+      <p>곰 1 : 22:30</p>
+      <p>곰 2 : 24:00</p>
+    </div>
+  `;
+}
+</script>
 
 </body>
 </html>
