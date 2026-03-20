@@ -1,53 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>SERVER 2515</title>
-
-<style>
-body {
-  background:#0b1a24;
-  color:white;
-  text-align:center;
-  font-family:Arial;
-}
-
-.btn {
-  padding:10px 20px;
-  margin:10px;
-  background:#1f3a4a;
-  cursor:pointer;
-  display:inline-block;
-}
-
-.box {
-  margin-top:30px;
-}
-</style>
-</head>
-
+<html>
 <body>
 
-<h1>🔥 SERVER 2515 🔥</h1>
+<h1>테스트</h1>
 
-<div>
-  <span class="btn" onclick="uni()">UNI</span>
-  <span class="btn" onclick="kor()">KOR</span>
-</div>
+<button onclick="test()">클릭</button>
 
-<div class="box" id="box">
-  연맹 선택
-</div>
+<p id="demo"></p>
 
 <script>
-function uni() {
-  document.getElementById("box").innerHTML =
-    "UNI 연맹<br>드래곤 20:00<br>연맹전 21:30";
-}
-
-function kor() {
-  document.getElementById("box").innerHTML =
-    "KOR 연맹<br>드래곤 19:30<br>연맹전 21:00";
+function test() {
+  document.getElementById("demo").innerHTML = "성공";
 }
 </script>
 
