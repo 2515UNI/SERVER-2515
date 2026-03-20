@@ -8,9 +8,9 @@
 body {
   margin:0;
   font-family: Arial;
+  background:#0b1a24;
   color:white;
   text-align:center;
-  background: linear-gradient(#0b1a24, #000);
 }
 
 /* 눈 효과 */
@@ -21,7 +21,7 @@ body {
   background-image: radial-gradient(white 1px, transparent 1px);
   background-size:20px 20px;
   animation:snow 20s linear infinite;
-  opacity:0.3;
+  opacity:0.2;
 }
 
 @keyframes snow {
@@ -32,17 +32,21 @@ body {
 /* 제목 */
 h1 {
   margin-top:50px;
-  font-size:50px;
-  text-shadow:0 0 15px #00ccff;
+  font-size:45px;
+  text-shadow:0 0 10px #00ccff;
 }
 
 /* 버튼 */
+.menu {
+  margin:20px;
+}
+
 .btn {
   display:inline-block;
-  margin:10px;
+  margin:5px;
   padding:10px 20px;
   background:#1f3a4a;
-  border-radius:10px;
+  border-radius:8px;
   color:white;
   text-decoration:none;
 }
@@ -54,18 +58,18 @@ h1 {
 /* 박스 */
 .box {
   width:320px;
-  margin:30px auto;
-  padding:20px;
-  border-radius:15px;
-  background:rgba(255,255,255,0.05);
+  margin:20px auto;
+  padding:15px;
+  background:#1a2a35;
+  border-radius:10px;
   text-align:left;
 }
 
 .title {
-  font-size:25px;
-  margin-bottom:10px;
   text-align:center;
+  font-size:22px;
   color:#00ccff;
+  margin-bottom:10px;
 }
 
 .section {
@@ -82,10 +86,10 @@ h1 {
 <h1>SERVER 2515</h1>
 
 <!-- 버튼 -->
-<div>
-  <a class="btn" href="https://whiteoutsurvival.com" target="_blank">게임 입장</a>
-  <a class="btn" href="https://discord.com" target="_blank">디스코드</a>
-  <a class="btn" href="#">공지</a>
+<div class="menu">
+  <a class="btn" href="#">이민 문의</a>
+  <a class="btn" href="#">UNI 연맹소개</a>
+  <a class="btn" href="#">KOR 연맹소개</a>
 </div>
 
 <!-- UNI -->
