@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SERVER 2515</title>
 
 <style>
@@ -10,7 +11,55 @@ body {
   font-family: Arial;
   color:white;
   text-align:center;
-  background:black;
+  background: url('https://images.unsplash.com/photo-1608889175119-3e3b2d1d9c0d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+}
+
+.overlay {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.6);
+}
+
+.snow {
+  position:fixed;
+  width:100%;
+  height:100%;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size:25px 25px;
+  animation:snow 15s linear infinite;
+  opacity:0.3;
+}
+
+@keyframes snow {
+  from { transform: translateY(-100px); }
+  to { transform: translateY(100vh); }
+}
+
+.container {
+  position:relative;
+  padding-top:80px;
+}
+
+h1 {
+  font-size:55px;
+  text-shadow:0 0 20px #00ccff;
+}
+
+.btn {
+  display:inline-block;
+  margin:10px;
+  padding:12px 25px;
+  border-radius:12px;
+  background:rgba(0,150,255,0.3);
+  color:white;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.btn:hover {
+  background:#00ccff;
+  transform:scale(1.1);
 }
 
 .box {
@@ -18,54 +67,70 @@ body {
   margin:30px auto;
   padding:20px;
   border-radius:15px;
-  background:#222;
+  background:rgba(255,255,255,0.08);
   text-align:left;
 }
 
 .title {
   font-size:25px;
-  margin-bottom:10px;
-  text-align:center;
+  margin-bottom:15px;
   color:#00ccff;
+  text-align:center;
 }
 
 .section {
-  margin-top:10px;
+  margin-top:15px;
   font-weight:bold;
+  color:#00ccff;
 }
 </style>
 </head>
 
 <body>
 
-<h1>SERVER 2515</h1>
+<div class="overlay"></div>
+<div class="snow"></div>
 
-<div class="box">
-  <div class="title">UNI 연맹</div>
+<div class="container">
+  <h1>🔥 SERVER 2515 🔥</h1>
 
-  <div class="section">곰</div>
-  <p>곰 1 : 21:00</p>
-  <p>곰 2 : 22:00</p>
-  <p>곰 3 : 23:10</p>
+  <!-- 버튼 -->
+  <div>
+    <a class="btn" href="#">🎮 게임 입장</a>
+    <a class="btn" href="#">💬 디스코드</a>
+    <a class="btn" href="#">📢 공지</a>
+  </div>
 
-  <div class="section">무기공장</div>
-  <p>1군 : 21:00</p>
-  <p>2군 : 22:00</p>
+  <!-- UNI -->
+  <div class="box">
+    <div class="title">UNI 연맹</div>
 
-  <div class="section">협곡</div>
-  <p>1군 : 21:00</p>
-  <p>2군 : 22:00</p>
+    <div class="section">🐻 곰</div>
+    <p>곰 1 : 21:00</p>
+    <p>곰 2 : 22:00</p>
+    <p>곰 3 : 23:10</p>
 
-  <div class="section">조이</div>
-  <p>22:00</p>
-</div>
+    <div class="section">⚙ 무기공장</div>
+    <p>1군 : 21:00</p>
+    <p>2군 : 22:00</p>
 
-<div class="box">
-  <div class="title">KOR 연맹</div>
+    <div class="section">🏔 협곡</div>
+    <p>1군 : 21:00</p>
+    <p>2군 : 22:00</p>
 
-  <div class="section">곰</div>
-  <p>곰 1 : 22:30</p>
-  <p>곰 2 : 24:00</p>
+    <div class="section">🎉 조이</div>
+    <p>22:00</p>
+  </div>
+
+  <!-- KOR -->
+  <div class="box">
+    <div class="title">KOR 연맹</div>
+
+    <div class="section">🐻 곰</div>
+    <p>곰 1 : 22:30</p>
+    <p>곰 2 : 24:00</p>
+  </div>
+
 </div>
 
 </body>
