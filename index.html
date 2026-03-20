@@ -8,19 +8,9 @@
 body {
   margin:0;
   font-family: Arial;
-  color:white;
+  color:#111;
   text-align:center;
-  background: url('https://images.unsplash.com/photo-1608889175119-3e3b2d1d9c0d?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-  background-size: cover;
-}
-
-/* 어둡게 덮기 */
-.overlay {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.65);
-  z-index:0;
+  background: linear-gradient(#e9f3f9, #ffffff); /* 화이트 느낌 */
 }
 
 /* 눈 효과 */
@@ -28,12 +18,11 @@ body {
   position:fixed;
   width:100%;
   height:100%;
-  background-image: radial-gradient(white 1px, transparent 1px);
-  background-size:20px 20px;
-  animation:snow 20s linear infinite;
-  opacity:0.3;
+  background-image: radial-gradient(white 2px, transparent 2px);
+  background-size:25px 25px;
+  animation:snow 15s linear infinite;
+  opacity:0.4;
   pointer-events:none;
-  z-index:1;
 }
 
 @keyframes snow {
@@ -41,85 +30,77 @@ body {
   to { transform: translateY(100vh); }
 }
 
-/* 컨텐츠 */
-.container {
-  position:relative;
-  z-index:2;
-}
-
 /* 제목 */
 h1 {
   margin-top:40px;
-  font-size:50px;
-  text-shadow:0 0 20px #00ccff;
+  font-size:48px;
+  color:#111;
+  text-shadow:0 0 10px rgba(0,0,0,0.2);
 }
 
-/* 메뉴 */
+/* 버튼 */
 .menu {
   margin:30px;
 }
 
-/* 버튼 */
 .btn {
   display:block;
   width:240px;
   margin:12px auto;
   padding:14px;
   border-radius:12px;
-  background: linear-gradient(135deg, #1f3a4a, #12232e);
+  background: linear-gradient(135deg, #2c3e50, #1a252f);
+  color:white;
+  text-decoration:none; /* ⭐ 밑줄 제거 */
+  font-weight:bold;
   cursor:pointer;
   transition:0.3s;
-  font-weight:bold;
-  color:white; /* ⭐ 글씨색 강제 지정 */
 }
 
 .btn:hover {
   transform:scale(1.05);
-  background: linear-gradient(135deg, #00ccff, #0077aa);
-  color:white;
+  background: linear-gradient(135deg, #3498db, #2980b9);
 }
 
 /* 선택된 버튼 */
 .active {
-  background: linear-gradient(135deg, #00ccff, #005577);
-  box-shadow:0 0 15px #00ccff;
+  background: linear-gradient(135deg, #3498db, #1f5f8a);
+  box-shadow:0 0 10px rgba(0,0,0,0.3);
 }
 
-/* 박스 */
+/* 내용 박스 */
 .box {
-  width:330px;
+  width:340px;
   margin:20px auto;
   padding:20px;
   border-radius:15px;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter: blur(6px);
+  background:white;
   text-align:left;
-  box-shadow:0 0 20px rgba(0,200,255,0.3);
+  box-shadow:0 5px 20px rgba(0,0,0,0.15);
 }
 
+/* 제목 */
 .title {
   text-align:center;
   font-size:24px;
-  color:#00ccff;
+  color:#2c3e50;
   margin-bottom:15px;
 }
 
+/* 섹션 */
 .section {
   margin-top:15px;
   font-weight:bold;
-  color:#00ccff;
+  color:#2980b9;
 }
 </style>
 </head>
 
 <body>
 
-<div class="overlay"></div>
 <div class="snow"></div>
 
-<div class="container">
-
-<h1>🔥 SERVER 2515 🔥</h1>
+<h1>SERVER 2515</h1>
 
 <!-- 메뉴 -->
 <div class="menu">
@@ -131,8 +112,6 @@ h1 {
 <!-- 내용 -->
 <div id="content">
   <p>연맹을 선택하세요</p>
-</div>
-
 </div>
 
 <script>
