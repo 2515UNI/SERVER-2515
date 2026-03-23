@@ -5,6 +5,7 @@
 <title>SERVER 2515</title>
 
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -63,22 +64,23 @@ canvas {
 /* 모집/공약 */
 .info-section {
   width:95%;
-  max-width:1100px;
+  max-width:1300px;
   margin:30px auto;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:20px;
+  gap:30px;
 }
 
 .info-card {
   background:white;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  border-radius:25px;
+  padding:35px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
 .info-title {
-  font-size:26px;
+  font-family:'Poppins', sans-serif;
+  font-size:28px;
   font-weight:900;
   cursor:pointer;
 }
@@ -86,17 +88,17 @@ canvas {
 .info-content {
   max-height:0;
   overflow:hidden;
-  transition:0.3s ease;
+  transition:0.3s;
   font-size:17px;
   line-height:1.8;
 }
 
 .info-content.open {
-  max-height:1000px;
+  max-height:2000px;
   margin-top:15px;
 }
 
-/* 이벤트 카드 */
+/* 이벤트 */
 .grid {
   width:95%;
   max-width:1400px;
@@ -111,7 +113,10 @@ canvas {
   border-radius:20px;
   padding:25px;
   box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  transition:0.2s;
 }
+
+.card:active { transform:scale(0.97); }
 
 .card-header {
   font-size:22px;
@@ -124,15 +129,35 @@ canvas {
   padding:14px;
   margin-top:10px;
   border:1.5px solid #ccc;
+  position:relative;
+  overflow:hidden;
+}
+
+.time-box::before {
+  content:'';
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+  transform:rotate(25deg);
+  opacity:0;
+}
+
+.time-box:active::before {
+  animation:shine 0.5s;
+}
+
+@keyframes shine {
+  0% {opacity:0; left:-50%;}
+  50% {opacity:1;}
+  100% {left:100%; opacity:0;}
 }
 
 .label { font-size:14px; font-weight:700; }
 .time { font-size:28px; font-weight:900; }
 .utc { font-size:12px; color:#333; }
-
-.active-event {
-  border:2px solid #00ccff;
-}
 
 /* 모바일 */
 @media (max-width:900px){
@@ -163,22 +188,17 @@ canvas {
 <!-- 모집 / 공약 -->
 <div class="info-section">
 
-  <!-- 모집 -->
-  <div class="info-card">
-    <div class="info-title" onclick="toggleInfo(this)">💙 모집 대상</div>
-    <div class="info-content">
+<div class="info-card">
+<div class="info-title" onclick="toggleInfo(this)">💙 모집 대상</div>
+<div class="info-content">
 
-💙 모집 대상
-
-<br><br>
+💙 모집 대상<br><br>
 
 · 단체 이민 (4월 특초 2장가능합니다)<br>
 · 특초 개인 이민<br>
 · 뜻 맞는 분들과 함께하실 분 누구나 환영합니다 :)<br>
 · 4-5월 연계 단체 이민 예정이신 분들<br>
-특히, KOR 합병 원하시는 분 or 단체로 이동하시는 분<br>
-
-<br><br>
+특히, KOR 합병 원하시는 분 or 단체로 이동하시는 분<br><br>
 
 💙 2515 서버, 이런 분들께 잘 맞습니다.<br><br>
 
@@ -188,26 +208,32 @@ canvas {
 · 초기 정착할 때 지원 잘 되는 서버를 원하시는 분<br>
 · 연구/운영 기반이 어느 정도 갖춰진 연맹으로 안정적으로 들어오고 싶은 분
 
-    </div>
-  </div>
+</div>
+</div>
 
-  <!-- 서버 공약 -->
-  <div class="info-card">
-    <div class="info-title" onclick="toggleInfo(this)">📜 서버 공약</div>
-    <div class="info-content">
+<div class="info-card">
+<div class="info-title" onclick="toggleInfo(this)">📜 서버 공약</div>
+<div class="info-content">
 
-· 12개 엔센 보장 (4레벨 포함)<br>
-· 요새 4개 / 성채 1개 제공<br>
-· 서버전 12전 9승 (강한 서버와도 승리 경험)<br>
-· 연맹 간 협력 및 합병 가능<br>
-· 초기 정착 적극 지원 (깃발 / 인원 / 운영)<br>
+💙 2515 서버에서 약속드릴 수 있는 부분<br><br>
 
-<br>
+1. 4레벨 엔센 포함 12개 엔센 보장<br>
+단체 이민 오시는 분들이<br>
+안정적인 출발을 할 수 있도록 지원<br><br>
 
-👉 평소에는 평화롭게, 전투 시에는 확실하게
+2. 요새 4개 / 성채 1개 분배<br>
+기여도 기준 공정 재분배<br><br>
 
-    </div>
-  </div>
+3. 서버전 중심 운영 (12전 9승)<br><br>
+
+4. 서리 / 드엠 협력 가능<br><br>
+
+5. 연구 만렙 연맹 제공 + KOR 합병 가능<br><br>
+
+6. 초기 정착 전폭 지원
+
+</div>
+</div>
 
 </div>
 
@@ -228,16 +254,13 @@ localStorage.setItem("total", total);
 document.getElementById("today").innerText = today;
 document.getElementById("total").innerText = total;
 
-/* 토글 (버그 수정 완료) */
+/* 토글 */
 function toggleInfo(el){
   const content = el.nextElementSibling;
-
-  if(content.classList.contains("open")){
-    content.classList.remove("open");
-  } else {
-    document.querySelectorAll(".info-content").forEach(c=>c.classList.remove("open"));
-    content.classList.add("open");
-  }
+  document.querySelectorAll(".info-content").forEach(c=>{
+    if(c!==content) c.classList.remove("open");
+  });
+  content.classList.toggle("open");
 }
 
 /* 배경 */
@@ -264,14 +287,7 @@ function draw(){
 }
 setInterval(draw,30);
 
-/* 이벤트 강조 */
-function getActiveClass(h,m){
-  const now=new Date();
-  const nowMin=now.getHours()*60+now.getMinutes();
-  const target=h*60+m;
-  return Math.abs(nowMin-target)<30?"active-event":"";
-}
-
+/* 이벤트 */
 function selectTeam(team){
   document.getElementById("uniBtn").classList.remove("active");
   document.getElementById("wonBtn").classList.remove("active");
@@ -281,65 +297,54 @@ function selectTeam(team){
   else renderWON();
 }
 
-/* ⭐ 이벤트 카드 원복 완료 */
+/* UNI */
 function renderUNI(){
 document.getElementById("content").innerHTML=`
 <div class="grid">
-
-<div class="card">
-<div class="card-header">🐻 곰</div>
-<div class="time-box"><div class="label">곰1</div><div class="time">21:00</div></div>
-<div class="time-box"><div class="label">곰2</div><div class="time">22:00</div></div>
-<div class="time-box"><div class="label">곰3</div><div class="time">23:10</div></div>
+<div class="card"><div class="card-header">🐻 곰</div>
+<div class="time-box"><div class="label">곰1</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+<div class="time-box"><div class="label">곰2</div><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
+<div class="time-box"><div class="label">곰3</div><div class="time">23:10</div><div class="utc">(UTC 14:10)</div></div>
 </div>
 
-<div class="card">
-<div class="card-header">⚙ 무공</div>
-<div class="time-box"><div class="label">1군</div><div class="time">21:00</div></div>
-<div class="time-box"><div class="label">2군</div><div class="time">22:00</div></div>
+<div class="card"><div class="card-header">⚙ 무공</div>
+<div class="time-box"><div class="label">1군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+<div class="time-box"><div class="label">2군</div><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
 </div>
 
-<div class="card">
-<div class="card-header">🏔 협곡</div>
-<div class="time-box"><div class="label">1군</div><div class="time">21:00</div></div>
-<div class="time-box"><div class="label">2군</div><div class="time">22:00</div></div>
+<div class="card"><div class="card-header">🏔 협곡</div>
+<div class="time-box"><div class="label">1군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+<div class="time-box"><div class="label">2군</div><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
 </div>
 
-<div class="card">
-<div class="card-header">🎉 조이</div>
-<div class="time-box"><div class="time">22:00</div></div>
+<div class="card"><div class="card-header">🎉 조이</div>
+<div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
 </div>
-
 </div>`;
 }
 
+/* WON */
 function renderWON(){
 document.getElementById("content").innerHTML=`
 <div class="grid">
-
-<div class="card">
-<div class="card-header">🐻 곰</div>
-<div class="time-box"><div class="label">곰1</div><div class="time">22:20</div></div>
-<div class="time-box"><div class="label">곰2</div><div class="time">00:05</div></div>
+<div class="card"><div class="card-header">🐻 곰</div>
+<div class="time-box"><div class="label">곰1</div><div class="time">22:20</div><div class="utc">(UTC 13:20)</div></div>
+<div class="time-box"><div class="label">곰2</div><div class="time">00:05</div><div class="utc">(UTC 15:05)</div></div>
 </div>
 
-<div class="card">
-<div class="card-header">⚙ 무공</div>
-<div class="time-box"><div class="label">1군</div><div class="time">23:00</div></div>
-<div class="time-box"><div class="label">2군</div><div class="time">21:00</div></div>
+<div class="card"><div class="card-header">⚙ 무공</div>
+<div class="time-box"><div class="label">1군</div><div class="time">23:00</div><div class="utc">(UTC 14:00)</div></div>
+<div class="time-box"><div class="label">2군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
 </div>
 
-<div class="card">
-<div class="card-header">🏔 협곡</div>
-<div class="time-box"><div class="label">1군</div><div class="time">23:00</div></div>
-<div class="time-box"><div class="label">2군</div><div class="time">21:00</div></div>
+<div class="card"><div class="card-header">🏔 협곡</div>
+<div class="time-box"><div class="label">1군</div><div class="time">23:00</div><div class="utc">(UTC 14:00)</div></div>
+<div class="time-box"><div class="label">2군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
 </div>
 
-<div class="card">
-<div class="card-header">🎉 조이</div>
-<div class="time-box"><div class="time">21:00</div></div>
+<div class="card"><div class="card-header">🎉 조이</div>
+<div class="time-box"><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
 </div>
-
 </div>`;
 }
 </script>
