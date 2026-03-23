@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Snow + Glow Ultimate</title>
+<title>Snow Glow Simple</title>
 
 <style>
 body {
   margin:0;
-  background:linear-gradient(#0f172a, #1e293b); /* 어두운 블루톤 */
+  background:#ffffff; /* 흰 배경 */
   overflow:hidden;
 }
 
@@ -30,7 +30,6 @@ body {
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
-/* 사이즈 */
 function resize(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -38,66 +37,39 @@ function resize(){
 resize();
 window.addEventListener("resize", resize);
 
-/* ❄ 눈 (업그레이드) */
-let snow = [];
-for(let i=0;i<120;i++){
-  snow.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*5+1,              // ⭐ 큰 눈 추가
-    speed:Math.random()*1.5+0.3,
-    drift:Math.random()*1-0.5,        // ⭐ 좌우 흔들림 강화
-    opacity:Math.random()*0.8+0.2
-  });
-}
+/* ❄ 눈꽃 (고정 + 깜빡임) */
+let flakes = [];
 
-/* ✨ 빛 입자 (블루 글로우) */
-let glow = [];
-for(let i=0;i<60;i++){
-  glow.push({
+for(let i=0;i<50;i++){
+  flakes.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
-    r:Math.random()*3+1,
+    size:Math.random()*20 + 10,
     alpha:Math.random(),
-    fade:Math.random()*0.015,
-    color:Math.random()>0.5 ? "rgba(0,200,255," : "rgba(255,255,255,"
+    fade:Math.random()*0.02 + 0.005
   });
 }
 
 function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  /* ❄ 눈 */
-  snow.forEach(s=>{
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(255,255,255,${s.opacity})`;
-    ctx.fill();
+  flakes.forEach(f=>{
+    ctx.font = f.size + "px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
 
-    s.y += s.speed;
-    s.x += Math.sin(s.y * 0.01) * 0.5 + s.drift;
+    /* 파란빛 눈꽃 */
+    ctx.fillStyle = `rgba(0,150,255,${f.alpha})`;
 
-    if(s.y > canvas.height){
-      s.y = -5;
-      s.x = Math.random()*canvas.width;
+    /* ❄ 눈꽃 아이콘 */
+    ctx.fillText("❄", f.x, f.y);
+
+    /* 알파 애니메이션 */
+    f.alpha += f.fade;
+
+    if(f.alpha > 1 || f.alpha < 0){
+      f.fade *= -1;
     }
-  });
-
-  /* ✨ 빛 */
-  glow.forEach(g=>{
-    ctx.beginPath();
-    ctx.arc(g.x,g.y,g.r,0,Math.PI*2);
-
-    ctx.fillStyle = g.color + g.alpha + ")";
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = "rgba(0,200,255,0.8)";
-
-    ctx.fill();
-
-    ctx.shadowBlur = 0;
-
-    g.alpha += g.fade;
-    if(g.alpha > 1 || g.alpha < 0) g.fade *= -1;
   });
 
   requestAnimationFrame(draw);
