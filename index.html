@@ -2,12 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Snow Test</title>
+<title>Snow + Glow Ultimate</title>
 
 <style>
 body {
   margin:0;
-  background:#111; /* 테스트용 어두운 배경 */
+  background:linear-gradient(#0f172a, #1e293b); /* 어두운 블루톤 */
+  overflow:hidden;
 }
 
 /* 캔버스 */
@@ -17,7 +18,6 @@ body {
   left:0;
   width:100vw;
   height:100vh;
-  z-index:0;
 }
 </style>
 </head>
@@ -30,7 +30,7 @@ body {
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
-/* ⭐ 핵심: 실제 픽셀 크기 강제 지정 */
+/* 사이즈 */
 function resize(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -38,27 +38,29 @@ function resize(){
 resize();
 window.addEventListener("resize", resize);
 
-/* ❄ 눈 */
+/* ❄ 눈 (업그레이드) */
 let snow = [];
-for(let i=0;i<100;i++){
+for(let i=0;i<120;i++){
   snow.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
-    r:Math.random()*3+1,
-    speed:Math.random()*1+0.5,
-    drift:Math.random()*0.6-0.3
+    r:Math.random()*5+1,              // ⭐ 큰 눈 추가
+    speed:Math.random()*1.5+0.3,
+    drift:Math.random()*1-0.5,        // ⭐ 좌우 흔들림 강화
+    opacity:Math.random()*0.8+0.2
   });
 }
 
-/* ✨ 빛 */
+/* ✨ 빛 입자 (블루 글로우) */
 let glow = [];
-for(let i=0;i<50;i++){
+for(let i=0;i<60;i++){
   glow.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
-    r:Math.random()*2+1,
+    r:Math.random()*3+1,
     alpha:Math.random(),
-    fade:Math.random()*0.02
+    fade:Math.random()*0.015,
+    color:Math.random()>0.5 ? "rgba(0,200,255," : "rgba(255,255,255,"
   });
 }
 
@@ -66,18 +68,18 @@ function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
   /* ❄ 눈 */
-  ctx.fillStyle="white";
   snow.forEach(s=>{
     ctx.beginPath();
     ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${s.opacity})`;
     ctx.fill();
 
-    s.y+=s.speed;
-    s.x+=s.drift;
+    s.y += s.speed;
+    s.x += Math.sin(s.y * 0.01) * 0.5 + s.drift;
 
-    if(s.y>canvas.height){
-      s.y=0;
-      s.x=Math.random()*canvas.width;
+    if(s.y > canvas.height){
+      s.y = -5;
+      s.x = Math.random()*canvas.width;
     }
   });
 
@@ -85,11 +87,17 @@ function draw(){
   glow.forEach(g=>{
     ctx.beginPath();
     ctx.arc(g.x,g.y,g.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(255,255,255,${g.alpha})`;
+
+    ctx.fillStyle = g.color + g.alpha + ")";
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = "rgba(0,200,255,0.8)";
+
     ctx.fill();
 
-    g.alpha+=g.fade;
-    if(g.alpha>1 || g.alpha<0) g.fade*=-1;
+    ctx.shadowBlur = 0;
+
+    g.alpha += g.fade;
+    if(g.alpha > 1 || g.alpha < 0) g.fade *= -1;
   });
 
   requestAnimationFrame(draw);
