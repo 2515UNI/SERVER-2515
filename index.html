@@ -8,10 +8,6 @@
 body {
   margin:0;
   font-family: Arial;
-  text-align:center;
-  color:#222;
-  overflow-x:hidden;
-
   background: linear-gradient(270deg, #dff3ff, #ffffff, #eaf8ff);
   background-size: 600% 600%;
   animation: bgMove 12s ease infinite;
@@ -23,114 +19,76 @@ body {
   100% {background-position:0% 50%;}
 }
 
-/* 떠다니는 2515 */
-.floating {
-  position:fixed;
-  font-size:60px;
-  font-weight:bold;
-  color:rgba(0,0,0,0.05);
-  animation: floatText 10s linear infinite;
-}
-
-@keyframes floatText {
-  0% {transform:translateY(100vh) translateX(0);}
-  100% {transform:translateY(-100vh) translateX(100px);}
-}
-
-/* 제목 */
 h1 {
-  margin-top:40px;
-  font-size:60px;
+  text-align:center;
+  margin-top:30px;
 }
 
-/* 메뉴 */
+/* 버튼 */
 .menu {
-  margin:30px;
+  text-align:center;
+  margin:20px;
 }
 
-/* 버튼 크게 */
 .btn {
   display:inline-block;
   margin:10px;
-  padding:16px 30px;
-  border-radius:14px;
+  padding:14px 25px;
+  border-radius:12px;
   background:#2c3e50;
   color:white;
-  font-size:18px;
   cursor:pointer;
-  transition:0.3s;
-}
-
-.btn:hover {
-  background:#3498db;
-  transform:scale(1.05);
+  font-size:18px;
 }
 
 .active {
   background:#3498db;
 }
 
-/* 카드 크게 */
-.card {
-  width:500px;
+/* 카드 전체 */
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap:20px;
+  width:90%;
   margin:30px auto;
-  padding:30px;
-  border-radius:20px;
+}
+
+/* 카드 */
+.card {
   background:white;
-  box-shadow:0 15px 40px rgba(0,0,0,0.2);
-}
-
-/* 탭 */
-.tab {
-  display:inline-block;
-  margin:8px;
-  padding:10px 16px;
-  border-radius:10px;
-  background:#ddd;
-  cursor:pointer;
-  font-size:16px;
-}
-
-.tab.active {
-  background:#3498db;
-  color:white;
-}
-
-/* 이벤트 카드 */
-.event-box {
-  margin-top:20px;
+  border-radius:18px;
   padding:20px;
-  border-radius:15px;
-  color:white;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+
+.card:hover {
+  transform:translateY(-5px);
+}
+
+/* 제목 */
+.title {
   font-size:20px;
-  animation:fadeUp 0.4s ease;
+  margin-bottom:10px;
 }
 
-@keyframes fadeUp {
-  from {opacity:0; transform:translateY(15px);}
-  to {opacity:1; transform:translateY(0);}
+/* 시간 */
+.time-box {
+  background:#f4f4f4;
+  padding:10px;
+  border-radius:10px;
+  margin-top:8px;
 }
-
-/* 색 */
-.bear { background:#e67e22; }
-.factory { background:#7f8c8d; }
-.valley { background:#27ae60; }
-.joy { background:#9b59b6; }
 
 .time {
-  font-size:28px;
+  font-size:22px;
   font-weight:bold;
-  margin-top:10px;
 }
 </style>
 </head>
 
 <body>
-
-<!-- 떠다니는 텍스트 여러개 -->
-<div class="floating" style="left:10%">2515</div>
-<div class="floating" style="left:40%; animation-delay:3s;">2515</div>
-<div class="floating" style="left:70%; animation-delay:6s;">2515</div>
 
 <h1>🔥 SERVER 2515 🔥</h1>
 
@@ -143,60 +101,77 @@ h1 {
 <div id="content"></div>
 
 <script>
-let currentTeam = "";
-let currentTab = "bear";
-
 function selectTeam(team) {
-  currentTeam = team;
-
   document.getElementById("uniBtn").classList.remove("active");
   document.getElementById("wonBtn").classList.remove("active");
-
   document.getElementById(team.toLowerCase()+"Btn").classList.add("active");
 
-  render();
+  if (team === "UNI") {
+    renderUNI();
+  } else {
+    renderWON();
+  }
 }
 
-function selectTab(tab) {
-  currentTab = tab;
-  render();
-}
+function renderUNI() {
+  document.getElementById("content").innerHTML = `
+    <div class="grid">
 
-function render() {
-  if (!currentTeam) return;
-
-  let html = `
-    <div class="card">
-      <div style="font-size:22px; font-weight:bold;">${currentTeam} 연맹</div>
-
-      <div>
-        <div class="tab ${currentTab==='bear'?'active':''}" onclick="selectTab('bear')">🐻 곰</div>
-        <div class="tab ${currentTab==='factory'?'active':''}" onclick="selectTab('factory')">⚙ 무기</div>
-        <div class="tab ${currentTab==='valley'?'active':''}" onclick="selectTab('valley')">🏔 협곡</div>
-        <div class="tab ${currentTab==='joy'?'active':''}" onclick="selectTab('joy')">🎉 조이</div>
+      <div class="card">
+        <div class="title">🐻 곰 사냥</div>
+        <div class="time-box">곰1 <div class="time">21:00</div></div>
+        <div class="time-box">곰2 <div class="time">22:00</div></div>
+        <div class="time-box">곰3 <div class="time">23:10</div></div>
       </div>
+
+      <div class="card">
+        <div class="title">⚙ 무기공장</div>
+        <div class="time-box">1군 <div class="time">21:00</div></div>
+        <div class="time-box">2군 <div class="time">22:00</div></div>
+      </div>
+
+      <div class="card">
+        <div class="title">🏔 협곡</div>
+        <div class="time-box">1군 <div class="time">21:00</div></div>
+        <div class="time-box">2군 <div class="time">22:00</div></div>
+      </div>
+
+      <div class="card">
+        <div class="title">🎉 조이</div>
+        <div class="time-box">이벤트 <div class="time">22:00</div></div>
+      </div>
+
+    </div>
   `;
+}
 
-  if (currentTeam === "UNI") {
-    if (currentTab === "bear")
-      html += `<div class="event-box bear">곰 사냥<div class="time">21:00 / 22:00 / 23:10</div></div>`;
-    if (currentTab === "factory")
-      html += `<div class="event-box factory">무기공장<div class="time">21:00 / 22:00</div></div>`;
-    if (currentTab === "valley")
-      html += `<div class="event-box valley">협곡<div class="time">21:00 / 22:00</div></div>`;
-    if (currentTab === "joy")
-      html += `<div class="event-box joy">조이<div class="time">22:00</div></div>`;
-  }
+function renderWON() {
+  document.getElementById("content").innerHTML = `
+    <div class="grid">
 
-  if (currentTeam === "WON") {
-    if (currentTab === "bear")
-      html += `<div class="event-box bear">곰 사냥<div class="time">22:30 / 24:00</div></div>`;
-    else
-      html += `<div class="event-box factory">정보 없음</div>`;
-  }
+      <div class="card">
+        <div class="title">🐻 곰 사냥</div>
+        <div class="time-box">곰1 <div class="time">22:30</div></div>
+        <div class="time-box">곰2 <div class="time">24:00</div></div>
+      </div>
 
-  html += `</div>`;
-  document.getElementById("content").innerHTML = html;
+      <div class="card">
+        <div class="title">⚙ 무기공장</div>
+        <div class="time-box">정보 없음</div>
+      </div>
+
+      <div class="card">
+        <div class="title">🏔 협곡</div>
+        <div class="time-box">정보 없음</div>
+      </div>
+
+      <div class="card">
+        <div class="title">🎉 조이</div>
+        <div class="time-box">정보 없음</div>
+      </div>
+
+    </div>
+  `;
 }
 </script>
 
