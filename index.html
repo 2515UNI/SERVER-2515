@@ -13,32 +13,16 @@ body {
   text-align:center;
 }
 
-/* 배경 그라데이션 */
-body::before {
-  content:"";
-  position:fixed;
-  width:100%;
-  height:100%;
-  background: radial-gradient(circle at top, rgba(0,150,255,0.2), transparent 70%);
-  z-index:0;
-}
-
-/* 컨텐츠 */
-.container {
-  position:relative;
-  z-index:1;
-}
-
 /* 제목 */
 h1 {
-  margin-top:40px;
-  font-size:48px;
-  text-shadow:0 0 20px #00ccff;
+  margin-top:30px;
+  font-size:42px;
+  text-shadow:0 0 15px #00ccff;
 }
 
-/* 메뉴 */
+/* 메뉴 공통 */
 .menu {
-  margin:30px;
+  margin:20px;
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
@@ -46,12 +30,11 @@ h1 {
 
 /* 버튼 */
 .btn {
-  margin:10px;
-  padding:12px 25px;
-  border-radius:10px;
+  margin:6px;
+  padding:10px 18px;
+  border-radius:8px;
   background:#111a22;
   border:1px solid rgba(0,200,255,0.3);
-  color:white;
   cursor:pointer;
   transition:0.3s;
 }
@@ -61,113 +44,114 @@ h1 {
   color:black;
 }
 
-/* 선택된 버튼 */
+/* 활성화 */
 .active {
   background:#00ccff;
   color:black;
-  box-shadow:0 0 15px #00ccff;
+  box-shadow:0 0 10px #00ccff;
 }
 
 /* 카드 */
 .card {
-  width:360px;
-  margin:30px auto;
+  width:340px;
+  margin:25px auto;
   padding:20px;
-  border-radius:15px;
+  border-radius:12px;
   background:#111a22;
   border:1px solid rgba(0,200,255,0.2);
-  box-shadow:0 0 20px rgba(0,200,255,0.1);
   text-align:left;
 }
 
-/* 카드 제목 */
+/* 제목 */
 .title {
   text-align:center;
-  font-size:24px;
+  font-size:22px;
   color:#00ccff;
-  margin-bottom:15px;
-}
-
-/* 섹션 */
-.section {
-  margin-top:15px;
-  font-weight:bold;
-  color:#00ccff;
-}
-
-/* 내용 */
-p {
-  margin:5px 0;
+  margin-bottom:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-
 <h1>🔥 SERVER 2515 🔥</h1>
 
-<!-- 메뉴 -->
+<!-- 상단 이벤트 선택 -->
 <div class="menu">
-  <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">이민 문의</a>
-  <div class="btn" id="btnUNI" onclick="showUNI()">UNI 연맹</div>
-  <div class="btn" id="btnKOR" onclick="showKOR()">KOR 연맹</div>
+  <div class="btn active" id="eventBear" onclick="setEvent('bear')">🐻 곰사냥</div>
+  <div class="btn" id="eventFactory" onclick="setEvent('factory')">⚙ 무기공장</div>
+  <div class="btn" id="eventValley" onclick="setEvent('valley')">🏔 협곡</div>
+  <div class="btn" id="eventJoy" onclick="setEvent('joy')">🎉 조이</div>
 </div>
 
-<!-- 내용 -->
+<!-- 연맹 선택 -->
+<div class="menu">
+  <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">💬 이민 문의</a>
+  <div class="btn" id="uniBtn" onclick="setTeam('UNI')">UNI</div>
+  <div class="btn" id="korBtn" onclick="setTeam('KOR')">KOR</div>
+</div>
+
+<!-- 결과 -->
 <div id="content">
-  <p>연맹을 선택하세요</p>
-</div>
-
+  <p>연맹과 이벤트를 선택하세요</p>
 </div>
 
 <script>
-function resetActive() {
-  document.getElementById("btnUNI").classList.remove("active");
-  document.getElementById("btnKOR").classList.remove("active");
+let currentTeam = "";
+let currentEvent = "bear";
+
+function resetActive(group) {
+  document.querySelectorAll(group).forEach(btn => btn.classList.remove("active"));
 }
 
-function showUNI() {
-  resetActive();
-  document.getElementById("btnUNI").classList.add("active");
+function setEvent(type) {
+  currentEvent = type;
+  resetActive("#eventBear, #eventFactory, #eventValley, #eventJoy");
+  document.getElementById("event" + capitalize(type)).classList.add("active");
+  update();
+}
+
+function setTeam(team) {
+  currentTeam = team;
+  resetActive("#uniBtn, #korBtn");
+  document.getElementById(team.toLowerCase() + "Btn").classList.add("active");
+  update();
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function update() {
+  if (!currentTeam) return;
+
+  let text = "";
+
+  if (currentTeam === "UNI") {
+    if (currentEvent === "bear") text = "곰 1 : 21:00<br>곰 2 : 22:00<br>곰 3 : 23:10";
+    if (currentEvent === "factory") text = "1군 : 21:00<br>2군 : 22:00";
+    if (currentEvent === "valley") text = "1군 : 21:00<br>2군 : 22:00";
+    if (currentEvent === "joy") text = "22:00";
+  }
+
+  if (currentTeam === "KOR") {
+    if (currentEvent === "bear") text = "곰 1 : 22:30<br>곰 2 : 24:00";
+    else text = "정보 없음";
+  }
 
   document.getElementById("content").innerHTML = `
     <div class="card">
-      <div class="title">UNI 연맹</div>
-
-      <div class="section">🐻 곰</div>
-      <p>곰 1 : 21:00</p>
-      <p>곰 2 : 22:00</p>
-      <p>곰 3 : 23:10</p>
-
-      <div class="section">⚙ 무기공장</div>
-      <p>1군 : 21:00</p>
-      <p>2군 : 22:00</p>
-
-      <div class="section">🏔 협곡</div>
-      <p>1군 : 21:00</p>
-      <p>2군 : 22:00</p>
-
-      <div class="section">🎉 조이</div>
-      <p>22:00</p>
+      <div class="title">${currentTeam} - ${getEventName(currentEvent)}</div>
+      <p>${text}</p>
     </div>
   `;
 }
 
-function showKOR() {
-  resetActive();
-  document.getElementById("btnKOR").classList.add("active");
-
-  document.getElementById("content").innerHTML = `
-    <div class="card">
-      <div class="title">KOR 연맹</div>
-
-      <div class="section">🐻 곰</div>
-      <p>곰 1 : 22:30</p>
-      <p>곰 2 : 24:00</p>
-    </div>
-  `;
+function getEventName(e) {
+  if(e==="bear") return "곰사냥";
+  if(e==="factory") return "무기공장";
+  if(e==="valley") return "협곡";
+  if(e==="joy") return "조이";
 }
 </script>
 
