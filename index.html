@@ -10,9 +10,6 @@ body {
   font-family: Arial;
   color:#222;
   text-align:center;
-  overflow-x:hidden;
-
-  /* 밝은 그라데이션 애니메이션 */
   background: linear-gradient(270deg, #dff3ff, #ffffff, #eaf8ff);
   background-size: 600% 600%;
   animation: bgMove 10s ease infinite;
@@ -24,10 +21,8 @@ body {
   100% {background-position:0% 50%;}
 }
 
-/* 제목 */
 h1 {
   margin-top:30px;
-  font-size:42px;
 }
 
 /* 버튼 */
@@ -43,14 +38,8 @@ h1 {
   background:#2c3e50;
   color:white;
   cursor:pointer;
-  transition:0.3s;
 }
 
-.btn:hover {
-  background:#3498db;
-}
-
-/* 선택 */
 .active {
   background:#3498db;
 }
@@ -62,20 +51,10 @@ h1 {
   padding:20px;
   border-radius:15px;
   background:white;
-  box-shadow:0 5px 20px rgba(0,0,0,0.2);
-  text-align:left;
-}
-
-/* 섹션 */
-.section {
-  margin-top:10px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
 /* 탭 */
-.tabs {
-  margin-top:15px;
-}
-
 .tab {
   display:inline-block;
   margin:5px;
@@ -89,6 +68,33 @@ h1 {
   background:#3498db;
   color:white;
 }
+
+/* 이벤트 카드 */
+.event-box {
+  margin-top:15px;
+  padding:15px;
+  border-radius:12px;
+  color:white;
+  font-size:18px;
+  animation:fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+  from {opacity:0; transform:translateY(10px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+/* 색상 구분 */
+.bear { background:#e67e22; }
+.factory { background:#7f8c8d; }
+.valley { background:#27ae60; }
+.joy { background:#9b59b6; }
+
+.time {
+  font-size:24px;
+  font-weight:bold;
+  margin-top:5px;
+}
 </style>
 </head>
 
@@ -96,17 +102,13 @@ h1 {
 
 <h1>🔥 SERVER 2515 🔥</h1>
 
-<!-- 상단 -->
 <div class="menu">
   <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">이민 문의</a>
   <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">UNI</div>
   <div class="btn" id="wonBtn" onclick="selectTeam('WON')">WON</div>
 </div>
 
-<!-- 내용 -->
-<div id="content">
-  <p>연맹을 선택하세요</p>
-</div>
+<div id="content"></div>
 
 <script>
 let currentTeam = "";
@@ -114,12 +116,9 @@ let currentTab = "bear";
 
 function selectTeam(team) {
   currentTeam = team;
-
   document.getElementById("uniBtn").classList.remove("active");
   document.getElementById("wonBtn").classList.remove("active");
-
-  document.getElementById(team.toLowerCase() + "Btn").classList.add("active");
-
+  document.getElementById(team.toLowerCase()+"Btn").classList.add("active");
   render();
 }
 
@@ -131,41 +130,63 @@ function selectTab(tab) {
 function render() {
   if (!currentTeam) return;
 
-  let content = "";
+  let html = `
+    <div class="card">
+      <div><b>${currentTeam} 연맹</b></div>
+
+      <div>
+        <div class="tab ${currentTab==='bear'?'active':''}" onclick="selectTab('bear')">🐻</div>
+        <div class="tab ${currentTab==='factory'?'active':''}" onclick="selectTab('factory')">⚙</div>
+        <div class="tab ${currentTab==='valley'?'active':''}" onclick="selectTab('valley')">🏔</div>
+        <div class="tab ${currentTab==='joy'?'active':''}" onclick="selectTab('joy')">🎉</div>
+      </div>
+  `;
 
   if (currentTeam === "UNI") {
-    if (currentTab === "bear") content = "곰 1 : 21:00<br>곰 2 : 22:00<br>곰 3 : 23:10";
-    if (currentTab === "factory") content = "1군 : 21:00<br>2군 : 22:00";
-    if (currentTab === "valley") content = "1군 : 21:00<br>2군 : 22:00";
-    if (currentTab === "joy") content = "22:00";
+    if (currentTab === "bear") {
+      html += `
+        <div class="event-box bear">
+          곰 사냥
+          <div class="time">21:00 / 22:00 / 23:10</div>
+        </div>`;
+    }
+    if (currentTab === "factory") {
+      html += `
+        <div class="event-box factory">
+          무기공장
+          <div class="time">21:00 / 22:00</div>
+        </div>`;
+    }
+    if (currentTab === "valley") {
+      html += `
+        <div class="event-box valley">
+          협곡
+          <div class="time">21:00 / 22:00</div>
+        </div>`;
+    }
+    if (currentTab === "joy") {
+      html += `
+        <div class="event-box joy">
+          조이
+          <div class="time">22:00</div>
+        </div>`;
+    }
   }
 
   if (currentTeam === "WON") {
-    if (currentTab === "bear") content = "곰 1 : 22:30<br>곰 2 : 24:00";
-    else content = "정보 없음";
+    if (currentTab === "bear") {
+      html += `
+        <div class="event-box bear">
+          곰 사냥
+          <div class="time">22:30 / 24:00</div>
+        </div>`;
+    } else {
+      html += `<div class="event-box factory">정보 없음</div>`;
+    }
   }
 
-  document.getElementById("content").innerHTML = `
-    <div class="card">
-
-      <div style="text-align:center; font-weight:bold;">
-        ${currentTeam} 연맹
-      </div>
-
-      <!-- 탭 -->
-      <div class="tabs">
-        <div class="tab ${currentTab==='bear'?'active':''}" onclick="selectTab('bear')">🐻 곰</div>
-        <div class="tab ${currentTab==='factory'?'active':''}" onclick="selectTab('factory')">⚙ 무기</div>
-        <div class="tab ${currentTab==='valley'?'active':''}" onclick="selectTab('valley')">🏔 협곡</div>
-        <div class="tab ${currentTab==='joy'?'active':''}" onclick="selectTab('joy')">🎉 조이</div>
-      </div>
-
-      <div class="section">
-        ${content}
-      </div>
-
-    </div>
-  `;
+  html += `</div>`;
+  document.getElementById("content").innerHTML = html;
 }
 </script>
 
