@@ -8,48 +8,39 @@
 body {
   margin:0;
   font-family: Arial;
-  background:#f7f9fc;
+  background:#f5f7fb;
   color:#111;
 }
 
-/* 타이틀 애니메이션 */
+/* 타이틀 */
 .title {
   text-align:center;
   font-size:48px;
   font-weight:bold;
-  margin-top:40px;
-  opacity:0;
-  transform:translateY(-80px);
-  animation:titleDrop 1s ease forwards;
+  margin:40px 0;
+  animation: drop 0.8s ease;
 }
 
-@keyframes titleDrop {
-  0% {opacity:0; transform:translateY(-80px);}
-  70% {transform:translateY(10px);}
-  100% {opacity:1; transform:translateY(0);}
+@keyframes drop {
+  from {transform:translateY(-60px); opacity:0;}
+  to {transform:translateY(0); opacity:1;}
 }
 
 /* 메뉴 */
 .menu {
   text-align:center;
-  margin:30px;
+  margin-bottom:20px;
 }
 
 .btn {
   display:inline-block;
-  margin:10px;
+  margin:8px;
   padding:14px 26px;
   border-radius:12px;
   background:white;
   border:1px solid #ddd;
   cursor:pointer;
   font-size:16px;
-  transition:0.3s;
-}
-
-.btn:hover {
-  background:#111;
-  color:white;
 }
 
 .active {
@@ -57,63 +48,61 @@ body {
   color:white;
 }
 
-/* 카드 영역 */
+/* 카드 (크게!) */
 .grid {
-  display:grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap:20px;
-  width:90%;
+  width:95%;
+  max-width:1200px;
   margin:30px auto;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap:25px;
 }
 
 /* 카드 */
 .card {
-  background:white;
-  border-radius:20px;
-  padding:20px;
-  border:1px solid #eee;
-  transition:0.3s;
-  position:relative;
+  background:linear-gradient(135deg,#1c1f2a,#111);
+  color:white;
+  border-radius:25px;
+  padding:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 
-.card:hover {
-  transform:translateY(-6px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* 카드 헤더 */
+/* 제목 */
 .card-header {
-  font-size:20px;
-  font-weight:bold;
-  margin-bottom:10px;
+  font-size:26px;
+  margin-bottom:15px;
+}
+
+/* 시간 박스 */
+.time-box {
+  background:#0d0f14;
+  border-radius:18px;
+  padding:18px;
+  margin-top:15px;
+}
+
+/* 라벨 */
+.label {
+  color:#f1c40f;
+  font-size:14px;
 }
 
 /* 시간 */
-.time-box {
-  background:#f4f6f8;
-  padding:10px;
-  border-radius:10px;
-  margin-top:8px;
-}
-
 .time {
-  font-size:22px;
+  font-size:34px;
   font-weight:bold;
+  margin-top:5px;
 }
 
-/* 포인트 라인 */
-.bear { border-top:4px solid #e67e22; }
-.factory { border-top:4px solid #7f8c8d; }
-.valley { border-top:4px solid #27ae60; }
-.joy { border-top:4px solid #9b59b6; }
+/* UTC */
+.utc {
+  font-size:12px;
+  color:#aaa;
+  margin-top:5px;
+}
 
 /* 모바일 */
-@media (max-width:900px){
-  .grid { grid-template-columns: repeat(2,1fr); }
-}
-
-@media (max-width:500px){
-  .grid { grid-template-columns:1fr; }
+@media (max-width:600px){
   .title { font-size:36px; }
 }
 </style>
@@ -132,60 +121,110 @@ body {
 <div id="content"></div>
 
 <script>
-function selectTeam(team) {
+function selectTeam(team){
   document.getElementById("uniBtn").classList.remove("active");
   document.getElementById("wonBtn").classList.remove("active");
   document.getElementById(team.toLowerCase()+"Btn").classList.add("active");
 
-  if (team === "UNI") renderUNI();
+  if(team==="UNI") renderUNI();
   else renderWON();
 }
 
-function renderUNI() {
+function renderUNI(){
   document.getElementById("content").innerHTML = `
     <div class="grid">
 
-      <div class="card bear">
+      <!-- 곰 -->
+      <div class="card">
         <div class="card-header">🐻 곰 사냥</div>
-        <div class="time-box">곰1 <div class="time">21:00</div></div>
-        <div class="time-box">곰2 <div class="time">22:00</div></div>
-        <div class="time-box">곰3 <div class="time">23:10</div></div>
+
+        <div class="time-box">
+          <div class="label">곰1</div>
+          <div class="time">21:00</div>
+          <div class="utc">(UTC 12:00)</div>
+        </div>
+
+        <div class="time-box">
+          <div class="label">곰2</div>
+          <div class="time">22:00</div>
+          <div class="utc">(UTC 13:00)</div>
+        </div>
+
+        <div class="time-box">
+          <div class="label">곰3</div>
+          <div class="time">23:10</div>
+          <div class="utc">(UTC 14:10)</div>
+        </div>
       </div>
 
-      <div class="card factory">
+      <!-- 무공 -->
+      <div class="card">
         <div class="card-header">⚙ 무기공장</div>
-        <div class="time-box">1군 <div class="time">21:00</div></div>
-        <div class="time-box">2군 <div class="time">22:00</div></div>
+
+        <div class="time-box">
+          <div class="label">1군</div>
+          <div class="time">21:00</div>
+          <div class="utc">(UTC 12:00)</div>
+        </div>
+
+        <div class="time-box">
+          <div class="label">2군</div>
+          <div class="time">23:00</div>
+          <div class="utc">(UTC 14:00)</div>
+        </div>
       </div>
 
-      <div class="card valley">
+      <!-- 협곡 -->
+      <div class="card">
         <div class="card-header">🏔 협곡</div>
-        <div class="time-box">1군 <div class="time">21:00</div></div>
-        <div class="time-box">2군 <div class="time">22:00</div></div>
+
+        <div class="time-box">
+          <div class="label">1군</div>
+          <div class="time">21:00</div>
+          <div class="utc">(UTC 12:00)</div>
+        </div>
+
+        <div class="time-box">
+          <div class="label">2군</div>
+          <div class="time">23:00</div>
+          <div class="utc">(UTC 14:00)</div>
+        </div>
       </div>
 
-      <div class="card joy">
+      <!-- 조이 -->
+      <div class="card">
         <div class="card-header">🎉 조이</div>
-        <div class="time-box">이벤트 <div class="time">22:00</div></div>
+
+        <div class="time-box">
+          <div class="label">이벤트</div>
+          <div class="time">22:00</div>
+          <div class="utc">(UTC 13:00)</div>
+        </div>
       </div>
 
     </div>
   `;
 }
 
-function renderWON() {
+function renderWON(){
   document.getElementById("content").innerHTML = `
     <div class="grid">
 
-      <div class="card bear">
+      <div class="card">
         <div class="card-header">🐻 곰 사냥</div>
-        <div class="time-box">곰1 <div class="time">22:30</div></div>
-        <div class="time-box">곰2 <div class="time">24:00</div></div>
-      </div>
 
-      <div class="card factory"><div class="card-header">⚙ 무기공장</div><div class="time-box">정보 없음</div></div>
-      <div class="card valley"><div class="card-header">🏔 협곡</div><div class="time-box">정보 없음</div></div>
-      <div class="card joy"><div class="card-header">🎉 조이</div><div class="time-box">정보 없음</div></div>
+        <div class="time-box">
+          <div class="label">곰1</div>
+          <div class="time">22:30</div>
+          <div class="utc">(UTC 13:30)</div>
+        </div>
+
+        <div class="time-box">
+          <div class="label">곰2</div>
+          <div class="time">24:00</div>
+          <div class="utc">(UTC 15:00)</div>
+        </div>
+      </div>
 
     </div>
   `;
