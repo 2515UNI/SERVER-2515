@@ -1,21 +1,36 @@
-<canvas id="bg"></canvas>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Snow Test</title>
 
 <style>
-canvas{
+body {
+  margin:0;
+  background:#111; /* 테스트용 어두운 배경 */
+}
+
+/* 캔버스 */
+#bg {
   position:fixed;
   top:0;
   left:0;
-  width:100%;
-  height:100%;
-  z-index:-1;
-  pointer-events:none;
+  width:100vw;
+  height:100vh;
+  z-index:0;
 }
 </style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
 
 <script>
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
+/* ⭐ 핵심: 실제 픽셀 크기 강제 지정 */
 function resize(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -25,7 +40,7 @@ window.addEventListener("resize", resize);
 
 /* ❄ 눈 */
 let snow = [];
-for(let i=0;i<80;i++){
+for(let i=0;i<100;i++){
   snow.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
@@ -50,8 +65,8 @@ for(let i=0;i<50;i++){
 function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  /* 눈 */
-  ctx.fillStyle="rgba(255,255,255,0.8)";
+  /* ❄ 눈 */
+  ctx.fillStyle="white";
   snow.forEach(s=>{
     ctx.beginPath();
     ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
@@ -66,7 +81,7 @@ function draw(){
     }
   });
 
-  /* 빛 */
+  /* ✨ 빛 */
   glow.forEach(g=>{
     ctx.beginPath();
     ctx.arc(g.x,g.y,g.r,0,Math.PI*2);
@@ -82,3 +97,6 @@ function draw(){
 
 draw();
 </script>
+
+</body>
+</html>
