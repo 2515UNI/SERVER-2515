@@ -1,3 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>SERVER 2515</title>
+
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family: 'Pretendard', sans-serif;
+  background:#f8fafc;
+  color:#111;
+}
+
+/* 타이틀 */
+.title {
+  text-align:center;
+  font-size:56px;
+  font-weight:900;
+  margin:50px 0 30px;
+}
+
+/* 메뉴 */
+.menu {
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.btn {
+  display:inline-block;
+  margin:10px;
+  padding:18px 36px;
+  border-radius:16px;
+  background:white;
+  border:2px solid #ddd;
+  cursor:pointer;
+  font-size:18px;
+  font-weight:600;
+  transition:0.2s;
+}
+
+.btn:hover {
+  background:#111;
+  color:white;
+}
+
+.btn:active {
+  transform:scale(0.95);
+}
+
+.active {
+  background:#111;
+  color:white;
+}
+
+/* 카드 */
+.grid {
+  width:95%;
+  max-width:1400px;
+  margin:30px auto;
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:25px;
+}
+
+.card {
+  background:linear-gradient(145deg,#ffffff,#f1f5f9);
+  border-radius:25px;
+  padding:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.card-header {
+  font-size:26px;
+  font-weight:800;
+}
+
+/* 시간 박스 */
+.time-box {
+  background:#ffffff;
+  border-radius:18px;
+  padding:18px;
+  margin-top:14px;
+  border:1.5px solid #ccc;
+}
+
+.label {
+  font-size:14px;
+  font-weight:700;
+  color:#111;
+}
+
+.time {
+  font-size:34px;
+  font-weight:900;
+}
+
+.utc {
+  font-size:13px;
+  color:#333;
+}
+
+/* 자동 강조 */
+.active-event {
+  border:2px solid #00ccff;
+  box-shadow:0 0 20px rgba(0,200,255,0.3);
+}
+
+/* 모바일 */
+@media (max-width:900px){
+  .grid {
+    display:flex;
+    overflow-x:auto;
+  }
+  .card {
+    min-width:300px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="title">🚀 SERVER 2515</div>
+
+<div class="menu">
+  <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">💬 이민 문의</a>
+  <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">🛡 UNI</div>
+  <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON</div>
+</div>
+
+<div id="content"></div>
+
+<script>
+function getActiveClass(hour, min){
+  const now = new Date();
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  const target = hour*60 + min;
+
+  if(Math.abs(nowMin - target) < 30){
+    return "active-event";
+  }
+  return "";
+}
+
+function selectTeam(team){
+  document.getElementById("uniBtn").classList.remove("active");
+  document.getElementById("wonBtn").classList.remove("active");
+  document.getElementById(team.toLowerCase()+"Btn").classList.add("active");
+
+  if(team==="UNI") renderUNI();
+  else renderWON();
+}
+
+/* 🛡 UNI (원래대로) */
 function renderUNI(){
   document.getElementById("content").innerHTML = `
     <div class="grid">
@@ -70,11 +227,11 @@ function renderUNI(){
   `;
 }
 
+/* ⚔ WON (수정 적용) */
 function renderWON(){
   document.getElementById("content").innerHTML = `
     <div class="grid">
 
-      <!-- 곰 -->
       <div class="card">
         <div class="card-header">🐻 곰 사냥</div>
 
@@ -91,7 +248,6 @@ function renderWON(){
         </div>
       </div>
 
-      <!-- 무공 -->
       <div class="card">
         <div class="card-header">⚙ 무기공장</div>
 
@@ -108,7 +264,6 @@ function renderWON(){
         </div>
       </div>
 
-      <!-- 협곡 -->
       <div class="card">
         <div class="card-header">🏔 협곡</div>
 
@@ -125,7 +280,6 @@ function renderWON(){
         </div>
       </div>
 
-      <!-- 조이 -->
       <div class="card">
         <div class="card-header">🎉 조이</div>
 
@@ -139,3 +293,7 @@ function renderWON(){
     </div>
   `;
 }
+</script>
+
+</body>
+</html>
