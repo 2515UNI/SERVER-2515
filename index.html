@@ -8,11 +8,13 @@
 body {
   margin:0;
   font-family: Arial;
-  color:#222;
   text-align:center;
+  color:#222;
+  overflow-x:hidden;
+
   background: linear-gradient(270deg, #dff3ff, #ffffff, #eaf8ff);
   background-size: 600% 600%;
-  animation: bgMove 10s ease infinite;
+  animation: bgMove 12s ease infinite;
 }
 
 @keyframes bgMove {
@@ -21,47 +23,72 @@ body {
   100% {background-position:0% 50%;}
 }
 
+/* 떠다니는 2515 */
+.floating {
+  position:fixed;
+  font-size:60px;
+  font-weight:bold;
+  color:rgba(0,0,0,0.05);
+  animation: floatText 10s linear infinite;
+}
+
+@keyframes floatText {
+  0% {transform:translateY(100vh) translateX(0);}
+  100% {transform:translateY(-100vh) translateX(100px);}
+}
+
+/* 제목 */
 h1 {
-  margin-top:30px;
+  margin-top:40px;
+  font-size:60px;
 }
 
-/* 버튼 */
+/* 메뉴 */
 .menu {
-  margin:20px;
+  margin:30px;
 }
 
+/* 버튼 크게 */
 .btn {
   display:inline-block;
-  margin:6px;
-  padding:10px 20px;
-  border-radius:10px;
+  margin:10px;
+  padding:16px 30px;
+  border-radius:14px;
   background:#2c3e50;
   color:white;
+  font-size:18px;
   cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover {
+  background:#3498db;
+  transform:scale(1.05);
 }
 
 .active {
   background:#3498db;
 }
 
-/* 카드 */
+/* 카드 크게 */
 .card {
-  width:360px;
-  margin:25px auto;
-  padding:20px;
-  border-radius:15px;
+  width:500px;
+  margin:30px auto;
+  padding:30px;
+  border-radius:20px;
   background:white;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  box-shadow:0 15px 40px rgba(0,0,0,0.2);
 }
 
 /* 탭 */
 .tab {
   display:inline-block;
-  margin:5px;
-  padding:8px 12px;
-  border-radius:8px;
+  margin:8px;
+  padding:10px 16px;
+  border-radius:10px;
   background:#ddd;
   cursor:pointer;
+  font-size:16px;
 }
 
 .tab.active {
@@ -71,34 +98,39 @@ h1 {
 
 /* 이벤트 카드 */
 .event-box {
-  margin-top:15px;
-  padding:15px;
-  border-radius:12px;
+  margin-top:20px;
+  padding:20px;
+  border-radius:15px;
   color:white;
-  font-size:18px;
+  font-size:20px;
   animation:fadeUp 0.4s ease;
 }
 
 @keyframes fadeUp {
-  from {opacity:0; transform:translateY(10px);}
+  from {opacity:0; transform:translateY(15px);}
   to {opacity:1; transform:translateY(0);}
 }
 
-/* 색상 구분 */
+/* 색 */
 .bear { background:#e67e22; }
 .factory { background:#7f8c8d; }
 .valley { background:#27ae60; }
 .joy { background:#9b59b6; }
 
 .time {
-  font-size:24px;
+  font-size:28px;
   font-weight:bold;
-  margin-top:5px;
+  margin-top:10px;
 }
 </style>
 </head>
 
 <body>
+
+<!-- 떠다니는 텍스트 여러개 -->
+<div class="floating" style="left:10%">2515</div>
+<div class="floating" style="left:40%; animation-delay:3s;">2515</div>
+<div class="floating" style="left:70%; animation-delay:6s;">2515</div>
 
 <h1>🔥 SERVER 2515 🔥</h1>
 
@@ -116,9 +148,12 @@ let currentTab = "bear";
 
 function selectTeam(team) {
   currentTeam = team;
+
   document.getElementById("uniBtn").classList.remove("active");
   document.getElementById("wonBtn").classList.remove("active");
+
   document.getElementById(team.toLowerCase()+"Btn").classList.add("active");
+
   render();
 }
 
@@ -132,57 +167,32 @@ function render() {
 
   let html = `
     <div class="card">
-      <div><b>${currentTeam} 연맹</b></div>
+      <div style="font-size:22px; font-weight:bold;">${currentTeam} 연맹</div>
 
       <div>
-        <div class="tab ${currentTab==='bear'?'active':''}" onclick="selectTab('bear')">🐻</div>
-        <div class="tab ${currentTab==='factory'?'active':''}" onclick="selectTab('factory')">⚙</div>
-        <div class="tab ${currentTab==='valley'?'active':''}" onclick="selectTab('valley')">🏔</div>
-        <div class="tab ${currentTab==='joy'?'active':''}" onclick="selectTab('joy')">🎉</div>
+        <div class="tab ${currentTab==='bear'?'active':''}" onclick="selectTab('bear')">🐻 곰</div>
+        <div class="tab ${currentTab==='factory'?'active':''}" onclick="selectTab('factory')">⚙ 무기</div>
+        <div class="tab ${currentTab==='valley'?'active':''}" onclick="selectTab('valley')">🏔 협곡</div>
+        <div class="tab ${currentTab==='joy'?'active':''}" onclick="selectTab('joy')">🎉 조이</div>
       </div>
   `;
 
   if (currentTeam === "UNI") {
-    if (currentTab === "bear") {
-      html += `
-        <div class="event-box bear">
-          곰 사냥
-          <div class="time">21:00 / 22:00 / 23:10</div>
-        </div>`;
-    }
-    if (currentTab === "factory") {
-      html += `
-        <div class="event-box factory">
-          무기공장
-          <div class="time">21:00 / 22:00</div>
-        </div>`;
-    }
-    if (currentTab === "valley") {
-      html += `
-        <div class="event-box valley">
-          협곡
-          <div class="time">21:00 / 22:00</div>
-        </div>`;
-    }
-    if (currentTab === "joy") {
-      html += `
-        <div class="event-box joy">
-          조이
-          <div class="time">22:00</div>
-        </div>`;
-    }
+    if (currentTab === "bear")
+      html += `<div class="event-box bear">곰 사냥<div class="time">21:00 / 22:00 / 23:10</div></div>`;
+    if (currentTab === "factory")
+      html += `<div class="event-box factory">무기공장<div class="time">21:00 / 22:00</div></div>`;
+    if (currentTab === "valley")
+      html += `<div class="event-box valley">협곡<div class="time">21:00 / 22:00</div></div>`;
+    if (currentTab === "joy")
+      html += `<div class="event-box joy">조이<div class="time">22:00</div></div>`;
   }
 
   if (currentTeam === "WON") {
-    if (currentTab === "bear") {
-      html += `
-        <div class="event-box bear">
-          곰 사냥
-          <div class="time">22:30 / 24:00</div>
-        </div>`;
-    } else {
+    if (currentTab === "bear")
+      html += `<div class="event-box bear">곰 사냥<div class="time">22:30 / 24:00</div></div>`;
+    else
       html += `<div class="event-box factory">정보 없음</div>`;
-    }
   }
 
   html += `</div>`;
