@@ -1,153 +1,43 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>SERVER 2515</title>
-
-<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+<canvas id="bg"></canvas>
 
 <style>
-body {
-  margin:0;
-  font-family:'Pretendard', sans-serif;
-  background:#f8fafc;
-  overflow-x:hidden;
-  color:#111;
-}
-
-/* 캔버스 */
-canvas {
+canvas{
   position:fixed;
   top:0;
   left:0;
+  width:100%;
+  height:100%;
   z-index:-1;
-}
-
-/* 타이틀 */
-.title {
-  text-align:center;
-  margin-top:60px;
-}
-
-.title-main {
-  font-family:'Poppins', sans-serif;
-  font-size:48px;
-}
-
-.title-sub {
-  font-family:'Poppins', sans-serif;
-  font-size:80px;
-  font-weight:900;
-
-  background: linear-gradient(90deg, #00c6ff, #0072ff, #00c6ff);
-  background-size:300%;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-
-  animation:shineText 5s linear infinite;
-
-  -webkit-text-stroke:1.5px rgba(0,0,0,0.7);
-
-  text-shadow:
-    0 0 10px rgba(0,200,255,0.6),
-    0 0 20px rgba(0,200,255,0.3);
-}
-
-@keyframes shineText {
-  0% {background-position:0%;}
-  100% {background-position:300%;}
-}
-
-/* 버튼 */
-.menu { text-align:center; margin-top:30px; }
-
-.btn {
-  display:inline-block;
-  margin:10px;
-  padding:16px 34px;
-  border-radius:16px;
-  background:white;
-  border:2px solid #ddd;
-  cursor:pointer;
-}
-.btn:hover { background:#111; color:white; }
-.active { background:#111; color:white; }
-
-/* 카드 */
-.grid {
-  width:95%;
-  max-width:1400px;
-  margin:30px auto;
-  display:grid;
-  grid-template-columns: repeat(4,1fr);
-  gap:25px;
-}
-
-.card {
-  background:white;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
-
-.time-box {
-  margin-top:10px;
-  padding:12px;
-  border:1px solid #ccc;
-  border-radius:12px;
-}
-
-.time { font-size:26px; font-weight:900; }
-.utc { font-size:12px; color:#333; }
-
-/* 모바일 */
-@media (max-width:900px){
-  .grid { display:flex; overflow-x:auto; }
-  .card { min-width:280px; }
+  pointer-events:none;
 }
 </style>
-</head>
-
-<body>
-
-<canvas id="bg"></canvas>
-
-<div class="title">
-  <div class="title-main">White Out Survival Server</div>
-  <div class="title-sub">2515 UNI & WON</div>
-</div>
-
-<div class="menu">
-  <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">💬 이민 문의</a>
-  <div class="btn" onclick="renderUNI()">UNI</div>
-  <div class="btn" onclick="renderWON()">WON</div>
-</div>
-
-<div id="content"></div>
 
 <script>
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
 
 /* ❄ 눈 */
 let snow = [];
-for(let i=0;i<70;i++){
+for(let i=0;i<80;i++){
   snow.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
     r:Math.random()*3+1,
     speed:Math.random()*1+0.5,
-    drift:Math.random()*0.5-0.25
+    drift:Math.random()*0.6-0.3
   });
 }
 
-/* ✨ 빛 입자 */
+/* ✨ 빛 */
 let glow = [];
-for(let i=0;i<40;i++){
+for(let i=0;i<50;i++){
   glow.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
@@ -166,9 +56,14 @@ function draw(){
     ctx.beginPath();
     ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
     ctx.fill();
+
     s.y+=s.speed;
     s.x+=s.drift;
-    if(s.y>canvas.height){ s.y=0; s.x=Math.random()*canvas.width; }
+
+    if(s.y>canvas.height){
+      s.y=0;
+      s.x=Math.random()*canvas.width;
+    }
   });
 
   /* 빛 */
@@ -181,34 +76,9 @@ function draw(){
     g.alpha+=g.fade;
     if(g.alpha>1 || g.alpha<0) g.fade*=-1;
   });
+
+  requestAnimationFrame(draw);
 }
 
-setInterval(draw,30);
-
-window.addEventListener("resize",()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-/* 이벤트 */
-function renderUNI(){
-document.getElementById("content").innerHTML=`
-<div class="grid">
-<div class="card"><h3>🐻 곰</h3>
-<div class="time-box">21:00<br><span class="utc">UTC 12:00</span></div>
-</div>
-</div>`;
-}
-
-function renderWON(){
-document.getElementById("content").innerHTML=`
-<div class="grid">
-<div class="card"><h3>🐻 곰</h3>
-<div class="time-box">22:20<br><span class="utc">UTC 13:20</span></div>
-</div>
-</div>`;
-}
+draw();
 </script>
-
-</body>
-</html>
