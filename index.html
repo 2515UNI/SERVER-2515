@@ -8,124 +8,99 @@
 body {
   margin:0;
   font-family: Arial;
-  color:white;
+  color:#222;
   text-align:center;
-  background:#0a0f14;
   overflow-x:hidden;
+
+  /* 밝은 그라데이션 애니메이션 */
+  background: linear-gradient(270deg, #dff3ff, #ffffff, #eaf8ff);
+  background-size: 600% 600%;
+  animation: bgMove 10s ease infinite;
 }
 
-/* 배경 빛 효과 */
-body::before {
-  content:"";
-  position:fixed;
-  width:100%;
-  height:100%;
-  background: radial-gradient(circle at top, rgba(0,200,255,0.2), transparent 70%);
-  z-index:0;
-}
-
-/* 눈 효과 */
-.snow {
-  position:fixed;
-  width:100%;
-  height:100%;
-  background-image: radial-gradient(white 2px, transparent 2px);
-  background-size:25px 25px;
-  animation:snow 15s linear infinite;
-  opacity:0.3;
-  pointer-events:none;
-  z-index:1;
-}
-
-@keyframes snow {
-  from { transform: translateY(-100px); }
-  to { transform: translateY(100vh); }
-}
-
-/* 컨텐츠 */
-.container {
-  position:relative;
-  z-index:2;
+@keyframes bgMove {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
 }
 
 /* 제목 */
 h1 {
-  margin-top:40px;
-  font-size:48px;
-  text-shadow:0 0 20px #00ccff;
+  margin-top:30px;
+  font-size:42px;
 }
 
 /* 버튼 */
 .menu {
-  margin:30px;
+  margin:20px;
 }
 
 .btn {
   display:inline-block;
-  margin:10px;
-  padding:12px 25px;
+  margin:6px;
+  padding:10px 20px;
   border-radius:10px;
-  background:#111a22;
-  border:1px solid rgba(0,200,255,0.3);
+  background:#2c3e50;
   color:white;
   cursor:pointer;
   transition:0.3s;
 }
 
 .btn:hover {
-  background:#00ccff;
-  color:black;
+  background:#3498db;
 }
 
 /* 선택 */
 .active {
-  background:#00ccff;
-  color:black;
-  box-shadow:0 0 15px #00ccff;
+  background:#3498db;
 }
 
 /* 카드 */
 .card {
   width:360px;
-  margin:30px auto;
+  margin:25px auto;
   padding:20px;
   border-radius:15px;
-  background:#111a22;
-  border:1px solid rgba(0,200,255,0.2);
+  background:white;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
   text-align:left;
-  box-shadow:0 0 20px rgba(0,200,255,0.1);
-}
-
-/* 제목 */
-.title {
-  text-align:center;
-  font-size:24px;
-  color:#00ccff;
-  margin-bottom:15px;
 }
 
 /* 섹션 */
 .section {
+  margin-top:10px;
+}
+
+/* 탭 */
+.tabs {
   margin-top:15px;
-  font-weight:bold;
-  color:#00ccff;
+}
+
+.tab {
+  display:inline-block;
+  margin:5px;
+  padding:8px 12px;
+  border-radius:8px;
+  background:#ddd;
+  cursor:pointer;
+}
+
+.tab.active {
+  background:#3498db;
+  color:white;
 }
 </style>
 </head>
 
 <body>
 
-<div class="snow"></div>
-
-<div class="container">
-
 <h1>🔥 SERVER 2515 🔥</h1>
 
-<!-- 메뉴 -->
+<!-- 상단 -->
 <div class="menu">
-  <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">💬 이민 문의</a>
-  <div class="btn" id="btnUNI" onclick="showUNI()">🛡 UNI</div>
-  <div class="btn" id="btnWON" onclick="showWON()">⚔ WON</div>
+  <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">이민 문의</a>
+  <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">UNI</div>
+  <div class="btn" id="wonBtn" onclick="selectTeam('WON')">WON</div>
 </div>
 
 <!-- 내용 -->
@@ -133,54 +108,62 @@ h1 {
   <p>연맹을 선택하세요</p>
 </div>
 
-</div>
-
 <script>
-function resetActive() {
-  document.getElementById("btnUNI").classList.remove("active");
-  document.getElementById("btnWON").classList.remove("active");
+let currentTeam = "";
+let currentTab = "bear";
+
+function selectTeam(team) {
+  currentTeam = team;
+
+  document.getElementById("uniBtn").classList.remove("active");
+  document.getElementById("wonBtn").classList.remove("active");
+
+  document.getElementById(team.toLowerCase() + "Btn").classList.add("active");
+
+  render();
 }
 
-/* UNI */
-function showUNI() {
-  resetActive();
-  document.getElementById("btnUNI").classList.add("active");
+function selectTab(tab) {
+  currentTab = tab;
+  render();
+}
+
+function render() {
+  if (!currentTeam) return;
+
+  let content = "";
+
+  if (currentTeam === "UNI") {
+    if (currentTab === "bear") content = "곰 1 : 21:00<br>곰 2 : 22:00<br>곰 3 : 23:10";
+    if (currentTab === "factory") content = "1군 : 21:00<br>2군 : 22:00";
+    if (currentTab === "valley") content = "1군 : 21:00<br>2군 : 22:00";
+    if (currentTab === "joy") content = "22:00";
+  }
+
+  if (currentTeam === "WON") {
+    if (currentTab === "bear") content = "곰 1 : 22:30<br>곰 2 : 24:00";
+    else content = "정보 없음";
+  }
 
   document.getElementById("content").innerHTML = `
     <div class="card">
-      <div class="title">🛡 UNI 연맹</div>
 
-      <div class="section">🐻 곰사냥</div>
-      <p>곰 1 : 21:00</p>
-      <p>곰 2 : 22:00</p>
-      <p>곰 3 : 23:10</p>
+      <div style="text-align:center; font-weight:bold;">
+        ${currentTeam} 연맹
+      </div>
 
-      <div class="section">⚙ 무기공장</div>
-      <p>1군 : 21:00</p>
-      <p>2군 : 22:00</p>
+      <!-- 탭 -->
+      <div class="tabs">
+        <div class="tab ${currentTab==='bear'?'active':''}" onclick="selectTab('bear')">🐻 곰</div>
+        <div class="tab ${currentTab==='factory'?'active':''}" onclick="selectTab('factory')">⚙ 무기</div>
+        <div class="tab ${currentTab==='valley'?'active':''}" onclick="selectTab('valley')">🏔 협곡</div>
+        <div class="tab ${currentTab==='joy'?'active':''}" onclick="selectTab('joy')">🎉 조이</div>
+      </div>
 
-      <div class="section">🏔 협곡</div>
-      <p>1군 : 21:00</p>
-      <p>2군 : 22:00</p>
+      <div class="section">
+        ${content}
+      </div>
 
-      <div class="section">🎉 조이</div>
-      <p>22:00</p>
-    </div>
-  `;
-}
-
-/* WON */
-function showWON() {
-  resetActive();
-  document.getElementById("btnWON").classList.add("active");
-
-  document.getElementById("content").innerHTML = `
-    <div class="card">
-      <div class="title">⚔ WON 연맹</div>
-
-      <div class="section">🐻 곰사냥</div>
-      <p>곰 1 : 22:30</p>
-      <p>곰 2 : 24:00</p>
     </div>
   `;
 }
