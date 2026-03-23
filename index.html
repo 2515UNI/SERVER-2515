@@ -11,13 +11,22 @@ body {
   margin:0;
   font-family:'Pretendard', sans-serif;
   background:#f8fafc;
+  overflow-x:hidden;
   color:#111;
+}
+
+/* 배경 */
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
 }
 
 /* 타이틀 */
 .title {
   text-align:center;
-  font-size:56px;
+  font-size:60px;
   font-weight:900;
   margin:50px 0 20px;
 }
@@ -40,68 +49,39 @@ body {
 .btn:hover { background:#111; color:white; }
 .active { background:#111; color:white; }
 
-/* 🔥 아코디언 */
-.accordion {
+/* 모집/공약 카드 */
+.info-section {
   width:95%;
-  max-width:1100px; /* 🔥 더 넓게 */
+  max-width:1100px;
   margin:30px auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
 }
 
-.accordion-item {
+.info-card {
   background:white;
-  border-radius:22px;
-  margin-bottom:20px;
-  border:1px solid #ddd;
-  overflow:hidden;
-  transition:0.2s;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
-.accordion-header {
-  padding:26px;
-  font-size:26px;
+.info-title {
+  font-size:24px;
   font-weight:900;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:10px;
+  margin-bottom:15px;
 }
 
-/* 🔥 아이콘 애니메이션 */
-.icon {
-  display:inline-block;
-  transition:0.3s;
-}
-
-/* 🔥 클릭 튕김 */
-.bounce {
-  animation:bounce 0.4s;
-}
-
-@keyframes bounce {
-  0% { transform:scale(1); }
-  50% { transform:scale(1.15); }
-  100% { transform:scale(1); }
-}
-
-.accordion-content {
-  max-height:0;
-  overflow:hidden;
-  transition:0.4s;
-  padding:0 30px;
+.info-item {
+  background:#f1f5f9;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:10px;
   font-size:17px;
-  line-height:1.8;
+  font-weight:600;
 }
 
-.accordion-content.open {
-  max-height:1200px;
-  padding:30px;
-}
-
-.accordion-content p {
-  margin-bottom:12px;
-}
-
-/* 카드 */
+/* 이벤트 카드 */
 .grid {
   width:95%;
   max-width:1400px;
@@ -112,42 +92,57 @@ body {
 }
 
 .card {
-  background:linear-gradient(145deg,#ffffff,#f1f5f9);
-  border-radius:25px;
+  background:white;
+  border-radius:20px;
   padding:25px;
   box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
 .card-header {
-  font-size:24px;
+  font-size:22px;
   font-weight:800;
 }
 
 .time-box {
-  background:white;
-  border-radius:14px;
+  background:#f8fafc;
+  border-radius:12px;
   padding:14px;
   margin-top:10px;
   border:1.5px solid #ccc;
 }
 
-.time { font-size:28px; font-weight:900; }
-.utc { font-size:12px; color:#333; }
+.label {
+  font-size:14px;
+  font-weight:700;
+}
+
+.time {
+  font-size:30px;
+  font-weight:900;
+}
+
+.utc {
+  font-size:12px;
+  color:#333;
+}
 
 .active-event {
   border:2px solid #00ccff;
-  box-shadow:0 0 15px rgba(0,200,255,0.3);
+  box-shadow:0 0 10px rgba(0,200,255,0.3);
 }
 
 /* 모바일 */
 @media (max-width:900px){
   .grid { display:flex; overflow-x:auto; }
   .card { min-width:280px; }
+  .info-section { grid-template-columns:1fr; }
 }
 </style>
 </head>
 
 <body>
+
+<canvas id="bg"></canvas>
 
 <div class="title">🚀 SERVER 2515</div>
 
@@ -157,67 +152,25 @@ body {
   <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON</div>
 </div>
 
-<!-- 🔥 아코디언 -->
-<div class="accordion">
+<!-- 모집 / 공약 -->
+<div class="info-section">
 
-  <!-- 모집 -->
-  <div class="accordion-item">
-    <div class="accordion-header" onclick="toggleAccordion(this)">
-      <span class="icon">💙</span> 모집 대상
-    </div>
-    <div class="accordion-content">
-
-      <p>✔ 단체 이민 (4월 특초 2장 가능)</p>
-      <p>→ 안정적인 기반에서 시작할 수 있도록 지원</p>
-
-      <p>✔ 특초 개인 이민</p>
-      <p>→ 혼자 오셔도 빠르게 적응 가능</p>
-
-      <p>✔ 4~5월 단체 이동 예정</p>
-      <p>→ 사전 상담 및 자리 확보 가능</p>
-
-      <p>✔ KOR 합병 및 단체 이동 환영</p>
-
-      <br>
-
-      <p>✔ 한국어 소통 편한 서버 찾는 분</p>
-      <p>✔ 전투 및 서버전에 진심인 분</p>
-      <p>✔ 안정적인 연맹에서 시작하고 싶은 분</p>
-
-    </div>
+  <div class="info-card">
+    <div class="info-title">💙 모집 대상</div>
+    <div class="info-item">단체 이민 / 특초 개인 이민</div>
+    <div class="info-item">4~5월 단체 이동 예정</div>
+    <div class="info-item">KOR 합병 및 단체 이동 환영</div>
+    <div class="info-item">전투 & 서버전 중심 유저</div>
+    <div class="info-item">안정적인 연맹 원하는 분</div>
   </div>
 
-  <!-- 공약 -->
-  <div class="accordion-item">
-    <div class="accordion-header" onclick="toggleAccordion(this)">
-      <span class="icon">📜</span> 서버 공약
-    </div>
-    <div class="accordion-content">
-
-      <p>✔ 12개 엔센 보장 (4레벨 포함)</p>
-      <p>→ 안정적인 시작 기반 제공</p>
-
-      <p>✔ 요새 4 / 성채 1 제공</p>
-      <p>→ 이후 기여도 기준 공정 재분배</p>
-
-      <p>✔ 서버전 12전 9승</p>
-      <p>→ 강한 서버와도 협력으로 승리</p>
-
-      <p>✔ 서리 / 드엠 협력 가능</p>
-
-      <p>✔ 연구 만렙 연맹 제공 + KOR 합병 가능</p>
-
-      <p>✔ 초기 정착 적극 지원</p>
-
-      <br>
-
-      <p>👉 “평소 평화 / 전투는 진심”</p>
-
-      <p>✔ 한국어 중심 소통</p>
-      <p>✔ 다국적 협력 서버</p>
-      <p>✔ 디스코드 활성화</p>
-
-    </div>
+  <div class="info-card">
+    <div class="info-title">📜 서버 공약</div>
+    <div class="info-item">12개 엔센 보장 (4레벨 포함)</div>
+    <div class="info-item">요새 4 / 성채 1 제공</div>
+    <div class="info-item">서버전 12전 9승</div>
+    <div class="info-item">연맹 협력 및 합병 가능</div>
+    <div class="info-item">초기 정착 전폭 지원</div>
   </div>
 
 </div>
@@ -225,21 +178,53 @@ body {
 <div id="content"></div>
 
 <script>
-function toggleAccordion(el){
-  const content = el.nextElementSibling;
-  const icon = el.querySelector(".icon");
+/* 배경 입자 */
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
 
-  content.classList.toggle("open");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-  icon.classList.add("bounce");
-  setTimeout(()=>icon.classList.remove("bounce"),400);
+let particles = [];
+for(let i=0;i<80;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2,
+    d:Math.random()*1
+  });
 }
 
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="rgba(0,0,0,0.1)";
+  ctx.beginPath();
+  particles.forEach(p=>{
+    ctx.moveTo(p.x,p.y);
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+  });
+  ctx.fill();
+  update();
+}
+
+function update(){
+  particles.forEach(p=>{
+    p.y+=p.d;
+    if(p.y>canvas.height){
+      p.y=0;
+      p.x=Math.random()*canvas.width;
+    }
+  });
+}
+
+setInterval(draw,30);
+
+/* 이벤트 강조 */
 function getActiveClass(h,m){
-  const now = new Date();
-  const nowMin = now.getHours()*60 + now.getMinutes();
-  const target = h*60 + m;
-  return Math.abs(nowMin-target)<30 ? "active-event":"";
+  const now=new Date();
+  const nowMin=now.getHours()*60+now.getMinutes();
+  const target=h*60+m;
+  return Math.abs(nowMin-target)<30?"active-event":"";
 }
 
 function selectTeam(team){
@@ -253,45 +238,65 @@ function selectTeam(team){
 
 /* UNI */
 function renderUNI(){
-  document.getElementById("content").innerHTML = `
-  <div class="grid">
-    <div class="card"><div class="card-header">🐻 곰</div>
-    <div class="time-box ${getActiveClass(21,0)}">21:00 (UTC 12:00)</div>
-    <div class="time-box ${getActiveClass(22,0)}">22:00 (UTC 13:00)</div>
-    <div class="time-box ${getActiveClass(23,10)}">23:10 (UTC 14:10)</div></div>
+document.getElementById("content").innerHTML=`
+<div class="grid">
 
-    <div class="card"><div class="card-header">⚙ 무공</div>
-    <div class="time-box ${getActiveClass(21,0)}">21:00</div>
-    <div class="time-box ${getActiveClass(22,0)}">22:00</div></div>
+  <div class="card">
+    <div class="card-header">🐻 곰 사냥</div>
+    <div class="time-box ${getActiveClass(21,0)}"><div class="label">곰1</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+    <div class="time-box ${getActiveClass(22,0)}"><div class="label">곰2</div><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
+    <div class="time-box ${getActiveClass(23,10)}"><div class="label">곰3</div><div class="time">23:10</div><div class="utc">(UTC 14:10)</div></div>
+  </div>
 
-    <div class="card"><div class="card-header">🏔 협곡</div>
-    <div class="time-box ${getActiveClass(21,0)}">21:00</div>
-    <div class="time-box ${getActiveClass(22,0)}">22:00</div></div>
+  <div class="card">
+    <div class="card-header">⚙ 무기공장</div>
+    <div class="time-box ${getActiveClass(21,0)}"><div class="label">1군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+    <div class="time-box ${getActiveClass(22,0)}"><div class="label">2군</div><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
+  </div>
 
-    <div class="card"><div class="card-header">🎉 조이</div>
-    <div class="time-box ${getActiveClass(22,0)}">22:00</div></div>
-  </div>`;
+  <div class="card">
+    <div class="card-header">🏔 협곡</div>
+    <div class="time-box ${getActiveClass(21,0)}"><div class="label">1군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+    <div class="time-box ${getActiveClass(22,0)}"><div class="label">2군</div><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">🎉 조이</div>
+    <div class="time-box ${getActiveClass(22,0)}"><div class="label">이벤트</div><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
+  </div>
+
+</div>`;
 }
 
 /* WON */
 function renderWON(){
-  document.getElementById("content").innerHTML = `
-  <div class="grid">
-    <div class="card"><div class="card-header">🐻 곰</div>
-    <div class="time-box ${getActiveClass(22,20)}">22:20</div>
-    <div class="time-box ${getActiveClass(0,5)}">00:05</div></div>
+document.getElementById("content").innerHTML=`
+<div class="grid">
 
-    <div class="card"><div class="card-header">⚙ 무공</div>
-    <div class="time-box ${getActiveClass(23,0)}">23:00</div>
-    <div class="time-box ${getActiveClass(21,0)}">21:00</div></div>
+  <div class="card">
+    <div class="card-header">🐻 곰 사냥</div>
+    <div class="time-box ${getActiveClass(22,20)}"><div class="label">곰1</div><div class="time">22:20</div><div class="utc">(UTC 13:20)</div></div>
+    <div class="time-box ${getActiveClass(0,5)}"><div class="label">곰2</div><div class="time">00:05</div><div class="utc">(UTC 15:05)</div></div>
+  </div>
 
-    <div class="card"><div class="card-header">🏔 협곡</div>
-    <div class="time-box ${getActiveClass(23,0)}">23:00</div>
-    <div class="time-box ${getActiveClass(21,0)}">21:00</div></div>
+  <div class="card">
+    <div class="card-header">⚙ 무기공장</div>
+    <div class="time-box ${getActiveClass(23,0)}"><div class="label">1군</div><div class="time">23:00</div><div class="utc">(UTC 14:00)</div></div>
+    <div class="time-box ${getActiveClass(21,0)}"><div class="label">2군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+  </div>
 
-    <div class="card"><div class="card-header">🎉 조이</div>
-    <div class="time-box ${getActiveClass(21,0)}">21:00</div></div>
-  </div>`;
+  <div class="card">
+    <div class="card-header">🏔 협곡</div>
+    <div class="time-box ${getActiveClass(23,0)}"><div class="label">1군</div><div class="time">23:00</div><div class="utc">(UTC 14:00)</div></div>
+    <div class="time-box ${getActiveClass(21,0)}"><div class="label">2군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">🎉 조이</div>
+    <div class="time-box ${getActiveClass(21,0)}"><div class="label">이벤트</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+  </div>
+
+</div>`;
 }
 </script>
 
