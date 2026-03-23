@@ -31,10 +31,26 @@ body {
 
 .title-sub {
   font-family:'Poppins', sans-serif;
-  font-size:70px;
+  font-size:80px;
   font-weight:900;
   margin-top:10px;
-  letter-spacing:2px;
+
+  background: linear-gradient(90deg, #00c6ff, #0072ff, #00c6ff);
+  background-size:300%;
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  animation:shineText 5s linear infinite;
+
+  text-shadow:
+    0 0 10px rgba(0, 200, 255, 0.5),
+    0 0 20px rgba(0, 200, 255, 0.3);
+}
+
+@keyframes shineText {
+  0% {background-position:0%;}
+  100% {background-position:300%;}
 }
 
 /* 버튼 */
@@ -88,7 +104,7 @@ body {
 }
 
 .info-content.open {
-  max-height:2000px;
+  max-height:3000px;
   margin-top:15px;
 }
 
@@ -204,37 +220,46 @@ body {
 <div class="info-card">
 <div class="info-title" onclick="toggleInfo(this)">💙 모집 대상</div>
 <div class="info-content">
+
 <p>💙 모집 대상</p>
 <p>· 단체 이민 (4월 특초 2장가능합니다)</p>
 <p>· 특초 개인 이민</p>
-<p>· 누구나 환영</p>
-<p>· 4~5월 단체 이민 예정</p>
-<p><b>KOR 합병 / 단체 이동 환영</b></p>
+<p>· 뜻 맞는 분들과 함께하실 분 누구나 환영합니다 :)</p>
+<p>· 4-5월 연계 단체 이민 예정이신 분들</p>
+<p><b>특히, KOR 합병 원하시는 분 or 단체로 이동하시는 분</b></p>
 
-<p>💙 추천 대상</p>
-<p>· 한국어 서버 찾는 분</p>
-<p>· 전투 중심 유저</p>
-<p>· 안정적 연맹 원하는 분</p>
+<p>💙 2515 서버, 이런 분들께 잘 맞습니다.</p>
+
+<p>· 한국어 소통이 편한 서버를 찾으시는 분</p>
+<p>· 단체 이민 가능한 곳을 찾으시는 분</p>
+<p>· 서버전을 제대로 하고 싶은 분, 전투에 진심인 분</p>
+<p>· 초기 정착할 때 지원 잘 되는 서버를 원하시는 분</p>
+<p>· 연구/운영 기반이 어느 정도 갖춰진 연맹으로 안정적으로 들어오고 싶은 분</p>
+
 </div>
 </div>
 
 <div class="info-card">
 <div class="info-title" onclick="toggleInfo(this)">📜 서버 공약</div>
 <div class="info-content">
-<p>💙 2515 서버 약속</p>
 
-<p><b>1. 12 엔센 보장</b></p>
-<p>안정적 시작 지원</p>
+<p>💙 2515 서버에서 약속드릴 수 있는 부분</p>
 
-<p><b>2. 요새 / 성채 분배</b></p>
+<p><b>1. 4레벨 엔센 포함 12개 엔센 보장</b></p>
+<p>단체 이민 오시는 분들이 안정적인 출발 가능</p>
 
-<p><b>3. 서버전 중심</b></p>
+<p><b>2. 요새 4개 / 성채 1개 분배</b></p>
+<p>기여도 기준 재분배</p>
 
-<p><b>4. 연맹 협력</b></p>
+<p><b>3. 서버전 메인 / 협력</b></p>
+<p>12전 9승</p>
 
-<p><b>5. 연구 연맹 제공</b></p>
+<p><b>4. 서리 / 드엠 협력 가능</b></p>
+
+<p><b>5. 연구 만렙 연맹 제공</b></p>
 
 <p><b>6. 초기 정착 지원</b></p>
+
 </div>
 </div>
 
@@ -289,22 +314,22 @@ function renderWON(){
 document.getElementById("content").innerHTML=`
 <div class="grid">
 <div class="card"><div class="card-header">🐻 곰</div>
-<div class="time-box"><div class="label">곰1</div><div class="time">22:20</div></div>
-<div class="time-box"><div class="label">곰2</div><div class="time">00:05</div></div>
+<div class="time-box"><div class="label">곰1</div><div class="time">22:20</div><div class="utc">(UTC 13:20)</div></div>
+<div class="time-box"><div class="label">곰2</div><div class="time">00:05</div><div class="utc">(UTC 15:05)</div></div>
 </div>
 
 <div class="card"><div class="card-header">⚙ 무공</div>
-<div class="time-box"><div class="label">1군</div><div class="time">23:00</div></div>
-<div class="time-box"><div class="label">2군</div><div class="time">21:00</div></div>
+<div class="time-box"><div class="label">1군</div><div class="time">23:00</div><div class="utc">(UTC 14:00)</div></div>
+<div class="time-box"><div class="label">2군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
 </div>
 
 <div class="card"><div class="card-header">🏔 협곡</div>
-<div class="time-box"><div class="label">1군</div><div class="time">23:00</div></div>
-<div class="time-box"><div class="label">2군</div><div class="time">21:00</div></div>
+<div class="time-box"><div class="label">1군</div><div class="time">23:00</div><div class="utc">(UTC 14:00)</div></div>
+<div class="time-box"><div class="label">2군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
 </div>
 
 <div class="card"><div class="card-header">🎉 조이</div>
-<div class="time-box"><div class="time">21:00</div></div>
+<div class="time-box"><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
 </div>
 </div>`;
 }
