@@ -23,9 +23,7 @@ body {
 }
 
 /* 메뉴 */
-.menu {
-  text-align:center;
-}
+.menu { text-align:center; }
 
 .btn {
   display:inline-block;
@@ -37,43 +35,70 @@ body {
   cursor:pointer;
   font-size:18px;
   font-weight:600;
+  transition:0.2s;
 }
-
 .btn:hover { background:#111; color:white; }
 .active { background:#111; color:white; }
 
 /* 🔥 아코디언 */
 .accordion {
-  width:90%;
-  max-width:1000px;
-  margin:20px auto;
+  width:95%;
+  max-width:1100px; /* 🔥 더 넓게 */
+  margin:30px auto;
 }
 
 .accordion-item {
   background:white;
-  border-radius:18px;
-  margin-bottom:15px;
+  border-radius:22px;
+  margin-bottom:20px;
   border:1px solid #ddd;
   overflow:hidden;
+  transition:0.2s;
 }
 
 .accordion-header {
-  padding:20px;
-  font-size:20px;
-  font-weight:700;
+  padding:26px;
+  font-size:26px;
+  font-weight:900;
   cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* 🔥 아이콘 애니메이션 */
+.icon {
+  display:inline-block;
+  transition:0.3s;
+}
+
+/* 🔥 클릭 튕김 */
+.bounce {
+  animation:bounce 0.4s;
+}
+
+@keyframes bounce {
+  0% { transform:scale(1); }
+  50% { transform:scale(1.15); }
+  100% { transform:scale(1); }
 }
 
 .accordion-content {
   max-height:0;
   overflow:hidden;
   transition:0.4s;
-  padding:0 20px;
+  padding:0 30px;
+  font-size:17px;
+  line-height:1.8;
 }
 
 .accordion-content.open {
-  max-height:800px;
-  padding:20px;
+  max-height:1200px;
+  padding:30px;
+}
+
+.accordion-content p {
+  margin-bottom:12px;
 }
 
 /* 카드 */
@@ -106,7 +131,6 @@ body {
   border:1.5px solid #ccc;
 }
 
-.label { font-weight:700; }
 .time { font-size:28px; font-weight:900; }
 .utc { font-size:12px; color:#333; }
 
@@ -133,35 +157,66 @@ body {
   <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON</div>
 </div>
 
-<!-- 🔥 아코디언 UI -->
+<!-- 🔥 아코디언 -->
 <div class="accordion">
 
+  <!-- 모집 -->
   <div class="accordion-item">
-    <div class="accordion-header" onclick="toggleAccordion(this)">💙 모집 대상</div>
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="icon">💙</span> 모집 대상
+    </div>
     <div class="accordion-content">
-      ✔ 단체 이민 (4월 특초 2장 가능)<br>
-      ✔ 특초 개인 이민<br>
-      ✔ 4~5월 단체 이동 예정<br>
-      ✔ KOR 합병 및 단체 이동 환영<br><br>
 
-      ✔ 한국어 소통 가능한 서버 찾는 분<br>
-      ✔ 서버전 & 전투에 진심인 분<br>
-      ✔ 안정적인 연맹 원하는 분
+      <p>✔ 단체 이민 (4월 특초 2장 가능)</p>
+      <p>→ 안정적인 기반에서 시작할 수 있도록 지원</p>
+
+      <p>✔ 특초 개인 이민</p>
+      <p>→ 혼자 오셔도 빠르게 적응 가능</p>
+
+      <p>✔ 4~5월 단체 이동 예정</p>
+      <p>→ 사전 상담 및 자리 확보 가능</p>
+
+      <p>✔ KOR 합병 및 단체 이동 환영</p>
+
+      <br>
+
+      <p>✔ 한국어 소통 편한 서버 찾는 분</p>
+      <p>✔ 전투 및 서버전에 진심인 분</p>
+      <p>✔ 안정적인 연맹에서 시작하고 싶은 분</p>
+
     </div>
   </div>
 
+  <!-- 공약 -->
   <div class="accordion-item">
-    <div class="accordion-header" onclick="toggleAccordion(this)">📜 서버 공약</div>
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <span class="icon">📜</span> 서버 공약
+    </div>
     <div class="accordion-content">
-      ✔ 12개 엔센 보장 (4레벨 포함)<br>
-      ✔ 요새 4 / 성채 1 제공 (추후 재분배)<br>
-      ✔ 서버전 12전 9승<br>
-      ✔ 서리 / 드엠 협력 가능<br>
-      ✔ 연구 만렙 연맹 제공 + KOR 합병 가능<br>
-      ✔ 초기 정착 적극 지원<br><br>
 
-      👉 “평소 평화 / 전투는 진심”<br>
-      👉 한국어 중심 + 협력 서버
+      <p>✔ 12개 엔센 보장 (4레벨 포함)</p>
+      <p>→ 안정적인 시작 기반 제공</p>
+
+      <p>✔ 요새 4 / 성채 1 제공</p>
+      <p>→ 이후 기여도 기준 공정 재분배</p>
+
+      <p>✔ 서버전 12전 9승</p>
+      <p>→ 강한 서버와도 협력으로 승리</p>
+
+      <p>✔ 서리 / 드엠 협력 가능</p>
+
+      <p>✔ 연구 만렙 연맹 제공 + KOR 합병 가능</p>
+
+      <p>✔ 초기 정착 적극 지원</p>
+
+      <br>
+
+      <p>👉 “평소 평화 / 전투는 진심”</p>
+
+      <p>✔ 한국어 중심 소통</p>
+      <p>✔ 다국적 협력 서버</p>
+      <p>✔ 디스코드 활성화</p>
+
     </div>
   </div>
 
@@ -172,7 +227,12 @@ body {
 <script>
 function toggleAccordion(el){
   const content = el.nextElementSibling;
+  const icon = el.querySelector(".icon");
+
   content.classList.toggle("open");
+
+  icon.classList.add("bounce");
+  setTimeout(()=>icon.classList.remove("bounce"),400);
 }
 
 function getActiveClass(h,m){
@@ -195,31 +255,21 @@ function selectTeam(team){
 function renderUNI(){
   document.getElementById("content").innerHTML = `
   <div class="grid">
+    <div class="card"><div class="card-header">🐻 곰</div>
+    <div class="time-box ${getActiveClass(21,0)}">21:00 (UTC 12:00)</div>
+    <div class="time-box ${getActiveClass(22,0)}">22:00 (UTC 13:00)</div>
+    <div class="time-box ${getActiveClass(23,10)}">23:10 (UTC 14:10)</div></div>
 
-    <div class="card">
-      <div class="card-header">🐻 곰</div>
-      <div class="time-box ${getActiveClass(21,0)}">곰1 <div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
-      <div class="time-box ${getActiveClass(22,0)}">곰2 <div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
-      <div class="time-box ${getActiveClass(23,10)}">곰3 <div class="time">23:10</div><div class="utc">(UTC 14:10)</div></div>
-    </div>
+    <div class="card"><div class="card-header">⚙ 무공</div>
+    <div class="time-box ${getActiveClass(21,0)}">21:00</div>
+    <div class="time-box ${getActiveClass(22,0)}">22:00</div></div>
 
-    <div class="card">
-      <div class="card-header">⚙ 무공</div>
-      <div class="time-box ${getActiveClass(21,0)}">1군 <div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
-      <div class="time-box ${getActiveClass(22,0)}">2군 <div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
-    </div>
+    <div class="card"><div class="card-header">🏔 협곡</div>
+    <div class="time-box ${getActiveClass(21,0)}">21:00</div>
+    <div class="time-box ${getActiveClass(22,0)}">22:00</div></div>
 
-    <div class="card">
-      <div class="card-header">🏔 협곡</div>
-      <div class="time-box ${getActiveClass(21,0)}">1군 <div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
-      <div class="time-box ${getActiveClass(22,0)}">2군 <div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">🎉 조이</div>
-      <div class="time-box ${getActiveClass(22,0)}">이벤트 <div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
-    </div>
-
+    <div class="card"><div class="card-header">🎉 조이</div>
+    <div class="time-box ${getActiveClass(22,0)}">22:00</div></div>
   </div>`;
 }
 
@@ -227,30 +277,20 @@ function renderUNI(){
 function renderWON(){
   document.getElementById("content").innerHTML = `
   <div class="grid">
+    <div class="card"><div class="card-header">🐻 곰</div>
+    <div class="time-box ${getActiveClass(22,20)}">22:20</div>
+    <div class="time-box ${getActiveClass(0,5)}">00:05</div></div>
 
-    <div class="card">
-      <div class="card-header">🐻 곰</div>
-      <div class="time-box ${getActiveClass(22,20)}">곰1 <div class="time">22:20</div><div class="utc">(UTC 13:20)</div></div>
-      <div class="time-box ${getActiveClass(0,5)}">곰2 <div class="time">00:05</div><div class="utc">(UTC 15:05)</div></div>
-    </div>
+    <div class="card"><div class="card-header">⚙ 무공</div>
+    <div class="time-box ${getActiveClass(23,0)}">23:00</div>
+    <div class="time-box ${getActiveClass(21,0)}">21:00</div></div>
 
-    <div class="card">
-      <div class="card-header">⚙ 무공</div>
-      <div class="time-box ${getActiveClass(23,0)}">1군 <div class="time">23:00</div><div class="utc">(UTC 14:00)</div></div>
-      <div class="time-box ${getActiveClass(21,0)}">2군 <div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
-    </div>
+    <div class="card"><div class="card-header">🏔 협곡</div>
+    <div class="time-box ${getActiveClass(23,0)}">23:00</div>
+    <div class="time-box ${getActiveClass(21,0)}">21:00</div></div>
 
-    <div class="card">
-      <div class="card-header">🏔 협곡</div>
-      <div class="time-box ${getActiveClass(23,0)}">1군 <div class="time">23:00</div><div class="utc">(UTC 14:00)</div></div>
-      <div class="time-box ${getActiveClass(21,0)}">2군 <div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">🎉 조이</div>
-      <div class="time-box ${getActiveClass(21,0)}">이벤트 <div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
-    </div>
-
+    <div class="card"><div class="card-header">🎉 조이</div>
+    <div class="time-box ${getActiveClass(21,0)}">21:00</div></div>
   </div>`;
 }
 </script>
