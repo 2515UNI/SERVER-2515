@@ -8,60 +8,53 @@
 body {
   margin:0;
   font-family: Arial;
-  color:#fff;
-  overflow-x:hidden;
-
-  background: radial-gradient(circle at top, #1b2735, #090a0f);
+  background:#f7f9fc;
+  color:#111;
 }
 
-/* 배경 떠다니는 숫자 */
-.bg-text {
-  position:fixed;
-  font-size:80px;
-  color:rgba(255,255,255,0.03);
-  animation: float 15s linear infinite;
-}
-
-@keyframes float {
-  0% {transform:translateY(100vh);}
-  100% {transform:translateY(-120vh);}
-}
-
-/* 제목 */
-h1 {
+/* 타이틀 애니메이션 */
+.title {
   text-align:center;
-  margin-top:30px;
-  font-size:42px;
-  text-shadow:0 0 15px #00ccff;
+  font-size:48px;
+  font-weight:bold;
+  margin-top:40px;
+  opacity:0;
+  transform:translateY(-80px);
+  animation:titleDrop 1s ease forwards;
+}
+
+@keyframes titleDrop {
+  0% {opacity:0; transform:translateY(-80px);}
+  70% {transform:translateY(10px);}
+  100% {opacity:1; transform:translateY(0);}
 }
 
 /* 메뉴 */
 .menu {
   text-align:center;
-  margin:20px;
+  margin:30px;
 }
 
 .btn {
   display:inline-block;
-  margin:8px;
-  padding:14px 24px;
+  margin:10px;
+  padding:14px 26px;
   border-radius:12px;
-  background:rgba(255,255,255,0.1);
-  backdrop-filter: blur(6px);
-  color:white;
+  background:white;
+  border:1px solid #ddd;
   cursor:pointer;
   font-size:16px;
   transition:0.3s;
 }
 
 .btn:hover {
-  background:#00ccff;
-  color:black;
+  background:#111;
+  color:white;
 }
 
 .active {
-  background:#00ccff;
-  color:black;
+  background:#111;
+  color:white;
 }
 
 /* 카드 영역 */
@@ -75,32 +68,29 @@ h1 {
 
 /* 카드 */
 .card {
-  background:rgba(255,255,255,0.05);
-  border-radius:18px;
+  background:white;
+  border-radius:20px;
   padding:20px;
-  backdrop-filter: blur(10px);
-  border:1px solid rgba(255,255,255,0.1);
+  border:1px solid #eee;
   transition:0.3s;
   position:relative;
 }
 
 .card:hover {
-  transform:translateY(-8px);
-  box-shadow:0 10px 30px rgba(0,200,255,0.3);
+  transform:translateY(-6px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* 카드 상단 */
+/* 카드 헤더 */
 .card-header {
   font-size:20px;
+  font-weight:bold;
   margin-bottom:10px;
-  display:flex;
-  align-items:center;
-  gap:8px;
 }
 
-/* 시간 박스 */
+/* 시간 */
 .time-box {
-  background:rgba(0,0,0,0.4);
+  background:#f4f6f8;
   padding:10px;
   border-radius:10px;
   margin-top:8px;
@@ -111,44 +101,32 @@ h1 {
   font-weight:bold;
 }
 
-/* 색 강조 */
-.bear { border-left:4px solid #e67e22; }
-.factory { border-left:4px solid #95a5a6; }
-.valley { border-left:4px solid #2ecc71; }
-.joy { border-left:4px solid #9b59b6; }
+/* 포인트 라인 */
+.bear { border-top:4px solid #e67e22; }
+.factory { border-top:4px solid #7f8c8d; }
+.valley { border-top:4px solid #27ae60; }
+.joy { border-top:4px solid #9b59b6; }
 
 /* 모바일 */
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media (max-width:900px){
+  .grid { grid-template-columns: repeat(2,1fr); }
 }
 
-@media (max-width: 500px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .btn {
-    width:80%;
-  }
+@media (max-width:500px){
+  .grid { grid-template-columns:1fr; }
+  .title { font-size:36px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 배경 텍스트 -->
-<div class="bg-text" style="left:10%">2515</div>
-<div class="bg-text" style="left:50%; animation-delay:5s;">2515</div>
-<div class="bg-text" style="left:80%; animation-delay:10s;">2515</div>
-
-<h1>🔥 SERVER 2515 🔥</h1>
+<div class="title">🚀 SERVER 2515</div>
 
 <div class="menu">
   <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">💬 이민 문의</a>
-  <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">🛡 UNI</div>
-  <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON</div>
+  <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">UNI</div>
+  <div class="btn" id="wonBtn" onclick="selectTeam('WON')">WON</div>
 </div>
 
 <div id="content"></div>
