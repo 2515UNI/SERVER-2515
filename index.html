@@ -8,16 +8,17 @@
 body {
   margin:0;
   font-family: Arial;
-  background:#f5f7fb;
+  background:#f4f6fb;
   color:#111;
 }
 
 /* 타이틀 */
 .title {
   text-align:center;
-  font-size:48px;
+  font-size:52px;
   font-weight:bold;
   margin:40px 0;
+  letter-spacing:2px;
   animation: drop 0.8s ease;
 }
 
@@ -36,11 +37,17 @@ body {
   display:inline-block;
   margin:8px;
   padding:14px 26px;
-  border-radius:12px;
+  border-radius:14px;
   background:white;
   border:1px solid #ddd;
   cursor:pointer;
   font-size:16px;
+  transition:0.3s;
+}
+
+.btn:hover {
+  background:#111;
+  color:white;
 }
 
 .active {
@@ -48,23 +55,43 @@ body {
   color:white;
 }
 
-/* 카드 (크게!) */
+/* 🔥 4칸 고정 */
 .grid {
   width:95%;
-  max-width:1200px;
+  max-width:1400px;
   margin:30px auto;
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap:25px;
+  grid-template-columns: repeat(4, 1fr);
+  gap:20px;
 }
 
 /* 카드 */
 .card {
-  background:linear-gradient(135deg,#1c1f2a,#111);
+  background:linear-gradient(145deg,#1c1f2a,#111);
   color:white;
   border-radius:25px;
   padding:25px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+  position:relative;
+  overflow:hidden;
+  transition:0.3s;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* 상단 라인 효과 */
+.card::before {
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:3px;
+  background:linear-gradient(90deg,#00ccff,#9b59b6);
+}
+
+/* hover */
+.card:hover {
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 0 25px rgba(0,200,255,0.4);
 }
 
 /* 제목 */
@@ -79,6 +106,7 @@ body {
   border-radius:18px;
   padding:18px;
   margin-top:15px;
+  border:1px solid rgba(255,255,255,0.05);
 }
 
 /* 라벨 */
@@ -87,11 +115,12 @@ body {
   font-size:14px;
 }
 
-/* 시간 */
+/* 시간 (게임 느낌) */
 .time {
-  font-size:34px;
+  font-size:36px;
   font-weight:bold;
   margin-top:5px;
+  letter-spacing:1px;
 }
 
 /* UTC */
@@ -101,9 +130,15 @@ body {
   margin-top:5px;
 }
 
-/* 모바일 */
-@media (max-width:600px){
-  .title { font-size:36px; }
+/* 모바일 (스크롤 허용) */
+@media (max-width:900px){
+  .grid {
+    display:flex;
+    overflow-x:auto;
+  }
+  .card {
+    min-width:280px;
+  }
 }
 </style>
 </head>
@@ -134,72 +169,28 @@ function renderUNI(){
   document.getElementById("content").innerHTML = `
     <div class="grid">
 
-      <!-- 곰 -->
       <div class="card">
         <div class="card-header">🐻 곰 사냥</div>
-
-        <div class="time-box">
-          <div class="label">곰1</div>
-          <div class="time">21:00</div>
-          <div class="utc">(UTC 12:00)</div>
-        </div>
-
-        <div class="time-box">
-          <div class="label">곰2</div>
-          <div class="time">22:00</div>
-          <div class="utc">(UTC 13:00)</div>
-        </div>
-
-        <div class="time-box">
-          <div class="label">곰3</div>
-          <div class="time">23:10</div>
-          <div class="utc">(UTC 14:10)</div>
-        </div>
+        <div class="time-box"><div class="label">곰1</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+        <div class="time-box"><div class="label">곰2</div><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
+        <div class="time-box"><div class="label">곰3</div><div class="time">23:10</div><div class="utc">(UTC 14:10)</div></div>
       </div>
 
-      <!-- 무공 -->
       <div class="card">
         <div class="card-header">⚙ 무기공장</div>
-
-        <div class="time-box">
-          <div class="label">1군</div>
-          <div class="time">21:00</div>
-          <div class="utc">(UTC 12:00)</div>
-        </div>
-
-        <div class="time-box">
-          <div class="label">2군</div>
-          <div class="time">23:00</div>
-          <div class="utc">(UTC 14:00)</div>
-        </div>
+        <div class="time-box"><div class="label">1군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+        <div class="time-box"><div class="label">2군</div><div class="time">23:00</div><div class="utc">(UTC 14:00)</div></div>
       </div>
 
-      <!-- 협곡 -->
       <div class="card">
         <div class="card-header">🏔 협곡</div>
-
-        <div class="time-box">
-          <div class="label">1군</div>
-          <div class="time">21:00</div>
-          <div class="utc">(UTC 12:00)</div>
-        </div>
-
-        <div class="time-box">
-          <div class="label">2군</div>
-          <div class="time">23:00</div>
-          <div class="utc">(UTC 14:00)</div>
-        </div>
+        <div class="time-box"><div class="label">1군</div><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+        <div class="time-box"><div class="label">2군</div><div class="time">23:00</div><div class="utc">(UTC 14:00)</div></div>
       </div>
 
-      <!-- 조이 -->
       <div class="card">
         <div class="card-header">🎉 조이</div>
-
-        <div class="time-box">
-          <div class="label">이벤트</div>
-          <div class="time">22:00</div>
-          <div class="utc">(UTC 13:00)</div>
-        </div>
+        <div class="time-box"><div class="label">이벤트</div><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
       </div>
 
     </div>
@@ -212,18 +203,8 @@ function renderWON(){
 
       <div class="card">
         <div class="card-header">🐻 곰 사냥</div>
-
-        <div class="time-box">
-          <div class="label">곰1</div>
-          <div class="time">22:30</div>
-          <div class="utc">(UTC 13:30)</div>
-        </div>
-
-        <div class="time-box">
-          <div class="label">곰2</div>
-          <div class="time">24:00</div>
-          <div class="utc">(UTC 15:00)</div>
-        </div>
+        <div class="time-box"><div class="label">곰1</div><div class="time">22:30</div><div class="utc">(UTC 13:30)</div></div>
+        <div class="time-box"><div class="label">곰2</div><div class="time">24:00</div><div class="utc">(UTC 15:00)</div></div>
       </div>
 
     </div>
