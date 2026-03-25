@@ -11,12 +11,56 @@ body {margin:0;font-family:'Pretendard';background:#fff;color:#111;}
 canvas {position:fixed;top:0;left:0;z-index:-1;}
 
 /* 타이틀 */
-.title {text-align:center;margin-top:60px;}
-.title-main {font-size:48px;}
+.title {
+  text-align:center;
+  margin-top:60px;
+  position:relative;
+}
+
+.title-main {
+  font-size:48px;
+  font-weight:900;
+  letter-spacing:2px;
+
+  background:linear-gradient(90deg,#111,#555,#111);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  text-shadow:
+    0 2px 5px rgba(0,0,0,0.15),
+    0 0 15px rgba(200,200,200,0.3);
+
+  position:relative;
+}
+
+/* 빛 흐름 */
+.title-main::after{
+  content:'White Out Survival';
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.9),transparent);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 3s infinite;
+}
+
+@keyframes shine{
+  0%{background-position:-200%;}
+  100%{background-position:200%;}
+}
+
 .title-sub {
   font-size:90px;
   font-weight:900;
   -webkit-text-stroke:2px gold;
+  animation:glow 2.5s infinite alternate;
+}
+
+@keyframes glow{
+  from {text-shadow:0 0 5px gold;}
+  to {text-shadow:0 0 20px gold;}
 }
 
 /* 메뉴 */
@@ -48,7 +92,6 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
   overflow:hidden;
 }
 
-/* 빛 효과 */
 .btn::after{
   content:'';
   position:absolute;
@@ -278,7 +321,6 @@ function showCards(){
   });
 }
 
-/* 이벤트 완전 복구 */
 function renderUNI(){
 document.getElementById("content").innerHTML=`
 <div class="grid">
