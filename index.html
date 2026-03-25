@@ -7,29 +7,31 @@
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 
 <style>
-body {margin:0;font-family:'Pretendard';background:#fff;color:#111;}
-canvas {position:fixed;top:0;left:0;z-index:-1;}
+body {margin:0;font-family:'Pretendard';background:#fff;color:#111;overflow-x:hidden;}
+canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
 
 /* 타이틀 */
 .title {text-align:center;margin-top:60px;}
-.title-main {
-  font-size:48px;font-weight:900;letter-spacing:2px;color:#fff;-webkit-text-stroke:1px #444;
-  text-shadow:0 2px 0 #bbb,0 4px 0 #999,0 6px 10px rgba(0,0,0,0.35),0 0 6px rgba(0,0,0,0.15);
-  animation:titlePop 0.8s ease;position:relative;
+.title-main, .title-sub {
+  font-weight:900;color:#fff;text-shadow:2px 2px 0 #444,4px 4px 8px rgba(0,0,0,0.35);
+  position:relative;display:inline-block;
 }
-.title-main::after{
+.title-main {
+  font-size:48px;letter-spacing:2px;
+  animation:titlePop 0.8s ease;
+}
+.title-main::after {
   content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.3),transparent);
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
   animation:shine 2s infinite;
 }
 .title-sub {
-  font-size:90px;font-weight:900;color:#fff;-webkit-text-stroke:2px #222;
-  text-shadow:2px 2px 0 #555,4px 4px 8px rgba(0,0,0,0.35),-1px -1px 3px rgba(255,255,255,0.3);
-  transform: skewX(-5deg);animation:titlePop 1s ease;position:relative;
+  font-size:90px;transform: skewX(-5deg);
+  animation:titlePop 1s ease;
 }
-.title-sub::after{
+.title-sub::after {
   content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.2),transparent);
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.3),transparent);
   animation:shine 2.5s infinite;
 }
 .title-line{
@@ -37,7 +39,6 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
   border-radius:10px;background:linear-gradient(90deg,transparent,#999,transparent);
 }
 
-/* shine 애니메이션 */
 @keyframes shine{0%{left:-100%;}100%{left:120%;}}
 @keyframes titlePop{0%{opacity:0;transform:translateY(-20px);}100%{opacity:1;transform:translateY(0);}}
 
@@ -76,7 +77,7 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
 .info-content{font-size:17px;line-height:1.9;font-weight:700;}
 .hidden{display:none;}
 
-/* 이벤트 */
+/* 이벤트 카드 */
 .grid {width:95%;margin:40px auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
 .card {
   padding:25px;border-radius:22px;
@@ -87,18 +88,27 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
   transition:all 0.3s ease, background 0.3s ease;
 }
 .card.show{animation:fadeUp 0.6s ease forwards;}
-.card-header{font-size:26px;font-weight:900;margin-bottom:18px;}
+.card-header{font-size:26px;font-weight:900;margin-bottom:18px;display:flex;align-items:center;}
+.card-header span{display:inline-block;animation:iconSwing 1.2s infinite alternate;margin-right:6px;}
+@keyframes iconSwing{0%{transform:rotate(0deg);}100%{transform:rotate(5deg);}}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+
 .time-box{
   border-radius:12px;padding:14px;margin-bottom:10px;
   background:linear-gradient(145deg,#fdfdfd,#f0f0f0);
   border:1px solid #000;
   box-shadow: inset 0 0 6px rgba(255,255,255,0.4);
   display:flex;justify-content:space-between;align-items:center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.time-box:hover{
+  transform:translateY(-3px) scale(1.02);
+  background: linear-gradient(120deg,#e0f0ff,#d1d1ff);
 }
 .time{font-size:22px;font-weight:900;}
 .utc{font-size:14px;color:#777;}
 
-/* 카드 호버 & 펄 */
+/* 카드 hover + 펄 */
 .card:hover{transform:translateY(-6px) scale(1.02);}
 .card::before{
   content:'';position:absolute;inset:0;border-radius:22px;
@@ -106,13 +116,6 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
   opacity:0;transition:0.4s;
 }
 .card:hover::before{opacity:1;}
-
-/* 아이콘 애니메이션 */
-.card-header span{display:inline-block;animation:iconSwing 1.2s infinite alternate;}
-@keyframes iconSwing{0%{transform:rotate(0deg);}100%{transform:rotate(5deg);}}
-
-/* 카드 등장 애니메이션 */
-@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
 
 /* 모바일 */
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}.info-section{grid-template-columns:1fr;}}
@@ -195,7 +198,6 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
 </div>
 
 <div id="content"></div>
-
 <div class="footer">Made in 우짱</div>
 
 <script>
@@ -253,7 +255,7 @@ document.getElementById("content").innerHTML=`
 </div>`;
 }
 
-/* 카드 hover + 마우스 트래킹 */
+/* 카드 hover + 내부 time-box gradient */
 document.addEventListener("mousemove", e=>{
   document.querySelectorAll(".card").forEach(card=>{
     const rect = card.getBoundingClientRect();
@@ -261,29 +263,30 @@ document.addEventListener("mousemove", e=>{
     const y = e.clientY - rect.top - rect.height/2;
     if(e.clientX>rect.left && e.clientX<rect.right && e.clientY>rect.top && e.clientY<rect.bottom){
       card.style.transform = `rotateY(${x/20}deg) rotateX(${-y/20}deg) translateZ(2px) scale(1.02)`;
-      card.style.background = `linear-gradient(${x/10}deg,#ffffff,#e0e0ff)`;
-    }else{
-      card.style.transform = "rotateY(0deg) rotateX(0deg)";
-      card.style.background = "linear-gradient(145deg,#ffffff,#f3f3f3)";
-    }
+    }else card.style.transform = "rotateY(0deg) rotateX(0deg)";
   });
 });
 
-/* 눈 */
+/* time-box hover dynamic */
+document.querySelectorAll(".time-box").forEach(box=>{
+  box.addEventListener("mousemove", e=>{
+    const rect = box.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    box.style.background = `linear-gradient(${x/2}deg,#e0f0ff,#d1d1ff)`;
+  });
+  box.addEventListener("mouseleave", ()=>{box.style.background = "linear-gradient(145deg,#fdfdfd,#f0f0f0)";});
+});
+
+/* 눈꽃 3중 layer */
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
-let flakes1=[],flakes2=[];
+let flakes1=[],flakes2=[],flakes3=[];
 for(let i=0;i<60;i++){flakes1.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*8+5,speed:Math.random()*1});}
 for(let i=0;i<40;i++){flakes2.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*5+3,speed:Math.random()*0.5});}
+for(let i=0;i<30;i++){flakes3.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*4+2,speed:Math.random()*0.3});}
 function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
-[...flakes1,...flakes2].forEach(f=>{
-ctx.font=f.size+"px Arial";ctx.fillStyle="#6ec6ff";ctx.fillText("❄",f.x,f.y);f.y+=f.speed;if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
-});
-requestAnimationFrame(draw);}
-draw();
-</script>
-</body>
-</html>
+[...flakes1,...flakes2,...flakes3].forEach(f=>{
+ctx.font=f.size+"px Arial";ctx.fillStyle="#6ec6ff";ctx.fillText("❄",f.x,f.y);f.y+=f.speed;if(f.y>canvas.height){f.y
