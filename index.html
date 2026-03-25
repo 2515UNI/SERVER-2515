@@ -84,7 +84,7 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
   border:2px solid #000;
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
   opacity:0;transform:translateY(30px);position:relative;overflow:hidden;
-  transition:all 0.3s ease;
+  transition:all 0.3s ease, background 0.3s ease;
 }
 .card.show{animation:fadeUp 0.6s ease forwards;}
 .card-header{font-size:26px;font-weight:900;margin-bottom:18px;}
@@ -253,24 +253,36 @@ document.getElementById("content").innerHTML=`
 </div>`;
 }
 
+/* 카드 hover + 마우스 트래킹 */
+document.addEventListener("mousemove", e=>{
+  document.querySelectorAll(".card").forEach(card=>{
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
+    if(e.clientX>rect.left && e.clientX<rect.right && e.clientY>rect.top && e.clientY<rect.bottom){
+      card.style.transform = `rotateY(${x/20}deg) rotateX(${-y/20}deg) translateZ(2px) scale(1.02)`;
+      card.style.background = `linear-gradient(${x/10}deg,#ffffff,#e0e0ff)`;
+    }else{
+      card.style.transform = "rotateY(0deg) rotateX(0deg)";
+      card.style.background = "linear-gradient(145deg,#ffffff,#f3f3f3)";
+    }
+  });
+});
+
 /* 눈 */
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
-let flakes=[];
-for(let i=0;i<60;i++){flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*8+5,speed:Math.random()*1});}
+let flakes1=[],flakes2=[];
+for(let i=0;i<60;i++){flakes1.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*8+5,speed:Math.random()*1});}
+for(let i=0;i<40;i++){flakes2.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*5+3,speed:Math.random()*0.5});}
 function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
-flakes.forEach(f=>{
-ctx.font=f.size+"px Arial";
-ctx.fillStyle="#6ec6ff";
-ctx.fillText("❄",f.x,f.y);
-f.y+=f.speed;
-if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
+[...flakes1,...flakes2].forEach(f=>{
+ctx.font=f.size+"px Arial";ctx.fillStyle="#6ec6ff";ctx.fillText("❄",f.x,f.y);f.y+=f.speed;if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
 });
-requestAnimationFrame(draw);
-}
+requestAnimationFrame(draw);}
 draw();
 </script>
 </body>
