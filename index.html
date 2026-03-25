@@ -20,16 +20,32 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
   font-size:48px;
   font-weight:900;
   letter-spacing:2px;
+
   color:#ffffff;
+  -webkit-text-stroke:1px #888;
 
   text-shadow:
     0 2px 0 #bbb,
     0 4px 0 #999,
-    0 6px 10px rgba(0,0,0,0.3),
-    0 0 10px rgba(255,255,255,0.8),
-    0 0 25px rgba(200,200,200,0.6);
+    0 6px 10px rgba(0,0,0,0.35),
+    0 0 8px rgba(0,0,0,0.2);
 
   animation:titlePop 0.8s ease;
+}
+
+.title-sub {
+  font-size:90px;
+  font-weight:900;
+
+  color:#ffffff;
+  -webkit-text-stroke:2px gold;
+
+  text-shadow:
+    0 3px 0 #c9a600,
+    0 6px 12px rgba(0,0,0,0.4),
+    0 0 10px rgba(255,215,0,0.5);
+
+  animation:titlePop 1s ease;
 }
 
 @keyframes titlePop {
@@ -37,16 +53,13 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
   to {transform:scale(1);opacity:1;}
 }
 
-.title-sub {
-  font-size:90px;
-  font-weight:900;
-  -webkit-text-stroke:2px gold;
-  animation:glow 2.5s infinite alternate;
-}
-
-@keyframes glow{
-  from {text-shadow:0 0 5px gold;}
-  to {text-shadow:0 0 20px gold;}
+/* 타이틀 라인 */
+.title-line {
+  width:120px;
+  height:3px;
+  margin:20px auto 0;
+  border-radius:10px;
+  background:linear-gradient(90deg,transparent,#999,transparent);
 }
 
 /* 메뉴 */
@@ -91,6 +104,7 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
 .btn:hover::after{left:120%;}
 
 .btn:hover {transform:translateY(-4px);}
+.btn:active {transform:scale(0.96);}
 .btn.active {background:#eaeaea;}
 
 /* 정보 */
@@ -190,6 +204,7 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
 <div class="title">
   <div class="title-main">White Out Survival</div>
   <div class="title-sub">S2515 UNI&WON</div>
+  <div class="title-line"></div>
 </div>
 
 <div class="menu">
