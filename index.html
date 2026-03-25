@@ -8,130 +8,57 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin:0;
-  font-family:'Pretendard', sans-serif;
-  background:#fff;
-  color:#111;
-}
+body {margin:0;font-family:'Pretendard';background:#fff;color:#111;}
 
-/* 눈꽃 */
-canvas {
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-1;
-}
+canvas {position:fixed;top:0;left:0;z-index:-1;}
 
-/* 타이틀 */
-.title { text-align:center; margin-top:60px; }
-.title-main { font-size:48px; }
-.title-sub {
-  font-size:90px;
-  font-weight:900;
-  color:#111;
-  -webkit-text-stroke:2px gold;
-}
+.title {text-align:center;margin-top:60px;}
+.title-main {font-size:48px;}
+.title-sub {font-size:90px;font-weight:900;-webkit-text-stroke:2px gold;}
 
-/* 메뉴 */
-.menu {
-  display:flex;
-  justify-content:center;
-  gap:30px;
-  margin-top:40px;
-}
-
+.menu {display:flex;justify-content:center;gap:30px;margin-top:40px;}
 .btn {
-  min-width:260px;
-  padding:24px;
-  border-radius:20px;
-  font-size:24px;
-  font-weight:900;
-  cursor:pointer;
-  border:2px solid #000;
-  background:#fff;
-  transition:0.2s;
+  min-width:260px;padding:24px;border-radius:20px;
+  font-size:24px;font-weight:900;cursor:pointer;
+  border:2px solid #000;background:#fff;
 }
-.btn.active {
-  background:#111;
-  color:#fff;
-}
+.btn.active {background:#111;color:#fff;}
 
-/* 정보 */
 .info-section {
-  width:95%;
-  max-width:1300px;
-  margin:40px auto;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:30px;
+  width:95%;max-width:1300px;margin:40px auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:30px;
 }
-.hidden { display:none; }
 
 .info-card {
-  padding:40px;
-  border:2px solid #000;
-  border-radius:25px;
+  padding:40px;border:2px solid #000;border-radius:25px;
 }
-.info-title {
-  font-size:30px;
-  font-weight:900;
-}
-.info-content {
-  font-size:18px;
-  line-height:1.9;
-  font-weight:700;
-}
+.info-title {font-size:28px;font-weight:900;}
+.info-content {font-size:17px;line-height:1.9;font-weight:700;}
 
-/* 이벤트 */
+.hidden {display:none;}
+
 .grid {
-  width:95%;
-  margin:40px auto;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
+  width:95%;margin:40px auto;
+  display:grid;grid-template-columns:repeat(4,1fr);
   gap:25px;
 }
 
 .card {
-  padding:30px;
-  border-radius:25px;
-  background:#fff;
-  border:2px solid;
-  border-image:linear-gradient(45deg,#aaa,#fff,#aaa)1;
-  transition:0.3s;
-}
-.card:hover {
-  transform:translateY(-8px);
-  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+  padding:30px;border-radius:25px;
+  border:2px solid #000;background:#fff;
 }
 
 .card-header {
-  font-size:26px;
-  font-weight:900;
-  margin-bottom:15px;
+  font-size:24px;font-weight:900;margin-bottom:15px;
 }
 
-/* 내부 */
 .time-box {
-  border:2px solid #ddd;
-  border-radius:14px;
-  padding:14px;
-  margin-bottom:10px;
-  transition:0.2s;
-}
-.time-box:hover {
-  background:#f7f7f7;
-  transform:scale(1.03);
+  border:2px solid #ddd;border-radius:14px;
+  padding:14px;margin-bottom:10px;
 }
 
-.time {
-  font-size:20px;
-  font-weight:900;
-}
-.utc {
-  font-size:14px;
-  color:#666;
-}
+.time {font-size:20px;font-weight:900;}
+.utc {font-size:14px;color:#666;}
 </style>
 </head>
 
@@ -145,19 +72,44 @@ canvas {
 </div>
 
 <div class="menu">
-  <div class="btn" onclick="goLink()">💬 이민 문의</div>
   <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">🛡 UNI 연맹</div>
   <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON 연맹</div>
 </div>
 
-<!-- 모집 + 서버공약 -->
 <div class="info-section" id="infoSection">
 
 <div class="info-card">
 <div class="info-title">💙 모집 대상</div>
 <div class="info-content">
 
-(※ 기존 모집대상 그대로 유지)
+💙 모집 대상<br><br>
+
+· 개인 / 소규모 / 단체 이민 모두 환영합니다<br>
+(4월 특초 2장 가능 / 6주 기준 5월 1일 추가 지급 포함)<br><br>
+
+· UNI : 소수 인원 / WON : 단체 인원 수용 가능 (최대 50명)<br><br>
+
+· 뜻 맞는 분들과 함께 성장하실 분이라면 누구나 환영합니다 :)<br><br>
+
+· 4~5월 연계 단체 이민 예정이신 분들<br>
+(WON 합병 또는 단체 이동 적극 환영)<br><br>
+
+💙 연맹 소개<br><br>
+
+· WON : 행성 1명 / 유성 5명 보유 <br>
+· UNI : 행성 4명 / 유성 5명 보유 <br><br>
+
+💙 2515 서버, 이런 분들께 추천드립니다<br><br>
+
+“평소에는 평화롭게, 전투와 전쟁 때는 확실하게.”<br><br>
+
+· 한국어 소통이 편한 서버를 찾는 분<br>
+· 단체 이민이 가능한 환경을 원하는 분<br>
+· 서버전에 진심으로 참여하실 분<br>
+· 초기 정착 지원이 필요한 분<br>
+· 안정적인 연맹에서 플레이하고 싶은 분<br>
+· 다국적 서버 환경을 선호하는 분 (인도네시아 / 대만 유저 활동)<br>
+· 협력 중심 플레이를 즐기시는 분 (디스코드 및 오픈채팅 운영)
 
 </div>
 </div>
@@ -180,13 +132,21 @@ canvas {
 3. 서버전 메인 참여 / 카랠 협력 운영<br>
 · 서버전에 진심으로 참여하는 구조<br>
 · 강성 서버와의 전투에서도 승리 경험 보유<br>
-· 전적 : 12전 9승<br><br>
+· 전적 : 12전 9승 (※ 일부 별은 타 연맹 보유)<br><br>
 
-4. 서리 / 드엠 협력 가능<br><br>
+4. 서리 / 드엠 협력 가능<br>
+· 연맹 간 협의를 통한 유동적 협력 운영<br>
+· 첫 서리 이벤트에서도 연합 운영 경험 보유<br><br>
 
-5. 연구 만렙 연맹 제공 가능<br><br>
+5. 연구 만렙 연맹 제공 가능<br>
+· 연구 만렙 빈 연맹 2개 보유<br>
+· WON 연맹(행성 1 / 유성 5) 합병 형태 참여 가능<br>
+→ 단체 이민 시 매우 유리한 선택지<br><br>
 
-6. 초기 정착 전폭 지원
+6. 초기 정착 전폭 지원<br>
+· 깃발 / 센터 / 인원 부족 등 초기 문제 적극 지원<br>
+· 단체 이민 시 발생하는 정착 스트레스 최소화<br>
+· 안정적으로 자리 잡을 수 있도록 지속 지원
 
 </div>
 </div>
@@ -196,10 +156,6 @@ canvas {
 <div id="content"></div>
 
 <script>
-function goLink(){
-  window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
-}
-
 function selectTeam(team){
   document.getElementById("infoSection").classList.add("hidden");
 
@@ -215,30 +171,68 @@ function selectTeam(team){
   }
 }
 
-/* 이벤트 */
 function renderUNI(){
-document.getElementById("content").innerHTML=`<div class="grid">...생략 (기존 유지)</div>`;
+document.getElementById("content").innerHTML=`
+<div class="grid">
+
+<div class="card"><div class="card-header">🐻 곰</div>
+<div class="time-box"><div class="time">곰 1 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+<div class="time-box"><div class="time">곰 2 - 22:00</div><div class="utc">(UTC 13:00)</div></div>
+<div class="time-box"><div class="time">곰 3 - 23:10</div><div class="utc">(UTC 14:10)</div></div>
+</div>
+
+<div class="card"><div class="card-header">⚙ 무공</div>
+<div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+<div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+</div>
+
+<div class="card"><div class="card-header">🏔 협곡</div>
+<div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+<div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+</div>
+
+<div class="card"><div class="card-header">🎉 조이</div>
+<div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
+</div>
+
+</div>`;
 }
 
 function renderWON(){
-document.getElementById("content").innerHTML=`<div class="grid">...생략 (기존 유지)</div>`;
+document.getElementById("content").innerHTML=`
+<div class="grid">
+
+<div class="card"><div class="card-header">🐻 곰</div>
+<div class="time-box"><div class="time">곰 1 - 22:20</div><div class="utc">(UTC 13:20)</div></div>
+<div class="time-box"><div class="time">곰 2 - 00:05</div><div class="utc">(UTC 15:05)</div></div>
+</div>
+
+<div class="card"><div class="card-header">⚙ 무공</div>
+<div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+<div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+</div>
+
+<div class="card"><div class="card-header">🏔 협곡</div>
+<div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+<div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+</div>
+
+<div class="card"><div class="card-header">🎉 조이</div>
+<div class="time-box"><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+</div>
+
+</div>`;
 }
 
 /* 눈꽃 */
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
-
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let flakes=[];
-for(let i=0;i<70;i++){
-flakes.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:Math.random()*10+6,
-speed:Math.random()*1+0.5
-});
+for(let i=0;i<60;i++){
+flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*8+5,speed:Math.random()*1});
 }
 
 function draw(){
@@ -248,10 +242,7 @@ ctx.font=f.size+"px Arial";
 ctx.fillStyle="#6ec6ff";
 ctx.fillText("❄",f.x,f.y);
 f.y+=f.speed;
-if(f.y>canvas.height){
-f.y=0;
-f.x=Math.random()*canvas.width;
-}
+if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
 });
 requestAnimationFrame(draw);
 }
