@@ -16,29 +16,19 @@ canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
   font-weight:900;color:#fff;text-shadow:2px 2px 0 #000,4px 4px 8px rgba(0,0,0,0.35);
   position:relative;display:inline-block;
 }
-.title-main {
-  font-size:48px;letter-spacing:2px;
-  animation:titlePop 0.8s ease;
-}
-.title-main::after {
+.title-main {font-size:48px;letter-spacing:2px;animation:titlePop 0.8s ease;}
+.title-main::after{
   content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
   background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
   animation:shine 2s infinite;
 }
-.title-sub {
-  font-size:90px;transform: skewX(-5deg);
-  animation:titlePop 1s ease;
-}
-.title-sub::after {
+.title-sub {font-size:90px;transform: skewX(-5deg);animation:titlePop 1s ease;}
+.title-sub::after{
   content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
   background:linear-gradient(120deg,transparent,rgba(255,255,255,0.3),transparent);
   animation:shine 2.5s infinite;
 }
-.title-line{
-  width:120px;height:3px;margin:20px auto 0;
-  border-radius:10px;background:linear-gradient(90deg,transparent,#999,transparent);
-}
-
+.title-line{width:120px;height:3px;margin:20px auto 0;border-radius:10px;background:linear-gradient(90deg,transparent,#999,transparent);}
 @keyframes shine{0%{left:-100%;}100%{left:120%;}}
 @keyframes titlePop{0%{opacity:0;transform:translateY(-20px);}100%{opacity:1;transform:translateY(0);}}
 
@@ -208,14 +198,15 @@ canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
   </div>
 </div>
 
-<div id="content"></div>
+<div id="content" style="display:none;"></div>
 <div class="footer">Made in 우짱</div>
 
 <script>
 function goLink(){window.open("https://open.kakao.com/o/sL7u8cYh","_blank");}
 
 function selectTeam(team){
-  document.getElementById("infoSection").classList.add("hidden");
+  document.getElementById("infoSection").style.display="none";
+  document.getElementById("content").style.display="block";
   document.getElementById("uniBtn").classList.remove("active");
   document.getElementById("wonBtn").classList.remove("active");
 
@@ -230,7 +221,8 @@ function showCards(){
 }
 
 function renderUNI(){
-  document.getElementById("content").innerHTML=`
+  const content = document.getElementById("content");
+  content.innerHTML=`
   <div class="grid">
     <div class="card"><div class="card-header"><span>🐻</span> 곰</div>
       <div class="time-box"><div class="time">곰 1 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
@@ -249,11 +241,12 @@ function renderUNI(){
       <div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
     </div>
   </div>`;
-  requestAnimationFrame(showCards);
+  showCards();
 }
 
 function renderWON(){
-  document.getElementById("content").innerHTML=`
+  const content = document.getElementById("content");
+  content.innerHTML=`
   <div class="grid">
     <div class="card"><div class="card-header"><span>🐻</span> 곰</div>
       <div class="time-box"><div class="time">곰 1 - 22:20</div><div class="utc">(UTC 13:20)</div></div>
@@ -271,17 +264,17 @@ function renderWON(){
       <div class="time-box"><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
     </div>
   </div>`;
-  requestAnimationFrame(showCards);
+  showCards();
 }
 
-/* 카드 + time-box hover + 그라데이션 */
-document.addEventListener("mousemove", e=>{
-  document.querySelectorAll(".card").forEach(card=>{
-    const rect=card.getBoundingClientRect();
-    const x=e.clientX-rect.left-rect.width/2;
-    const y=e.clientY-rect.top-rect.height/2;
-    if(e.clientX>rect.left&&e.clientX<rect.right&&e.clientY>rect.top&&e.clientY<rect.bottom)
-      card.style.transform=`rotateY(${x/20}deg) rotateX(${-y/20}deg) translateZ(2px) scale(1.02)`;
-    else card.style.transform="rotateY(0deg) rotateX(0deg)";
-  });
-  document.query
+/* 눈꽃 */
+const canvas=document.getElementById("snow");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+let flakes=[];for(let i=0;i<60;i++){flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*8+5,speed:Math.random()*1});}
+function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);flakes.forEach(f=>{ctx.font=f.size+"px Arial";ctx.fillStyle="#6ec6ff";ctx.fillText("❄",f.x,f.y);f.y+=f.speed;if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}});requestAnimationFrame(draw);}
+draw();
+</script>
+
+</body>
+</html>
