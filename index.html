@@ -15,7 +15,7 @@ body {
   color:#111;
 }
 
-/* 눈꽃 */
+/* 배경 */
 canvas {
   position:fixed;
   top:0;
@@ -101,14 +101,15 @@ canvas {
   width:95%;
   margin:30px auto;
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); /* 핵심 */
   gap:20px;
 }
 
 .card {
-  padding:25px;
+  padding:30px;
   border:2px solid #000;
   border-radius:20px;
+  text-align:center;
 }
 
 .card-header {
@@ -281,12 +282,12 @@ canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let flakes=[];
-for(let i=0;i<60;i++){
+for(let i=0;i<80;i++){
 flakes.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-size:Math.random()*25+10,
-speed:Math.random()*1+0.5
+size:Math.random()*8+4,
+speed:Math.random()*0.5+0.2
 });
 }
 
@@ -294,8 +295,11 @@ function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
 flakes.forEach(f=>{
-ctx.font=f.size+"px Arial";
-ctx.fillText("❄",f.x,f.y);
+ctx.globalAlpha = 0.5 + Math.sin(Date.now()*0.002 + f.x)*0.5;
+ctx.fillStyle="#6ec6ff";
+ctx.beginPath();
+ctx.arc(f.x,f.y,f.size,0,Math.PI*2);
+ctx.fill();
 
 f.y+=f.speed;
 if(f.y>canvas.height){
@@ -304,6 +308,7 @@ f.x=Math.random()*canvas.width;
 }
 });
 
+ctx.globalAlpha = 1;
 requestAnimationFrame(draw);
 }
 draw();
