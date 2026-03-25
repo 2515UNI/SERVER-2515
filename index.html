@@ -202,60 +202,68 @@ canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
 
 <script>
 function goLink(){window.open("https://open.kakao.com/o/sL7u8cYh","_blank");}
+
 function selectTeam(team){
   document.getElementById("infoSection").classList.add("hidden");
   document.getElementById("uniBtn").classList.remove("active");
   document.getElementById("wonBtn").classList.remove("active");
   if(team==="UNI"){document.getElementById("uniBtn").classList.add("active");renderUNI();}
   else{document.getElementById("wonBtn").classList.add("active");renderWON();}
-  setTimeout(showCards,50);
-}
-function showCards(){
-  document.querySelectorAll(".card").forEach((c,i)=>{setTimeout(()=>c.classList.add("show"),i*120);});
-}
-function renderUNI(){
-document.getElementById("content").innerHTML=`
-<div class="grid">
-<div class="card"><div class="card-header"><span>🐻</span> 곰</div>
-<div class="time-box"><div class="time">곰 1 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-<div class="time-box"><div class="time">곰 2 - 22:00</div><div class="utc">(UTC 13:00)</div></div>
-<div class="time-box"><div class="time">곰 3 - 23:10</div><div class="utc">(UTC 14:10)</div></div>
-</div>
-<div class="card"><div class="card-header"><span>⚙</span> 무공</div>
-<div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-<div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-</div>
-<div class="card"><div class="card-header"><span>🏔</span> 협곡</div>
-<div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-<div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-</div>
-<div class="card"><div class="card-header"><span>🎉</span> 조이</div>
-<div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
-</div>
-</div>`;
-}
-function renderWON(){
-document.getElementById("content").innerHTML=`
-<div class="grid">
-<div class="card"><div class="card-header"><span>🐻</span> 곰</div>
-<div class="time-box"><div class="time">곰 1 - 22:20</div><div class="utc">(UTC 13:20)</div></div>
-<div class="time-box"><div class="time">곰 2 - 00:05</div><div class="utc">(UTC 15:05)</div></div>
-</div>
-<div class="card"><div class="card-header"><span>⚙</span> 무공</div>
-<div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-<div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-</div>
-<div class="card"><div class="card-header"><span>🏔</span> 협곡</div>
-<div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-<div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-</div>
-<div class="card"><div class="card-header"><span>🎉</span> 조이</div>
-<div class="time-box"><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
-</div>
-</div>`;
 }
 
-/* 카드 hover + 내부 time-box gradient */
+/* 카드 순차 등장 */
+function showCards(){
+  document.querySelectorAll(".card").forEach((c,i)=>{
+    setTimeout(()=>c.classList.add("show"),i*120);
+  });
+}
+
+function renderUNI(){
+  document.getElementById("content").innerHTML=`
+  <div class="grid">
+    <div class="card"><div class="card-header"><span>🐻</span> 곰</div>
+      <div class="time-box"><div class="time">곰 1 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+      <div class="time-box"><div class="time">곰 2 - 22:00</div><div class="utc">(UTC 13:00)</div></div>
+      <div class="time-box"><div class="time">곰 3 - 23:10</div><div class="utc">(UTC 14:10)</div></div>
+    </div>
+    <div class="card"><div class="card-header"><span>⚙</span> 무공</div>
+      <div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+      <div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+    </div>
+    <div class="card"><div class="card-header"><span>🏔</span> 협곡</div>
+      <div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+      <div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+    </div>
+    <div class="card"><div class="card-header"><span>🎉</span> 조이</div>
+      <div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
+    </div>
+  </div>`;
+  requestAnimationFrame(showCards);
+}
+
+function renderWON(){
+  document.getElementById("content").innerHTML=`
+  <div class="grid">
+    <div class="card"><div class="card-header"><span>🐻</span> 곰</div>
+      <div class="time-box"><div class="time">곰 1 - 22:20</div><div class="utc">(UTC 13:20)</div></div>
+      <div class="time-box"><div class="time">곰 2 - 00:05</div><div class="utc">(UTC 15:05)</div></div>
+    </div>
+    <div class="card"><div class="card-header"><span>⚙</span> 무공</div>
+      <div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+      <div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+    </div>
+    <div class="card"><div class="card-header"><span>🏔</span> 협곡</div>
+      <div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+      <div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+    </div>
+    <div class="card"><div class="card-header"><span>🎉</span> 조이</div>
+      <div class="time-box"><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+    </div>
+  </div>`;
+  requestAnimationFrame(showCards);
+}
+
+/* 카드 hover 3D effect */
 document.addEventListener("mousemove", e=>{
   document.querySelectorAll(".card").forEach(card=>{
     const rect = card.getBoundingClientRect();
@@ -267,17 +275,20 @@ document.addEventListener("mousemove", e=>{
   });
 });
 
-/* time-box hover dynamic */
-document.querySelectorAll(".time-box").forEach(box=>{
-  box.addEventListener("mousemove", e=>{
+/* time-box hover gradient */
+document.addEventListener("mousemove", e=>{
+  document.querySelectorAll(".time-box").forEach(box=>{
     const rect = box.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    box.style.background = `linear-gradient(${x/2}deg,#e0f0ff,#d1d1ff)`;
+    if(e.clientX>rect.left && e.clientX<rect.right && e.clientY>rect.top && e.clientY<rect.bottom){
+      const x = e.clientX - rect.left;
+      box.style.background = `linear-gradient(${x/2}deg,#e0f0ff,#d1d1ff)`;
+    }else{
+      box.style.background = "linear-gradient(145deg,#fdfdfd,#f0f0f0)";
+    }
   });
-  box.addEventListener("mouseleave", ()=>{box.style.background = "linear-gradient(145deg,#fdfdfd,#f0f0f0)";});
 });
 
-/* 눈꽃 3중 layer */
+/* 눈꽃 3중 레이어 */
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
@@ -287,6 +298,5 @@ for(let i=0;i<60;i++){flakes1.push({x:Math.random()*canvas.width,y:Math.random()
 for(let i=0;i<40;i++){flakes2.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*5+3,speed:Math.random()*0.5});}
 for(let i=0;i<30;i++){flakes3.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*4+2,speed:Math.random()*0.3});}
 function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-[...flakes1,...flakes2,...flakes3].forEach(f=>{
-ctx.font=f.size+"px Arial";ctx.fillStyle="#6ec6ff";ctx.fillText("❄",f.x,f.y);f.y+=f.speed;if(f.y>canvas.height){f.y
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  [...flakes1,...flakes2,...flakes3].for
