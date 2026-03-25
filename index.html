@@ -93,6 +93,7 @@ canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
 @keyframes iconSwing{0%{transform:rotate(0deg);}100%{transform:rotate(5deg);}}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
 
+/* time-box */
 .time-box{
   border-radius:12px;padding:14px;margin-bottom:10px;
   background:linear-gradient(145deg,#fdfdfd,#f0f0f0);
@@ -100,11 +101,16 @@ canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
   box-shadow: inset 0 0 6px rgba(255,255,255,0.4);
   display:flex;justify-content:space-between;align-items:center;
   transition: background 0.3s ease, transform 0.2s ease;
+  position:relative;overflow:hidden;
 }
-.time-box:hover{
-  transform:translateY(-3px) scale(1.02);
-  background: linear-gradient(120deg,#e0f0ff,#d1d1ff);
+.time-box::after{
+  content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent);
+  transition:0.4s;opacity:0;
+  border-radius:12px;
 }
+.time-box:hover::after{opacity:1;left:120%;}
+.time-box:hover{transform:translateY(-3px) scale(1.02);}
 .time{font-size:22px;font-weight:900;}
 .utc{font-size:14px;color:#777;}
 
@@ -116,6 +122,12 @@ canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
   opacity:0;transition:0.4s;
 }
 .card:hover::before{opacity:1;}
+
+/* 카드별 그라데이션 색상 */
+.card:nth-child(1) .time-box:hover{background:linear-gradient(120deg,#ffebf0,#ffd1e0);}
+.card:nth-child(2) .time-box:hover{background:linear-gradient(120deg,#e0f0ff,#d1d1ff);}
+.card:nth-child(3) .time-box:hover{background:linear-gradient(120deg,#e0ffe0,#d1ffd1);}
+.card:nth-child(4) .time-box:hover{background:linear-gradient(120deg,#fffce0,#fff5d1);}
 
 /* 모바일 */
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}.info-section{grid-template-columns:1fr;}}
@@ -202,7 +214,6 @@ canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
 
 <script>
 function goLink(){window.open("https://open.kakao.com/o/sL7u8cYh","_blank");}
-
 function selectTeam(team){
   document.getElementById("infoSection").classList.add("hidden");
   document.getElementById("uniBtn").classList.remove("active");
@@ -210,13 +221,7 @@ function selectTeam(team){
   if(team==="UNI"){document.getElementById("uniBtn").classList.add("active");renderUNI();}
   else{document.getElementById("wonBtn").classList.add("active");renderWON();}
 }
-
-/* 카드 순차 등장 */
-function showCards(){
-  document.querySelectorAll(".card").forEach((c,i)=>{
-    setTimeout(()=>c.classList.add("show"),i*120);
-  });
-}
+function showCards(){document.querySelectorAll(".card").forEach((c,i)=>{setTimeout(()=>c.classList.add("show"),i*120);});}
 
 function renderUNI(){
   document.getElementById("content").innerHTML=`
@@ -263,40 +268,28 @@ function renderWON(){
   requestAnimationFrame(showCards);
 }
 
-/* 카드 hover 3D effect */
+/* 카드 3D + time-box 그라데이션 */
 document.addEventListener("mousemove", e=>{
   document.querySelectorAll(".card").forEach(card=>{
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width/2;
-    const y = e.clientY - rect.top - rect.height/2;
-    if(e.clientX>rect.left && e.clientX<rect.right && e.clientY>rect.top && e.clientY<rect.bottom){
-      card.style.transform = `rotateY(${x/20}deg) rotateX(${-y/20}deg) translateZ(2px) scale(1.02)`;
-    }else card.style.transform = "rotateY(0deg) rotateX(0deg)";
+    const rect=card.getBoundingClientRect();
+    const x=e.clientX-rect.left-rect.width/2;
+    const y=e.clientY-rect.top-rect.height/2;
+    if(e.clientX>rect.left&&e.clientX<rect.right&&e.clientY>rect.top&&e.clientY<rect.bottom)
+      card.style.transform=`rotateY(${x/20}deg) rotateX(${-y/20}deg) translateZ(2px) scale(1.02)`;
+    else card.style.transform="rotateY(0deg) rotateX(0deg)";
   });
-});
-
-/* time-box hover gradient */
-document.addEventListener("mousemove", e=>{
   document.querySelectorAll(".time-box").forEach(box=>{
-    const rect = box.getBoundingClientRect();
-    if(e.clientX>rect.left && e.clientX<rect.right && e.clientY>rect.top && e.clientY<rect.bottom){
-      const x = e.clientX - rect.left;
-      box.style.background = `linear-gradient(${x/2}deg,#e0f0ff,#d1d1ff)`;
-    }else{
-      box.style.background = "linear-gradient(145deg,#fdfdfd,#f0f0f0)";
-    }
+    const rect=box.getBoundingClientRect();
+    if(e.clientX>rect.left&&e.clientX<rect.right&&e.clientY>rect.top&&e.clientY<rect.bottom){
+      const x=e.clientX-rect.left;
+      box.style.background=`linear-gradient(${x/2}deg,#f0faff,#e0e0ff)`;
+    }else box.style.background="linear-gradient(145deg,#fdfdfd,#f0f0f0)";
   });
 });
 
 /* 눈꽃 3중 레이어 */
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
 let flakes1=[],flakes2=[],flakes3=[];
-for(let i=0;i<60;i++){flakes1.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*8+5,speed:Math.random()*1});}
-for(let i=0;i<40;i++){flakes2.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*5+3,speed:Math.random()*0.5});}
-for(let i=0;i<30;i++){flakes3.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*4+2,speed:Math.random()*0.3});}
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  [...flakes1,...flakes2,...flakes3].for
+for(let i=
