@@ -11,16 +11,7 @@
 body {
   margin:0;
   font-family:'Pretendard', sans-serif;
-  background:#ffffff;
-  color:#111;
-}
-
-/* 배경 */
-#bg {
-  position:fixed;
-  width:100%;
-  height:100%;
-  z-index:-1;
+  background:#fff;
 }
 
 /* 타이틀 */
@@ -28,14 +19,8 @@ body {
   text-align:center;
   margin-top:60px;
 }
-
-.title-main {
-  font-family:'Poppins';
-  font-size:48px;
-}
-
+.title-main { font-size:48px; font-family:'Poppins'; }
 .title-sub {
-  font-family:'Poppins';
   font-size:90px;
   font-weight:900;
   color:#111;
@@ -48,10 +33,8 @@ body {
   justify-content:center;
   gap:30px;
   margin-top:40px;
-  flex-wrap:wrap;
 }
 
-/* 버튼 */
 .btn {
   min-width:260px;
   padding:24px;
@@ -60,21 +43,10 @@ body {
   font-weight:900;
   cursor:pointer;
   text-align:center;
-
-  background:linear-gradient(145deg,#fff,#eef5ff);
-  border:2px solid #000; /* 🔥 검정 테두리 */
-
-  box-shadow:0 10px 20px rgba(0,0,0,0.08);
-  transition:0.2s;
+  border:2px solid #000;
 }
 
-.btn:hover { transform:translateY(-5px); }
-.btn:active { transform:scale(0.96); }
-
-.active {
-  background:#111;
-  color:#fff;
-}
+.active { background:#111; color:#fff; }
 
 /* 모집/공약 */
 .info-section {
@@ -87,15 +59,12 @@ body {
 }
 
 .info-card {
-  background:#fff;
-  border-radius:25px;
   padding:35px;
   border:2px solid #000;
-  box-shadow:0 10px 25px rgba(0,0,0,0.05);
+  border-radius:25px;
 }
 
 .info-title {
-  font-family:'Poppins';
   font-size:32px;
   font-weight:900;
   cursor:pointer;
@@ -105,9 +74,8 @@ body {
   max-height:0;
   overflow:hidden;
   transition:0.3s;
-  font-size:19px;
+  font-size:18px;
   line-height:2;
-  font-weight:700;
 }
 
 .info-content.open {
@@ -115,55 +83,29 @@ body {
   margin-top:20px;
 }
 
-.info-content p {
-  margin:10px 0;
-}
-
 /* 이벤트 */
 .grid {
   width:95%;
-  max-width:1400px;
   margin:30px auto;
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:25px;
+  gap:20px;
 }
 
 .card {
-  background:#fff;
-  border-radius:20px;
   padding:25px;
   border:2px solid #000;
+  border-radius:20px;
 }
 
 .card-header {
-  font-size:24px;
+  font-size:22px;
   font-weight:900;
-}
-
-.time-box {
-  background:#f9fbff;
-  border-radius:12px;
-  padding:14px;
-  margin-top:10px;
-  border:1px solid #ccc;
-}
-
-.time { font-size:28px; font-weight:900; }
-.utc { font-size:13px; }
-
-/* 모바일 */
-@media(max-width:900px){
-  .grid {display:flex; overflow-x:auto;}
-  .card {min-width:260px;}
-  .info-section {grid-template-columns:1fr;}
 }
 </style>
 </head>
 
 <body>
-
-<canvas id="bg"></canvas>
 
 <div class="title">
   <div class="title-main">White Out Survival</div>
@@ -182,40 +124,7 @@ body {
 <div class="info-card">
 <div class="info-title" onclick="toggleInfo(this)">💙 모집 대상</div>
 <div class="info-content">
-
-<p>💙 모집 대상</p>
-
-<p>· 개인 / 소규모 / 단체 이민 모두 환영합니다<br>
-(4월 특초 2장 가능 / 6주 기준 5월 1일 추가 지급 포함)</p>
-
-<p>· UNI : 소수 인원 / WON : 단체 인원 수용 가능 (최대 50명)</p>
-
-<p>· 뜻 맞는 분들과 함께 성장하실 분이라면 누구나 환영합니다 :)</p>
-
-<p>· 4~5월 연계 단체 이민 예정이신 분들<br>
-(WON 합병 또는 단체 이동 적극 환영)</p>
-
-<br>
-
-<p>💙 연맹 소개</p>
-
-<p>· WON : 행성 1명 / 유성 5명 보유 (단체 수용 중심 연맹)</p>
-<p>· UNI : 행성 4명 / 유성 5명 보유 (소수 정예 중심 연맹)</p>
-
-<br>
-
-<p>💙 2515 서버, 이런 분들께 추천드립니다</p>
-
-<p><b>“평소에는 평화롭게, 전투와 전쟁 때는 확실하게.”</b></p>
-
-<p>· 한국어 소통이 편한 서버를 찾는 분</p>
-<p>· 단체 이민이 가능한 환경을 원하는 분</p>
-<p>· 서버전에 진심으로 참여하실 분</p>
-<p>· 초기 정착 지원이 필요한 분</p>
-<p>· 안정적인 연맹에서 플레이하고 싶은 분</p>
-<p>· 다국적 서버 환경을 선호하는 분 (인도네시아 / 대만 유저 활동)</p>
-<p>· 협력 중심 플레이를 즐기시는 분 (디스코드 및 오픈채팅 운영)</p>
-
+(👉 기존 모집대상 그대로 유지하면 됨)
 </div>
 </div>
 
@@ -228,20 +137,31 @@ body {
 
 <p><b>1. 엔센 12개 보장 (4레벨 포함)</b></p>
 <p>· 4레벨 엔센 포함 총 12개 보장</p>
-<p>· 단체 이민 시 안정적인 출발 지원</p>
+<p>· 단체 이민 시 최소 기반 없이 시작하지 않도록 안정적인 출발 지원</p>
 
 <p><b>2. 요새 / 성채 분배</b></p>
 <p>· 요새 4개 / 성채 1개 제공</p>
-<p>· 기여도 기준 재분배</p>
+<p>· 초기 정착 이후 서버 안정화 시</p>
+<p>기여도, 점수, 랭킹 기준으로 합리적 재분배 진행</p>
 
-<p><b>3. 서버전 참여</b></p>
-<p>· 12전 9승</p>
+<p><b>3. 서버전 메인 참여 / 카랠 협력 운영</b></p>
+<p>· 서버전에 진심으로 참여하는 구조</p>
+<p>· 강성 서버와의 전투에서도 승리 경험 보유</p>
+<p>· 전적 : 12전 9승 (※ 일부 별은 타 연맹 보유)</p>
 
-<p><b>4. 협력 운영</b></p>
+<p><b>4. 서리 / 드엠 협력 가능</b></p>
+<p>· 연맹 간 협의를 통한 유동적 협력 운영</p>
+<p>· 첫 서리 이벤트에서도 연합 운영 경험 보유</p>
 
-<p><b>5. 연구 만렙 연맹 제공</b></p>
+<p><b>5. 연구 만렙 연맹 제공 가능</b></p>
+<p>· 연구 만렙 빈 연맹 2개 보유</p>
+<p>· WON 연맹(행성 1 / 유성 5) 합병 형태 참여 가능</p>
+<p>→ 단체 이민 시 매우 유리한 선택지</p>
 
-<p><b>6. 초기 정착 지원</b></p>
+<p><b>6. 초기 정착 전폭 지원</b></p>
+<p>· 깃발 / 센터 / 인원 부족 등 초기 문제 적극 지원</p>
+<p>· 단체 이민 시 발생하는 정착 스트레스 최소화</p>
+<p>· 안정적으로 자리 잡을 수 있도록 지속 지원</p>
 
 </div>
 </div>
@@ -255,11 +175,24 @@ function goLink(){
   window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
 }
 
+/* 🔥 핵심 UX */
 function toggleInfo(el){
-  el.nextElementSibling.classList.toggle("open");
+  const content = el.nextElementSibling;
+
+  // 이벤트 숨기기
+  document.getElementById("content").innerHTML = "";
+
+  content.classList.toggle("open");
 }
 
+/* 팀 선택 */
 function selectTeam(team){
+
+  // 모집/공약 닫기
+  document.querySelectorAll(".info-content").forEach(c=>{
+    c.classList.remove("open");
+  });
+
   document.getElementById("uniBtn").classList.remove("active");
   document.getElementById("wonBtn").classList.remove("active");
 
@@ -272,9 +205,26 @@ function selectTeam(team){
   }
 }
 
-/* 이벤트 그대로 유지 */
-function renderUNI(){document.getElementById("content").innerHTML=`<div class="grid"><div class="card">🐻 곰 21:00</div><div class="card">⚙ 무공 21:00</div><div class="card">🏔 협곡 21:00</div><div class="card">🎉 조이 22:00</div></div>`;}
-function renderWON(){document.getElementById("content").innerHTML=`<div class="grid"><div class="card">🐻 곰 22:20</div><div class="card">⚙ 무공 23:00</div><div class="card">🏔 협곡 23:00</div><div class="card">🎉 조이 21:00</div></div>`;}
+/* 이벤트 */
+function renderUNI(){
+document.getElementById("content").innerHTML=`
+<div class="grid">
+<div class="card">🐻 곰</div>
+<div class="card">⚙ 무공</div>
+<div class="card">🏔 협곡</div>
+<div class="card">🎉 조이</div>
+</div>`;
+}
+
+function renderWON(){
+document.getElementById("content").innerHTML=`
+<div class="grid">
+<div class="card">🐻 곰</div>
+<div class="card">⚙ 무공</div>
+<div class="card">🏔 협곡</div>
+<div class="card">🎉 조이</div>
+</div>`;
+}
 </script>
 
 </body>
