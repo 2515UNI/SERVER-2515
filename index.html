@@ -12,19 +12,14 @@ body {
   margin:0;
   font-family:'Pretendard', sans-serif;
   background:#ffffff;
-  overflow-x:hidden;
-  color:#111;
 }
 
 /* 배경 */
 #bg {
   position:fixed;
-  top:0;
-  left:0;
-  width:100vw;
-  height:100vh;
+  width:100%;
+  height:100%;
   z-index:-1;
-  pointer-events:none;
 }
 
 /* 타이틀 */
@@ -34,69 +29,47 @@ body {
 }
 
 .title-main {
-  font-family:'Poppins', sans-serif;
   font-size:48px;
-  font-weight:700;
+  font-family:'Poppins';
 }
 
 .title-sub {
-  font-family:'Poppins', sans-serif;
   font-size:90px;
   font-weight:900;
-  letter-spacing:2px;
-
-  color:#111; /* 검정 글씨 */
-
-  /* 금 테두리 */
-  -webkit-text-stroke:2px #d4af37;
-
-  /* 번짐 제거 */
-  text-shadow:none;
+  color:#111;
+  -webkit-text-stroke:2px gold;
 }
 
 /* 메뉴 */
 .menu {
   display:flex;
   justify-content:center;
-  gap:25px;
+  gap:30px;
   margin-top:40px;
-  flex-wrap:wrap;
 }
 
-/* 버튼 */
+/* 버튼 (크게) */
 .btn {
-  position:relative;
-  min-width:220px;
-  padding:22px 30px;
-  border-radius:20px;
-
-  background: linear-gradient(145deg, #ffffff, #e6f0ff);
-  border:2px solid rgba(0, 150, 255, 0.3);
-
-  font-family:'Poppins', sans-serif;
-  font-size:20px;
-  font-weight:800;
-
+  min-width:260px;
+  padding:26px;
+  border-radius:22px;
+  font-size:24px;
+  font-weight:900;
   text-align:center;
   cursor:pointer;
 
-  box-shadow:
-    0 10px 20px rgba(0,0,0,0.08),
-    0 0 10px rgba(0,150,255,0.2);
+  background:white;
+  border:2px solid #ccc;
 
-  transition:all 0.25s ease;
+  transition:0.2s;
 }
 
 .btn:hover {
-  transform:translateY(-5px) scale(1.03);
-}
-
-.btn:active {
-  transform:scale(0.96);
+  transform:translateY(-5px);
 }
 
 .active {
-  background: linear-gradient(145deg, #0072ff, #00c6ff);
+  background:#111;
   color:white;
 }
 
@@ -112,14 +85,12 @@ body {
 
 .info-card {
   background:white;
-  border-radius:25px;
   padding:35px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  border-radius:25px;
 }
 
 .info-title {
-  font-family:'Poppins', sans-serif;
-  font-size:28px;
+  font-size:30px;
   font-weight:900;
   cursor:pointer;
 }
@@ -129,57 +100,51 @@ body {
   overflow:hidden;
   transition:0.3s;
   font-size:18px;
-  line-height:1.9;
-  font-weight:600;
+  line-height:1.8;
 }
 
 .info-content.open {
   max-height:3000px;
-  margin-top:15px;
-}
-
-.info-content p {
-  margin:8px 0;
 }
 
 /* 이벤트 */
 .grid {
   width:95%;
-  max-width:1400px;
   margin:30px auto;
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:25px;
+  gap:20px;
 }
 
 .card {
   background:white;
-  border-radius:20px;
   padding:25px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+  border-radius:20px;
 }
 
 .card-header {
   font-size:22px;
-  font-weight:800;
+  font-weight:900;
 }
 
 .time-box {
-  background:#f8fafc;
-  border-radius:12px;
-  padding:14px;
   margin-top:10px;
-  border:1.5px solid #ccc;
 }
 
-.time { font-size:30px; font-weight:900; }
-.utc { font-size:12px; color:#333; }
+.time {
+  font-size:28px;
+  font-weight:900;
+}
+
+.utc {
+  font-size:13px;
+}
 
 /* 모바일 */
-@media (max-width:900px){
-  .grid { display:flex; overflow-x:auto; }
-  .card { min-width:280px; }
-  .info-section { grid-template-columns:1fr; }
+@media(max-width:900px){
+  .grid {display:flex; overflow-x:auto;}
+  .card {min-width:250px;}
+  .menu {flex-direction:column; align-items:center;}
 }
 </style>
 </head>
@@ -188,86 +153,150 @@ body {
 
 <canvas id="bg"></canvas>
 
-<!-- 타이틀 -->
 <div class="title">
   <div class="title-main">White Out Survival</div>
   <div class="title-sub">S2515 UNI&WON</div>
 </div>
 
-<!-- 메뉴 -->
+<!-- 🔥 버튼 정상 구조 -->
 <div class="menu">
-  <a class="btn" href="https://open.kakao.com/o/sL7u8cYh" target="_blank">💬 이민 문의</a>
+  <div class="btn" onclick="goLink()">💬 이민 문의</div>
   <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">🛡 UNI 연맹</div>
   <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON 연맹</div>
 </div>
 
-<!-- 모집/공약 -->
+<!-- 모집 / 공약 -->
 <div class="info-section">
 
 <div class="info-card">
 <div class="info-title" onclick="toggleInfo(this)">💙 모집 대상</div>
 <div class="info-content">
-<!-- 👉 여기에 아까 모집 대상 코드 넣으면 됨 -->
+<p>💙 모집 대상</p>
+<p>· 개인 / 소규모 / 단체 이민 모두 환영합니다</p>
 </div>
 </div>
 
 <div class="info-card">
 <div class="info-title" onclick="toggleInfo(this)">📜 서버 공약</div>
 <div class="info-content">
-<!-- 👉 여기에 서버 공약 코드 넣으면 됨 -->
+<p>💙 2515 서버 공약</p>
+<p>· 안정적 운영</p>
 </div>
 </div>
 
 </div>
 
+<!-- 이벤트 출력 -->
 <div id="content"></div>
 
 <script>
+/* 링크 */
+function goLink(){
+  window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
+}
+
+/* 토글 */
+function toggleInfo(el){
+  el.nextElementSibling.classList.toggle("open");
+}
+
+/* 팀 선택 */
+function selectTeam(team){
+  document.getElementById("uniBtn").classList.remove("active");
+  document.getElementById("wonBtn").classList.remove("active");
+
+  if(team==="UNI"){
+    document.getElementById("uniBtn").classList.add("active");
+    renderUNI();
+  } else {
+    document.getElementById("wonBtn").classList.add("active");
+    renderWON();
+  }
+}
+
+/* UNI */
+function renderUNI(){
+document.getElementById("content").innerHTML=`
+<div class="grid">
+
+<div class="card"><div class="card-header">🐻 곰</div>
+<div class="time-box"><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+</div>
+
+<div class="card"><div class="card-header">⚙ 무공</div>
+<div class="time-box"><div class="time">21:00</div></div>
+</div>
+
+<div class="card"><div class="card-header">🏔 협곡</div>
+<div class="time-box"><div class="time">21:00</div></div>
+</div>
+
+<div class="card"><div class="card-header">🎉 조이</div>
+<div class="time-box"><div class="time">22:00</div></div>
+</div>
+
+</div>`;
+}
+
+/* WON */
+function renderWON(){
+document.getElementById("content").innerHTML=`
+<div class="grid">
+
+<div class="card"><div class="card-header">🐻 곰</div>
+<div class="time-box"><div class="time">22:20</div></div>
+</div>
+
+<div class="card"><div class="card-header">⚙ 무공</div>
+<div class="time-box"><div class="time">23:00</div></div>
+</div>
+
+<div class="card"><div class="card-header">🏔 협곡</div>
+<div class="time-box"><div class="time">23:00</div></div>
+</div>
+
+<div class="card"><div class="card-header">🎉 조이</div>
+<div class="time-box"><div class="time">21:00</div></div>
+</div>
+
+</div>`;
+}
+
 /* 눈꽃 */
-const canvas = document.getElementById("bg");
-const ctx = canvas.getContext("2d");
+const canvas=document.getElementById("bg");
+const ctx=canvas.getContext("2d");
 
 function resize(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 }
 resize();
-window.addEventListener("resize", resize);
 
 let flakes=[];
-for(let i=0;i<50;i++){
-  flakes.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    size:Math.random()*20+10,
-    alpha:Math.random(),
-    fade:Math.random()*0.02+0.005
-  });
+for(let i=0;i<40;i++){
+flakes.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+a:Math.random(),
+f:Math.random()*0.02
+});
 }
 
 function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  flakes.forEach(f=>{
-    ctx.font=f.size+"px Arial";
-    ctx.textAlign="center";
-    ctx.textBaseline="middle";
-    ctx.fillStyle=`rgba(0,150,255,${f.alpha})`;
-    ctx.fillText("❄",f.x,f.y);
+flakes.forEach(f=>{
+ctx.fillStyle=`rgba(0,150,255,${f.a})`;
+ctx.font="20px Arial";
+ctx.fillText("❄",f.x,f.y);
 
-    f.alpha+=f.fade;
-    if(f.alpha>1||f.alpha<0) f.fade*=-1;
-  });
+f.a+=f.f;
+if(f.a>1||f.a<0) f.f*=-1;
+});
 
-  requestAnimationFrame(draw);
+requestAnimationFrame(draw);
 }
 draw();
-
-/* UI */
-function toggleInfo(el){
-  const content=el.nextElementSibling;
-  content.classList.toggle("open");
-}
 </script>
 
 </body>
