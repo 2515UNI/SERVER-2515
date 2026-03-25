@@ -55,7 +55,6 @@ canvas {
   border:2px solid #000;
   background:#fff;
 }
-.active { background:#111; color:#fff; }
 
 /* 정보 */
 .info-section {
@@ -72,28 +71,40 @@ canvas {
 /* 이벤트 */
 .grid {
   width:95%;
-  margin:50px auto;
+  margin:40px auto;
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:25px;
+  gap:20px;
 }
 
 .card {
-  padding:35px;
+  padding:20px;
   border:2px solid #000;
   border-radius:20px;
-  text-align:center;
 }
 
-.card-header {
-  font-size:24px;
+.card-title {
+  font-size:22px;
   font-weight:900;
+  margin-bottom:10px;
+}
+
+/* 내부 박스 */
+.inner-box {
+  border:1px solid #aaa;
+  border-radius:12px;
+  padding:10px;
+  margin-bottom:10px;
 }
 
 .time {
-  font-size:22px;
+  font-size:18px;
   font-weight:800;
-  margin-top:10px;
+}
+
+.utc {
+  font-size:13px;
+  color:#555;
 }
 </style>
 </head>
@@ -108,23 +119,22 @@ canvas {
 </div>
 
 <div class="menu">
-  <div class="btn" onclick="resetView()">🏠 홈</div>
-  <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">🛡 UNI 연맹</div>
-  <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON 연맹</div>
+  <div class="btn" onclick="goLink()">💬 이민 문의</div>
+  <div class="btn" onclick="selectTeam('UNI')">🛡 UNI 연맹</div>
+  <div class="btn" onclick="selectTeam('WON')">⚔ WON 연맹</div>
 </div>
 
-<!-- 모집/공약 -->
+<!-- 모집 / 공약 (그대로 유지 영역) -->
 <div class="info-section" id="infoSection">
-  <!-- 그대로 유지 (너 기존 코드 유지하면 됨) -->
+  <!-- 👉 기존 네가 쓰던 모집대상 + 서버공약 그대로 유지하면됨 -->
 </div>
 
 <!-- 이벤트 -->
 <div id="content"></div>
 
 <script>
-function resetView(){
-  document.getElementById("infoSection").classList.remove("hidden");
-  document.getElementById("content").innerHTML="";
+function goLink(){
+  window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
 }
 
 function selectTeam(team){
@@ -134,48 +144,68 @@ function selectTeam(team){
   else renderWON();
 }
 
-/* 🔥 이벤트 풀복구 */
+/* 🔥 이벤트 완전 원복 */
 function renderUNI(){
 document.getElementById("content").innerHTML=`
 <div class="grid">
-<div class="card"><div class="card-header">🐻 곰</div>
-<div class="time">1군 21:00</div>
-<div class="time">2군 23:00</div></div>
 
-<div class="card"><div class="card-header">⚙ 무공</div>
-<div class="time">1군 21:00</div>
-<div class="time">2군 23:00</div></div>
+<div class="card">
+<div class="card-title">🐻 곰</div>
+<div class="inner-box"><div class="time">1군 21:00</div><div class="utc">UTC 12:00</div></div>
+<div class="inner-box"><div class="time">2군 23:00</div><div class="utc">UTC 14:00</div></div>
+</div>
 
-<div class="card"><div class="card-header">🏔 협곡</div>
-<div class="time">1군 21:00</div>
-<div class="time">2군 23:00</div></div>
+<div class="card">
+<div class="card-title">⚙ 무공</div>
+<div class="inner-box"><div class="time">1군 21:00</div></div>
+<div class="inner-box"><div class="time">2군 23:00</div></div>
+</div>
 
-<div class="card"><div class="card-header">🎉 조이</div>
-<div class="time">21:00</div></div>
+<div class="card">
+<div class="card-title">🏔 협곡</div>
+<div class="inner-box"><div class="time">1군 21:00</div></div>
+<div class="inner-box"><div class="time">2군 23:00</div></div>
+</div>
+
+<div class="card">
+<div class="card-title">🎉 조이</div>
+<div class="inner-box"><div class="time">21:00</div></div>
+</div>
+
 </div>`;
 }
 
 function renderWON(){
 document.getElementById("content").innerHTML=`
 <div class="grid">
-<div class="card"><div class="card-header">🐻 곰</div>
-<div class="time">1군 22:20</div>
-<div class="time">2군 00:05</div></div>
 
-<div class="card"><div class="card-header">⚙ 무공</div>
-<div class="time">1군 23:00</div>
-<div class="time">2군 21:00</div></div>
+<div class="card">
+<div class="card-title">🐻 곰</div>
+<div class="inner-box"><div class="time">1군 22:20</div><div class="utc">UTC 13:20</div></div>
+<div class="inner-box"><div class="time">2군 00:05</div><div class="utc">UTC 15:05</div></div>
+</div>
 
-<div class="card"><div class="card-header">🏔 협곡</div>
-<div class="time">1군 23:00</div>
-<div class="time">2군 21:00</div></div>
+<div class="card">
+<div class="card-title">⚙ 무공</div>
+<div class="inner-box"><div class="time">1군 23:00</div></div>
+<div class="inner-box"><div class="time">2군 21:00</div></div>
+</div>
 
-<div class="card"><div class="card-header">🎉 조이</div>
-<div class="time">21:00</div></div>
+<div class="card">
+<div class="card-title">🏔 협곡</div>
+<div class="inner-box"><div class="time">1군 23:00</div></div>
+<div class="inner-box"><div class="time">2군 21:00</div></div>
+</div>
+
+<div class="card">
+<div class="card-title">🎉 조이</div>
+<div class="inner-box"><div class="time">21:00</div></div>
+</div>
+
 </div>`;
 }
 
-/* ❄ 눈꽃 (아이콘 복구) */
+/* ❄ 눈꽃 */
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
 
@@ -187,7 +217,7 @@ for(let i=0;i<70;i++){
 flakes.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-size:Math.random()*12+8,
+size:Math.random()*10+6,
 speed:Math.random()*1+0.5
 });
 }
