@@ -55,6 +55,7 @@ canvas {
   text-align:center;
   border:2px solid #000;
   background:#fff;
+  transition:0.2s;
 }
 .btn:hover { transform:translateY(-5px); }
 .active { background:#111; color:#fff; }
@@ -232,7 +233,6 @@ function goLink(){
   window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
 }
 
-/* UX */
 function toggleInfo(el){
   document.getElementById("content").innerHTML="";
   el.nextElementSibling.classList.toggle("open");
@@ -241,8 +241,15 @@ function toggleInfo(el){
 function selectTeam(team){
   document.querySelectorAll(".info-content").forEach(c=>c.classList.remove("open"));
 
-  if(team==="UNI") renderUNI();
-  else renderWON();
+  if(team==="UNI"){
+    document.getElementById("uniBtn").classList.add("active");
+    document.getElementById("wonBtn").classList.remove("active");
+    renderUNI();
+  } else {
+    document.getElementById("wonBtn").classList.add("active");
+    document.getElementById("uniBtn").classList.remove("active");
+    renderWON();
+  }
 }
 
 /* 이벤트 */
@@ -274,27 +281,23 @@ canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let flakes=[];
-for(let i=0;i<50;i++){
+for(let i=0;i<60;i++){
 flakes.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-r:Math.random()*3+1,
-d:Math.random()
+size:Math.random()*25+10,
+speed:Math.random()*1+0.5
 });
 }
 
 function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="#aee1ff";
-ctx.beginPath();
-flakes.forEach(f=>{
-ctx.moveTo(f.x,f.y);
-ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
-});
-ctx.fill();
 
 flakes.forEach(f=>{
-f.y+=Math.pow(f.d,2)+1;
+ctx.font=f.size+"px Arial";
+ctx.fillText("❄",f.x,f.y);
+
+f.y+=f.speed;
 if(f.y>canvas.height){
 f.y=0;
 f.x=Math.random()*canvas.width;
