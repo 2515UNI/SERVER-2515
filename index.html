@@ -9,15 +9,16 @@
 
 <style>
 body {margin:0;font-family:'Pretendard';background:#fff;color:#111;}
-
 canvas {position:fixed;top:0;left:0;z-index:-1;}
 
+/* 타이틀 */
 .title {text-align:center;margin-top:60px;}
 .title-main {font-size:48px;}
 .title-sub {
   font-size:90px;
   font-weight:900;
   -webkit-text-stroke:2px gold;
+  text-shadow:0 0 15px rgba(0,150,255,0.3);
 }
 
 /* 메뉴 */
@@ -31,17 +32,27 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
 .btn {
   min-width:260px;
   padding:24px;
-  border-radius:20px;
+  border-radius:16px;
   font-size:24px;
   font-weight:900;
   cursor:pointer;
-  border:2px solid #000;
-  background:#fff;
-  text-align:center;
+
+  border:2px solid #4fc3ff;
+  background:rgba(255,255,255,0.9);
+  color:#0b2a3a;
+
+  transition:all 0.25s ease;
 }
+
+.btn:hover {
+  transform:translateY(-5px) scale(1.05);
+  box-shadow:0 0 20px rgba(0,170,255,0.5);
+}
+
 .btn.active {
-  background:#111;
+  background:linear-gradient(135deg,#00c6ff,#0072ff);
   color:#fff;
+  box-shadow:0 0 25px rgba(0,200,255,0.8);
 }
 
 /* 정보 */
@@ -56,8 +67,11 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
 
 .info-card {
   padding:40px;
-  border:2px solid #000;
-  border-radius:25px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.85);
+  border:2px solid rgba(0,170,255,0.4);
+  backdrop-filter:blur(6px);
+  box-shadow:0 10px 25px rgba(0,150,255,0.15);
 }
 
 .info-title {
@@ -84,32 +98,53 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
 
 .card {
   padding:35px;
-  border-radius:25px;
-  border:2px solid #000;
-  background:#fff;
+  border-radius:20px;
+  background:rgba(255,255,255,0.85);
+  border:2px solid rgba(0,170,255,0.4);
+  backdrop-filter:blur(6px);
+  box-shadow:0 10px 25px rgba(0,150,255,0.15);
+  transition:all 0.25s ease;
+}
+
+.card:hover {
+  transform:translateY(-8px);
+  box-shadow:0 15px 35px rgba(0,170,255,0.3);
 }
 
 .card-header {
   font-size:26px;
   font-weight:900;
   margin-bottom:18px;
+  text-shadow:0 0 8px rgba(0,180,255,0.4);
 }
 
 .time-box {
-  border:2px solid #000;
-  border-radius:14px;
+  border:2px solid rgba(0,180,255,0.5);
+  border-radius:12px;
   padding:16px;
   margin-bottom:12px;
+  background:rgba(240,250,255,0.8);
 }
 
 .time {
   font-size:22px;
   font-weight:900;
+  color:#007acc;
 }
 
 .utc {
-  font-size:15px;
-  color:#666;
+  font-size:14px;
+  color:#5f7f90;
+}
+
+/* 애니메이션 */
+.fade-in {
+  animation:fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from {opacity:0;transform:translateY(30px);}
+  to {opacity:1;transform:translateY(0);}
 }
 
 /* 하단 */
@@ -137,11 +172,13 @@ canvas {position:fixed;top:0;left:0;z-index:-1;}
   <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON 연맹</div>
 </div>
 
+<!-- ✅ 원본 그대로 유지 -->
 <div class="info-section" id="infoSection">
 
 <div class="info-card">
 <div class="info-title">💙 모집 대상</div>
 <div class="info-content">
+
 <br><br>
 
 · 개인 / 소규모 / 단체 이민 모두 환영합니다<br>
@@ -239,9 +276,10 @@ function selectTeam(team){
   }
 }
 
+/* ✅ 이벤트 시간 원본 그대로 */
 function renderUNI(){
 document.getElementById("content").innerHTML=`
-<div class="grid">
+<div class="grid fade-in">
 <div class="card"><div class="card-header">🐻 곰</div>
 <div class="time-box"><div class="time">곰 1 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
 <div class="time-box"><div class="time">곰 2 - 22:00</div><div class="utc">(UTC 13:00)</div></div>
@@ -266,7 +304,7 @@ document.getElementById("content").innerHTML=`
 
 function renderWON(){
 document.getElementById("content").innerHTML=`
-<div class="grid">
+<div class="grid fade-in">
 <div class="card"><div class="card-header">🐻 곰</div>
 <div class="time-box"><div class="time">곰 1 - 22:20</div><div class="utc">(UTC 13:20)</div></div>
 <div class="time-box"><div class="time">곰 2 - 00:05</div><div class="utc">(UTC 15:05)</div></div>
@@ -288,7 +326,7 @@ document.getElementById("content").innerHTML=`
 </div>`;
 }
 
-/* 눈꽃 */
+/* 눈 효과 그대로 */
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
