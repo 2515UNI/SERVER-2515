@@ -2,50 +2,112 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+
+<!-- 🔥 모바일 흔들림 방지 핵심 -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
 <title>SERVER 2515</title>
 
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 
 <style>
-body {margin:0;font-family:'Pretendard';background:#fff;color:#111;overflow-x:hidden;}
-canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
+html, body {
+  margin:0;
+  height:100%;
+  font-family:'Pretendard';
+  background:#fff;
+  color:#111;
+
+  /* 🔥 갤럭시 스크롤 튐 방지 */
+  overflow-x:hidden;
+  overscroll-behavior:none;
+}
+
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+  pointer-events:none;
+}
 
 /* 타이틀 */
 .title {text-align:center;margin-top:60px;}
 .title-main, .title-sub {
-  font-weight:900;color:#fff; /* 글자 색 흰색 */
-  -webkit-text-stroke: 2px #000; /* 글자 테두리 검정 */
+  font-weight:900;
+  color:#fff;
+  -webkit-text-stroke: 2px #000;
   text-shadow: 2px 2px 8px rgba(0,0,0,0.35);
-  position:relative;display:inline-block;
+  position:relative;
+  display:inline-block;
 }
-.title-main {font-size:48px;letter-spacing:2px;animation:titlePop 0.8s ease;}
+.title-main {
+  font-size:48px;
+  letter-spacing:2px;
+  animation:titlePop 0.8s ease;
+}
 .title-main::after{
-  content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
+  content:'';
+  position:absolute;
+  top:0;left:-100%;
+  width:50%;height:100%;
   background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
   animation:shine 2s infinite;
 }
-.title-sub {font-size:90px;transform: skewX(-5deg);animation:titlePop 1s ease;}
+.title-sub {
+  font-size:90px;
+  transform: skewX(-5deg);
+  animation:titlePop 1s ease;
+}
 .title-sub::after{
-  content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
+  content:'';
+  position:absolute;
+  top:0;left:-100%;
+  width:50%;height:100%;
   background:linear-gradient(120deg,transparent,rgba(255,255,255,0.3),transparent);
   animation:shine 2.5s infinite;
 }
-.title-line{width:120px;height:3px;margin:20px auto 0;border-radius:10px;background:linear-gradient(90deg,transparent,#999,transparent);}
+.title-line{
+  width:120px;height:3px;
+  margin:20px auto 0;
+  border-radius:10px;
+  background:linear-gradient(90deg,transparent,#999,transparent);
+}
 @keyframes shine{0%{left:-100%;}100%{left:120%;}}
 @keyframes titlePop{0%{opacity:0;transform:translateY(-20px);}100%{opacity:1;transform:translateY(0);}}
 
 /* 메뉴 */
-.menu {display:flex;justify-content:center;gap:20px;margin-top:40px;flex-wrap:wrap;}
+.menu {
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-top:40px;
+  flex-wrap:wrap;
+}
 .btn {
-  min-width:220px;padding:20px;border-radius:18px;font-size:20px;font-weight:900;
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  min-width:220px;
+  padding:20px;
+  border-radius:18px;
+  font-size:20px;
+  font-weight:900;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   border:1px solid rgba(0,0,0,0.1);
   background:linear-gradient(145deg,#ffffff,#f3f3f3);
   box-shadow:0 6px 15px rgba(0,0,0,0.08);
-  transition:all 0.3s ease;position:relative;overflow:hidden;
+  transition:all 0.3s ease;
+  position:relative;
+  overflow:hidden;
 }
 .btn::after{
-  content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
+  content:'';
+  position:absolute;
+  top:0;left:-100%;
+  width:50%;height:100%;
   background:linear-gradient(120deg,transparent,rgba(255,255,255,0.8),transparent);
   transition:0.6s;
 }
@@ -56,73 +118,70 @@ canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
 
 /* 정보 */
 .info-section {
-  width:95%;max-width:1300px;margin:40px auto;
-  display:grid;grid-template-columns:1fr 1fr;gap:30px;
+  width:95%;
+  max-width:1300px;
+  margin:40px auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
 }
 .info-card {
-  padding:40px;border-radius:22px;
+  padding:40px;
+  border-radius:22px;
   background:linear-gradient(145deg,#ffffff,#f3f3f3);
-  border:2px solid #000;box-shadow:0 10px 25px rgba(0,0,0,0.08);
-  position:relative;overflow:hidden;
+  border:2px solid #000;
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 .info-title{font-size:28px;font-weight:900;}
 .info-content{font-size:17px;line-height:1.9;font-weight:700;}
 .hidden{display:none;}
 
-/* 이벤트 카드 */
-.grid {width:95%;margin:40px auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+/* 이벤트 */
+.grid {
+  width:95%;
+  margin:40px auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
 .card {
-  padding:25px;border-radius:22px;
+  padding:25px;
+  border-radius:22px;
   background:linear-gradient(145deg,#ffffff,#f3f3f3);
   border:2px solid #000;
   box-shadow:0 8px 20px rgba(0,0,0,0.08);
-  opacity:0;transform:translateY(30px);position:relative;overflow:hidden;
-  transition:all 0.3s ease, background 0.3s ease, transform 0.2s ease;
+  opacity:0;
+  transform:translateY(30px);
+  transition:all 0.3s ease;
 }
 .card.show{animation:fadeUp 0.6s ease forwards;}
-.card-header{font-size:26px;font-weight:900;margin-bottom:18px;display:flex;align-items:center;}
-.card-header span{display:inline-block;animation:iconSwing 1.2s infinite alternate;margin-right:6px;}
-@keyframes iconSwing{0%{transform:rotate(0deg);}100%{transform:rotate(5deg);}}
+.card:hover{transform:translateY(-6px) scale(1.02);}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
 
-/* time-box */
+.card-header{font-size:26px;font-weight:900;margin-bottom:18px;}
+
 .time-box{
-  border-radius:12px;padding:14px;margin-bottom:10px;
+  border-radius:12px;
+  padding:14px;
+  margin-bottom:10px;
   background:linear-gradient(145deg,#fdfdfd,#f0f0f0);
   border:1px solid #000;
-  box-shadow: inset 0 0 6px rgba(255,255,255,0.4);
-  display:flex;justify-content:space-between;align-items:center;
-  transition: background 0.3s ease, transform 0.2s ease;
-  position:relative;overflow:hidden;
+  transition:0.2s;
 }
-.time-box::after{
-  content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent);
-  transition:0.4s;opacity:0;border-radius:12px;
-}
-.time-box:hover::after{opacity:1;left:120%;}
-.time-box:hover{transform:translateY(-3px) scale(1.02);}
+.time-box:hover{transform:scale(1.02);}
 .time{font-size:22px;font-weight:900;}
 .utc{font-size:14px;color:#777;}
 
-/* 카드 hover + tilt + 펄 */
-.card:hover{transform:translateY(-6px) scale(1.02) rotateX(2deg) rotateY(2deg);}
-.card::before{
-  content:'';position:absolute;inset:0;border-radius:22px;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.5),transparent);
-  opacity:0;transition:0.4s;
-}
-.card:hover::before{opacity:1;}
-
-/* 카드별 그라데이션 색상 */
-.card:nth-child(1) .time-box:hover{background:linear-gradient(120deg,#ffebf0,#ffd1e0);}
-.card:nth-child(2) .time-box:hover{background:linear-gradient(120deg,#e0f0ff,#d1d1ff);}
-.card:nth-child(3) .time-box:hover{background:linear-gradient(120deg,#e0ffe0,#d1ffd1);}
-.card:nth-child(4) .time-box:hover{background:linear-gradient(120deg,#fffce0,#fff5d1);}
-
 /* 모바일 */
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);}.info-section{grid-template-columns:1fr;}}
-@media(max-width:500px){.grid{grid-template-columns:1fr;}.title-sub{font-size:50px;}.btn{min-width:160px;font-size:16px;padding:16px;}}
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr);}
+  .info-section{grid-template-columns:1fr;}
+}
+@media(max-width:500px){
+  .grid{grid-template-columns:1fr;}
+  .title-sub{font-size:50px;}
+  .btn{min-width:160px;font-size:16px;padding:16px;}
+}
 
 /* 하단 */
 .footer{text-align:center;margin:60px 0 30px;font-size:14px;color:#777;}
@@ -130,6 +189,7 @@ canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
 </head>
 
 <body>
+
 <canvas id="snow"></canvas>
 
 <div class="title">
@@ -148,72 +208,37 @@ canvas {position:fixed;top:0;left:0;z-index:-1;pointer-events:none;}
   <div class="info-card">
     <div class="info-title">💙 모집 대상</div>
     <div class="info-content">
-      <br><br>
-      · 개인 / 소규모 / 단체 이민 모두 환영합니다<br>
-      (4월 특초 2장 가능 / 6주 기준 5월 1일 추가 지급 포함)<br><br>
-      · UNI : 소수 인원 / WON : 단체 인원 수용 가능 (최대 50명)<br><br>
-      · 뜻 맞는 분들과 함께 성장하실 분이라면 누구나 환영합니다 :)<br><br>
-      · 4~5월 연계 단체 이민 예정이신 분들<br>
-      (WON 합병 또는 단체 이동 적극 환영)<br><br>
-      💙 연맹 소개<br><br>
-      · WON : 행성 1명 / 유성 5명 보유 <br>
-      · UNI : 행성 4명 / 유성 5명 보유 <br><br>
-      💙 2515 서버, 이런 분들께 추천드립니다<br><br>
-      “평소에는 평화롭게, 전투와 전쟁 때는 확실하게.”<br><br>
-      · 한국어 소통이 편한 서버를 찾는 분<br>
-      · 단체 이민이 가능한 환경을 원하는 분<br>
-      · 서버전에 진심으로 참여하실 분<br>
-      · 초기 정착 지원이 필요한 분<br>
-      · 안정적인 연맹에서 플레이하고 싶은 분<br>
-      · 다국적 서버 환경을 선호하는 분 (인도네시아 / 대만 유저 활동)<br>
-      · 협력 중심 플레이를 즐기시는 분 (디스코드 및 오픈채팅 운영)
+      · 개인 / 소규모 / 단체 이민 모두 환영합니다<br><br>
+      · UNI : 소수 인원 / WON : 단체 인원 수용 가능<br><br>
+      · 함께 성장하실 분 환영합니다 :)
     </div>
   </div>
 
   <div class="info-card">
-    <div class="info-title">💙 2515 서버에서 약속드릴 수 있는 부분</div>
+    <div class="info-title">💙 서버 혜택</div>
     <div class="info-content">
-      <br><br>
-      1. 엔센 12개 보장 (4레벨 포함)<br>
-      · 4레벨 엔센 포함 총 12개 보장<br>
-      · 단체 이민 시 최소 기반 없이 시작하지 않도록 안정적인 출발 지원<br><br>
-      2. 요새 / 성채 분배<br>
-      · 요새 4개 / 성채 1개 제공<br>
-      · 초기 정착 이후 서버 안정화 시<br>
-      기여도, 점수, 랭킹 기준으로 합리적 재분배 진행<br><br>
-      3. 서버전 메인 참여 / 카랠 협력 운영<br>
-      · 서버전에 진심으로 참여하는 구조<br>
-      · 강성 서버와의 전투에서도 승리 경험 보유<br>
-      · 전적 : 12전 9승 (※별 1개는 타 연맹 보유)<br><br>
-      4. 서리 / 드엠 협력 가능<br>
-      · 연맹 간 협의를 통한 유동적 협력 운영<br>
-      · 첫 서리 이벤트에서도 연합 운영 경험 보유<br><br>
-      5. 연구 만렙 연맹 제공 가능<br>
-      · 연구 만렙 빈 연맹 2개 보유<br>
-      · WON 연맹(행성 1 / 유성 5) 합병 형태 참여 가능<br>
-      → 단체 이민 시 매우 유리한 선택지<br><br>
-      6. 초기 정착 전폭 지원<br>
-      · 깃발 / 센터 / 인원 부족 등 초기 문제 적극 지원<br>
-      · 단체 이민 시 발생하는 정착 스트레스 최소화<br>
-      · 안정적으로 자리 잡을 수 있도록 지속 지원
+      · 엔센 12개 보장<br>
+      · 요새/성채 제공<br>
+      · 서버전 적극 참여<br>
     </div>
   </div>
 </div>
 
 <div id="content" style="display:none;"></div>
+
 <div class="footer">Made by 우짱</div>
 
 <script>
-function goLink(){window.open("https://open.kakao.com/o/sL7u8cYh","_blank");}
+function goLink(){
+  window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
+}
 
 function selectTeam(team){
   document.getElementById("infoSection").style.display="none";
   document.getElementById("content").style.display="block";
-  document.getElementById("uniBtn").classList.remove("active");
-  document.getElementById("wonBtn").classList.remove("active");
 
-  if(team==="UNI"){document.getElementById("uniBtn").classList.add("active");renderUNI();}
-  else{document.getElementById("wonBtn").classList.add("active");renderWON();}
+  if(team==="UNI"){renderUNI();}
+  else{renderWON();}
 }
 
 function showCards(){
@@ -223,58 +248,56 @@ function showCards(){
 }
 
 function renderUNI(){
-  const content = document.getElementById("content");
-  content.innerHTML=`
-  <div class="grid">
-    <div class="card"><div class="card-header"><span>🐻</span> 곰</div>
-      <div class="time-box"><div class="time">곰 1 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-      <div class="time-box"><div class="time">곰 2 - 22:00</div><div class="utc">(UTC 13:00)</div></div>
-      <div class="time-box"><div class="time">곰 3 - 23:10</div><div class="utc">(UTC 14:10)</div></div>
-    </div>
-    <div class="card"><div class="card-header"><span>⚙</span> 무공</div>
-      <div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-      <div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-    </div>
-    <div class="card"><div class="card-header"><span>🏔</span> 협곡</div>
-      <div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-      <div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-    </div>
-    <div class="card"><div class="card-header"><span>🎉</span> 조이</div>
-      <div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
-    </div>
-  </div>`;
-  showCards();
+document.getElementById("content").innerHTML=`
+<div class="grid">
+<div class="card"><div class="card-header">🐻 곰</div>
+<div class="time-box"><div class="time">곰 1 - 21:00</div></div>
+<div class="time-box"><div class="time">곰 2 - 22:00</div></div>
+</div>
+</div>`;
+showCards();
 }
 
 function renderWON(){
-  const content = document.getElementById("content");
-  content.innerHTML=`
-  <div class="grid">
-    <div class="card"><div class="card-header"><span>🐻</span> 곰</div>
-      <div class="time-box"><div class="time">곰 1 - 22:20</div><div class="utc">(UTC 13:20)</div></div>
-      <div class="time-box"><div class="time">곰 2 - 00:05</div><div class="utc">(UTC 15:05)</div></div>
-    </div>
-    <div class="card"><div class="card-header"><span>⚙</span> 무공</div>
-      <div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-      <div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-    </div>
-    <div class="card"><div class="card-header"><span>🏔</span> 협곡</div>
-      <div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-      <div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-    </div>
-    <div class="card"><div class="card-header"><span>🎉</span> 조이</div>
-      <div class="time-box"><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
-    </div>
-  </div>`;
-  showCards();
+document.getElementById("content").innerHTML=`
+<div class="grid">
+<div class="card"><div class="card-header">🐻 곰</div>
+<div class="time-box"><div class="time">곰 1 - 22:20</div></div>
+</div>
+</div>`;
+showCards();
 }
 
-/* 눈꽃 */
+/* 🔥 canvas 안정화 */
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth; canvas.height=window.innerHeight;
-let flakes=[];for(let i=0;i<60;i++){flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*8+5,speed:Math.random()*1});}
-function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);flakes.forEach(f=>{ctx.font=f.size+"px Arial";ctx.fillStyle="#6ec6ff";ctx.fillText("❄",f.x,f.y);f.y+=f.speed;if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}});requestAnimationFrame(draw);}draw();
+
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+/* 눈꽃 */
+let flakes=[];
+for(let i=0;i<60;i++){
+  flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*8+5,speed:Math.random()*1});
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  flakes.forEach(f=>{
+    ctx.font=f.size+"px Arial";
+    ctx.fillStyle="#6ec6ff";
+    ctx.fillText("❄",f.x,f.y);
+    f.y+=f.speed;
+    if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
+  });
+  requestAnimationFrame(draw);
+}
+draw();
 </script>
+
 </body>
 </html>
