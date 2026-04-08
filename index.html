@@ -28,6 +28,29 @@ canvas {
   pointer-events:none;
 }
 
+/* 🌍 언어 선택 바 */
+.lang-bar{
+  position:fixed;
+  top:10px;
+  right:10px;
+  z-index:9999;
+  display:flex;
+  gap:8px;
+}
+.lang-btn{
+  padding:6px 10px;
+  border-radius:8px;
+  border:none;
+  background:#000;
+  color:#fff;
+  font-size:12px;
+  cursor:pointer;
+  opacity:0.8;
+}
+.lang-btn:hover{
+  opacity:1;
+}
+
 /* 타이틀 */
 .title {text-align:center;margin-top:60px;}
 .title-main, .title-sub {
@@ -63,6 +86,21 @@ canvas {
   background:#f5f5f5;
 }
 .btn.active {background:#ddd;}
+
+/* hover */
+.card:hover {
+  background:#f9f9f9;
+  transform:translateY(-5px);
+  transition:0.2s;
+}
+.time-box:hover {
+  background:#e6f0ff;
+  border-color:#4a90e2;
+  transition:0.2s;
+}
+.time-box:hover .time {
+  color:#4a90e2;
+}
 
 /* 정보 */
 .info-section {
@@ -129,7 +167,7 @@ canvas {
 /* 하단 */
 .footer{text-align:center;margin:60px 0 30px;font-size:14px;color:#777;}
 
-/* 🔥 팝업 */
+/* 팝업 */
 #popup {
   display:none;
   position:fixed;
@@ -138,7 +176,6 @@ canvas {
   background:rgba(0,0,0,0.8);
   z-index:9999;
 }
-
 .popup-content {
   position:absolute;
   top:50%; left:50%;
@@ -152,20 +189,17 @@ canvas {
   display:flex;
   flex-direction:column;
 }
-
 .popup-header {
   text-align:right;
   padding:10px;
   background:#f1f1f1;
 }
-
 .close-btn {
   background:none;
   border:none;
   font-size:20px;
   cursor:pointer;
 }
-
 iframe {
   flex:1;
   width:100%;
@@ -175,6 +209,13 @@ iframe {
 </head>
 
 <body>
+
+<div class="lang-bar">
+  <button class="lang-btn" onclick="translatePage('ko')">🇰🇷</button>
+  <button class="lang-btn" onclick="translatePage('en')">🇺🇸</button>
+  <button class="lang-btn" onclick="translatePage('zh-CN')">🇨🇳</button>
+  <button class="lang-btn" onclick="translatePage('id')">🇮🇩</button>
+</div>
 
 <canvas id="snow"></canvas>
 
@@ -270,18 +311,22 @@ iframe {
 
 <div class="footer">Made by 우짱</div>
 
-<!-- 🔥 구글폼 팝업 -->
 <div id="popup">
   <div class="popup-content">
     <div class="popup-header">
       <button class="close-btn" onclick="closeForm()">❌</button>
     </div>
-
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSewbQiBZ_FCCYRGijla7nwDp7t_CiH7jcaFhvneQHoEDqfm8Q/viewform?embedded=true"></iframe>
   </div>
 </div>
 
 <script>
+function translatePage(lang){
+  var url = window.location.href;
+  var translateUrl = "https://translate.google.com/translate?sl=auto&tl=" + lang + "&u=" + url;
+  window.open(translateUrl, "_blank");
+}
+
 function goLink(){
   window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
 }
@@ -294,7 +339,22 @@ function closeForm(){
   document.getElementById("popup").style.display="none";
 }
 
+document.getElementById("popup").addEventListener("click", function(e){
+  if(e.target === this){
+    closeForm();
+  }
+});
+
 function selectTeam(team){
+  document.getElementById("uniBtn").classList.remove("active");
+  document.getElementById("wonBtn").classList.remove("active");
+
+  if(team==="UNI"){
+    document.getElementById("uniBtn").classList.add("active");
+  } else {
+    document.getElementById("wonBtn").classList.add("active");
+  }
+
   document.getElementById("infoSection").style.display="none";
   document.getElementById("content").innerHTML="";
 
