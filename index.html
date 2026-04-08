@@ -16,19 +16,9 @@ html, body {
   background:#fff;
   color:#111;
   overflow-x:hidden;
-  height:auto;
-  -webkit-overflow-scrolling: touch;
 }
 
-canvas {
-  position:fixed;
-  top:0;
-  left:0;
-  z-index:-1;
-  pointer-events:none;
-}
-
-/* 🌍 번역창 */
+/* 번역창 */
 #google_translate_element {
   position:fixed;
   top:15px;
@@ -48,7 +38,6 @@ canvas {
   color:#fff;
   -webkit-text-stroke:2px #000;
   text-shadow:2px 2px 8px rgba(0,0,0,0.35);
-  display:inline-block;
 }
 .title-main {font-size:48px;}
 .title-sub {font-size:90px;transform:skewX(-5deg);}
@@ -69,10 +58,7 @@ canvas {
   font-size:20px;
   font-weight:900;
   cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid rgba(0,0,0,0.1);
+  border:1px solid #ddd;
   background:#f5f5f5;
 }
 
@@ -92,11 +78,13 @@ canvas {
   background:#fff;
 }
 .info-title {font-size:28px;font-weight:900;}
-.info-content {
-  font-size:17px;
-  line-height:1.8;
+
+.info-content p {
+  margin:0 0 10px;
+  line-height:1.7;
   font-weight:700;
 }
+.block {margin-bottom:20px;}
 
 /* 이벤트 */
 .grid {
@@ -121,8 +109,8 @@ canvas {
   display:flex;
   justify-content:space-between;
 }
-.time {font-size:20px;font-weight:900;}
-.utc {font-size:14px;color:#777;}
+.time {font-size:18px;font-weight:900;}
+.utc {font-size:13px;color:#777;}
 
 /* 모바일 */
 @media(max-width:900px){
@@ -134,8 +122,7 @@ canvas {
   .title-sub{font-size:50px;}
 }
 
-/* 하단 */
-.footer{text-align:center;margin:60px 0 30px;font-size:14px;color:#777;}
+.footer{text-align:center;margin:60px 0 30px;color:#777;}
 
 /* 팝업 */
 #popup {
@@ -144,7 +131,6 @@ canvas {
   top:0; left:0;
   width:100%; height:100%;
   background:rgba(0,0,0,0.8);
-  z-index:9999;
 }
 .popup-content {
   position:absolute;
@@ -156,33 +142,16 @@ canvas {
   background:#fff;
   border-radius:12px;
   overflow:hidden;
-  display:flex;
-  flex-direction:column;
 }
-.popup-header {
-  text-align:right;
-  padding:10px;
-  background:#f1f1f1;
-}
-.close-btn {
-  background:none;
-  border:none;
-  font-size:20px;
-  cursor:pointer;
-}
-iframe {
-  flex:1;
-  width:100%;
-  border:none;
-}
+.popup-header {text-align:right;padding:10px;}
+.close-btn {border:none;background:none;font-size:20px;}
+iframe {width:100%;height:90%;border:none;}
 </style>
 </head>
 
 <body>
 
 <div id="google_translate_element"></div>
-
-<canvas id="snow"></canvas>
 
 <div class="title">
   <div class="title-main">White Out Survival</div>
@@ -200,63 +169,77 @@ iframe {
 <div class="info-section" id="infoSection">
 
 <div class="info-card">
-<div class="info-title">💙모집 대상💙</div><br><br>
+<div class="info-title">💙 모집 대상</div>
+
 <div class="info-content">
-· 개인 / 소규모 / 단체 이민 모두 환영합니다<br>
-· 4월 특초 1장 가능 / 4월 12일 이민범위 2505~2830<br><br>
-· UNI : 소수 인원 / WON : 단체 인원 수용 가능(최대 50명)<br>
-· 뜻 맞는 분들과 함께 성장하실 분이라면 누구나 환영합니다:)<br><br>
-· 4~5월 연계 단체 이민 예정이신 분들<br>
-· WON 합병 또는 단체 이동 적극 환영<br><br>
-💙연맹 소개💙<br><br>
-· WON : 행성 1명 / 유성 5명 보유 <br>
-· UNI : 행성 5명 / 유성 5명 보유 <br><br>
-💙2515 서버, 이런 분들께 추천드립니다💙<br><br>
-“평소에는 평화롭게, 전투와 전쟁 때는 확실하게.”<br><br>
-· 한국어 소통이 편한 서버를 찾는 분<br>
-· 단체 이민이 가능한 환경을 원하는 분<br>
-· 서버전에 진심으로 참여하실 분<br>
-· 초기 정착 지원이 필요한 분<br>
-· 안정적인 연맹에서 플레이하고 싶은 분<br>
-· 다국적 서버 환경을 선호하는 분 (인도네시아 / 대만 유저 활동)<br>
-· 협력 중심 플레이를 즐기시는 분 (디스코드 및 오픈채팅 운영)
+
+<div class="block">
+<p>· 개인 / 소규모 / 단체 이민 모두 환영합니다</p>
+<p>· 4월 특초 1장 가능 / 4월 12일 이민범위 2505~2830</p>
+</div>
+
+<div class="block">
+<p>· UNI : 소수 인원 / WON : 단체 인원 수용 가능(최대 50명)</p>
+<p>· 뜻 맞는 분들과 함께 성장하실 분이라면 누구나 환영합니다 :)</p>
+</div>
+
+<div class="block">
+<p>· 4~5월 연계 단체 이민 예정이신 분들</p>
+<p>· WON 합병 또는 단체 이동 적극 환영</p>
+</div>
+
+<div class="block">
+<p>💙 연맹 소개</p>
+<p>· WON : 행성 1명 / 유성 5명 보유</p>
+<p>· UNI : 행성 5명 / 유성 5명 보유</p>
+</div>
+
+<div class="block">
+<p>💙 2515 서버 추천</p>
+<p>· 평소 평화 / 전쟁 시 강력</p>
+<p>· 한국어 소통 서버</p>
+<p>· 단체 이민 가능</p>
+<p>· 서버전 적극 참여</p>
+<p>· 다국적 환경</p>
+</div>
+
 </div>
 </div>
 
 <div class="info-card">
-<div class="info-title">💙2515 서버에서 약속드릴 수 있는 부분💙</div><br><br>
+<div class="info-title">💙 2515 서버에서 약속드릴 수 있는 부분</div>
+
 <div class="info-content">
 
-1. 엔센 12개 보장 (4레벨 포함)<br>
-· 4레벨 엔센 포함 총 12개 보장<br>
-· 단체 이민 시 최소 기반 없이 시작하지 않도록 안정적인 출발 지원<br><br>
+<div class="block">
+<p>1. 엔센 12개 보장 (4레벨 포함)</p>
+<p>· 4레벨 포함 총 12개 보장</p>
+<p>· 안정적인 출발 지원</p>
+</div>
 
-2. 요새 / 성채 분배<br>
-· 요새 4개 / 성채 1개 제공<br>
-· 초기 정착 이후 서버 안정화 시<br>
-기여도, 점수, 랭킹 기준으로 합리적 재분배 진행<br><br>
+<div class="block">
+<p>2. 요새 / 성채 분배</p>
+<p>· 요새 4개 / 성채 1개 제공</p>
+<p>· 기여도 기준 재분배</p>
+</div>
 
-3. 서버전 메인 참여 / 카랠 협력 운영<br>
-· 서버전에 진심으로 참여하는 구조<br>
-· 강성 서버와의 전투에서도 승리 경험 보유<br>
-· 전적 : 13전 10승 달 1개 별 4개 (※별 1개는 타 연맹 보유)<br><br>
+<div class="block">
+<p>3. 서버전 참여</p>
+<p>· 13전 10승 기록</p>
+</div>
 
-4. 서리 / 드엠 협력 가능<br>
-· 연맹 간 협의를 통한 유동적 협력 운영<br>
-· 첫 서리 이벤트에서도 연합 운영 경험 보유<br>
-· 서리 서버 연합 단합으로 4강 진출 달성<br>
-· 첫 드엠에서는 단일 연맹 체제로 출전해 TOP 10권(9위) 기록<br><br>
-  
-5. 연구 만렙 연맹 제공 가능<br>
-· 연구 만렙 빈 연맹 2개 보유<br>
-· WON 연맹(행성 1 / 유성 5)<br> 
-→ 합병 형태 참여 가능<br>
-→ 단체 이민 시 매우 유리한 선택지<br><br>
+<div class="block">
+<p>4. 연맹 협력</p>
+<p>· 서리 / 드엠 협력 운영</p>
+</div>
 
-6. 초기 정착 전폭 지원<br>
-· 깃발 / 센터 / 인원 부족 등 초기 문제 적극 지원<br>
-· 단체 이민 시 발생하는 정착 스트레스 최소화<br>
-· 안정적으로 자리 잡을 수 있도록 지속 지원
+<div class="block">
+<p>5. 연구 만렙 지원</p>
+</div>
+
+<div class="block">
+<p>6. 초기 정착 지원</p>
+</div>
 
 </div>
 </div>
@@ -268,12 +251,12 @@ iframe {
 <div class="footer">Made by 우짱</div>
 
 <div id="popup">
-  <div class="popup-content">
-    <div class="popup-header">
-      <button class="close-btn" onclick="closeForm()">❌</button>
-    </div>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSewbQiBZ_FCCYRGijla7nwDp7t_CiH7jcaFhvneQHoEDqfm8Q/viewform?embedded=true"></iframe>
-  </div>
+<div class="popup-content">
+<div class="popup-header">
+<button class="close-btn" onclick="closeForm()">❌</button>
+</div>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSewbQiBZ_FCCYRGijla7nwDp7t_CiH7jcaFhvneQHoEDqfm8Q/viewform?embedded=true"></iframe>
+</div>
 </div>
 
 <script>
@@ -285,7 +268,7 @@ function googleTranslateElementInit() {
 }
 
 function goLink(){
-  window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
+  window.open("https://open.kakao.com/o/sL7u8cYh");
 }
 
 function openForm(){
@@ -298,14 +281,10 @@ function closeForm(){
 
 function selectTeam(team){
   document.getElementById("infoSection").style.display="none";
-  document.getElementById("content").innerHTML="";
-
-  if(team==="UNI") renderUNI();
-  else renderWON();
+  document.getElementById("content").innerHTML = team==="UNI" ? uniHTML : wonHTML;
 }
 
-function renderUNI(){
-document.getElementById("content").innerHTML=`
+const uniHTML = `
 <div class="grid">
 <div class="card"><div class="card-header">🐻 곰</div>
 <div class="time-box"><div class="time">곰 1 - 20:30</div><div class="utc">(UTC 11:30)</div></div>
@@ -326,11 +305,10 @@ document.getElementById("content").innerHTML=`
 <div class="card"><div class="card-header">🎉 조이</div>
 <div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
 </div>
-</div>`;
-}
+</div>
+`;
 
-function renderWON(){
-document.getElementById("content").innerHTML=`
+const wonHTML = `
 <div class="grid">
 <div class="card"><div class="card-header">🐻 곰</div>
 <div class="time-box"><div class="time">곰 1 - 22:20</div><div class="utc">(UTC 13:20)</div></div>
@@ -350,8 +328,8 @@ document.getElementById("content").innerHTML=`
 <div class="card"><div class="card-header">🎉 조이</div>
 <div class="time-box"><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
 </div>
-</div>`;
-}
+</div>
+`;
 </script>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
