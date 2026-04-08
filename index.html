@@ -64,6 +64,23 @@ canvas {
 }
 .btn.active {background:#ddd;}
 
+/* 🔥 hover 추가 */
+.card:hover {
+  background:#f9f9f9;
+  transform:translateY(-5px);
+  transition:0.2s;
+}
+
+.time-box:hover {
+  background:#e6f0ff;
+  border-color:#4a90e2;
+  transition:0.2s;
+}
+
+.time-box:hover .time {
+  color:#4a90e2;
+}
+
 /* 정보 */
 .info-section {
   width:95%;
@@ -295,12 +312,29 @@ function closeForm(){
 }
 
 function selectTeam(team){
+
+  document.getElementById("uniBtn").classList.remove("active");
+  document.getElementById("wonBtn").classList.remove("active");
+
+  if(team==="UNI"){
+    document.getElementById("uniBtn").classList.add("active");
+  } else {
+    document.getElementById("wonBtn").classList.add("active");
+  }
+
   document.getElementById("infoSection").style.display="none";
   document.getElementById("content").innerHTML="";
 
   if(team==="UNI") renderUNI();
   else renderWON();
 }
+
+/* 🔥 팝업 배경 클릭시 닫기 */
+document.getElementById("popup").addEventListener("click", function(e){
+  if(e.target === this){
+    closeForm();
+  }
+});
 
 function renderUNI(){
 document.getElementById("content").innerHTML=`
