@@ -28,16 +28,17 @@ canvas {
   pointer-events:none;
 }
 
-/* 🌍 번역 위젯 위치 */
+/* 🌍 번역창 */
 #google_translate_element {
   position:fixed;
-  top:10px;
-  right:10px;
+  top:15px;
+  right:15px;
   z-index:9999;
   background:#fff;
-  padding:5px;
-  border-radius:8px;
-  box-shadow:0 0 10px rgba(0,0,0,0.1);
+  padding:10px 14px;
+  border-radius:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.2);
+  transform:scale(1.2);
 }
 
 /* 타이틀 */
@@ -74,22 +75,6 @@ canvas {
   border:1px solid rgba(0,0,0,0.1);
   background:#f5f5f5;
 }
-.btn.active {background:#ddd;}
-
-/* hover */
-.card:hover {
-  background:#f9f9f9;
-  transform:translateY(-5px);
-  transition:0.2s;
-}
-.time-box:hover {
-  background:#e6f0ff;
-  border-color:#4a90e2;
-  transition:0.2s;
-}
-.time-box:hover .time {
-  color:#4a90e2;
-}
 
 /* 정보 */
 .info-section {
@@ -105,16 +90,12 @@ canvas {
   border-radius:20px;
   border:2px solid #000;
   background:#fff;
-  word-break:keep-all;
-  line-break:strict;
 }
 .info-title {font-size:28px;font-weight:900;}
 .info-content {
   font-size:17px;
   line-height:1.8;
   font-weight:700;
-  word-break:keep-all;
-  overflow-wrap:break-word;
 }
 
 /* 이벤트 */
@@ -199,7 +180,6 @@ iframe {
 
 <body>
 
-<!-- 🌍 번역 -->
 <div id="google_translate_element"></div>
 
 <canvas id="snow"></canvas>
@@ -213,8 +193,8 @@ iframe {
 <div class="menu">
   <div class="btn" onclick="goLink()">💬 이민 문의</div>
   <div class="btn" onclick="openForm()">📋 이민 신청</div>
-  <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">🛡 UNI 연맹</div>
-  <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON 연맹</div>
+  <div class="btn" onclick="selectTeam('UNI')">🛡 UNI 연맹</div>
+  <div class="btn" onclick="selectTeam('WON')">⚔ WON 연맹</div>
 </div>
 
 <div class="info-section" id="infoSection">
@@ -238,20 +218,46 @@ iframe {
 · 서버전에 진심으로 참여하실 분<br>
 · 초기 정착 지원이 필요한 분<br>
 · 안정적인 연맹에서 플레이하고 싶은 분<br>
-· 다국적 서버 환경을 선호하는 분<br>
-· 협력 중심 플레이를 즐기시는 분
+· 다국적 서버 환경을 선호하는 분 (인도네시아 / 대만 유저 활동)<br>
+· 협력 중심 플레이를 즐기시는 분 (디스코드 및 오픈채팅 운영)
 </div>
 </div>
 
 <div class="info-card">
 <div class="info-title">💙2515 서버에서 약속드릴 수 있는 부분💙</div><br><br>
 <div class="info-content">
-1. 엔센 12개 보장<br>
+
+1. 엔센 12개 보장 (4레벨 포함)<br>
+· 4레벨 엔센 포함 총 12개 보장<br>
+· 단체 이민 시 최소 기반 없이 시작하지 않도록 안정적인 출발 지원<br><br>
+
 2. 요새 / 성채 분배<br>
-3. 서버전 참여<br>
-4. 연맹 협력<br>
-5. 연구 만렙 지원<br>
-6. 초기 정착 지원
+· 요새 4개 / 성채 1개 제공<br>
+· 초기 정착 이후 서버 안정화 시<br>
+기여도, 점수, 랭킹 기준으로 합리적 재분배 진행<br><br>
+
+3. 서버전 메인 참여 / 카랠 협력 운영<br>
+· 서버전에 진심으로 참여하는 구조<br>
+· 강성 서버와의 전투에서도 승리 경험 보유<br>
+· 전적 : 13전 10승 달 1개 별 4개 (※별 1개는 타 연맹 보유)<br><br>
+
+4. 서리 / 드엠 협력 가능<br>
+· 연맹 간 협의를 통한 유동적 협력 운영<br>
+· 첫 서리 이벤트에서도 연합 운영 경험 보유<br>
+· 서리 서버 연합 단합으로 4강 진출 달성<br>
+· 첫 드엠에서는 단일 연맹 체제로 출전해 TOP 10권(9위) 기록<br><br>
+  
+5. 연구 만렙 연맹 제공 가능<br>
+· 연구 만렙 빈 연맹 2개 보유<br>
+· WON 연맹(행성 1 / 유성 5)<br> 
+→ 합병 형태 참여 가능<br>
+→ 단체 이민 시 매우 유리한 선택지<br><br>
+
+6. 초기 정착 전폭 지원<br>
+· 깃발 / 센터 / 인원 부족 등 초기 문제 적극 지원<br>
+· 단체 이민 시 발생하는 정착 스트레스 최소화<br>
+· 안정적으로 자리 잡을 수 있도록 지속 지원
+
 </div>
 </div>
 
@@ -290,34 +296,62 @@ function closeForm(){
   document.getElementById("popup").style.display="none";
 }
 
-/* 눈꽃 */
-const canvas=document.getElementById("snow");
-const ctx=canvas.getContext("2d");
+function selectTeam(team){
+  document.getElementById("infoSection").style.display="none";
+  document.getElementById("content").innerHTML="";
 
-function resizeCanvas(){
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener("resize",resizeCanvas);
-
-let flakes=[];
-for(let i=0;i<60;i++){
-flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*8+5,speed:Math.random()*1});
+  if(team==="UNI") renderUNI();
+  else renderWON();
 }
 
-function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-flakes.forEach(f=>{
-ctx.font=f.size+"px Arial";
-ctx.fillStyle="#6ec6ff";
-ctx.fillText("❄",f.x,f.y);
-f.y+=f.speed;
-if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
-});
-requestAnimationFrame(draw);
+function renderUNI(){
+document.getElementById("content").innerHTML=`
+<div class="grid">
+<div class="card"><div class="card-header">🐻 곰</div>
+<div class="time-box"><div class="time">곰 1 - 20:30</div><div class="utc">(UTC 11:30)</div></div>
+<div class="time-box"><div class="time">곰 2 - 22:00</div><div class="utc">(UTC 13:00)</div></div>
+<div class="time-box"><div class="time">곰 3 - 23:10</div><div class="utc">(UTC 14:10)</div></div>
+</div>
+
+<div class="card"><div class="card-header">⚙ 무공</div>
+<div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+<div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+</div>
+
+<div class="card"><div class="card-header">🏔 협곡</div>
+<div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+<div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+</div>
+
+<div class="card"><div class="card-header">🎉 조이</div>
+<div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
+</div>
+</div>`;
 }
-draw();
+
+function renderWON(){
+document.getElementById("content").innerHTML=`
+<div class="grid">
+<div class="card"><div class="card-header">🐻 곰</div>
+<div class="time-box"><div class="time">곰 1 - 22:20</div><div class="utc">(UTC 13:20)</div></div>
+<div class="time-box"><div class="time">곰 2 - 00:05</div><div class="utc">(UTC 15:05)</div></div>
+</div>
+
+<div class="card"><div class="card-header">⚙ 무공</div>
+<div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+<div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+</div>
+
+<div class="card"><div class="card-header">🏔 협곡</div>
+<div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+<div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+</div>
+
+<div class="card"><div class="card-header">🎉 조이</div>
+<div class="time-box"><div class="time">21:00</div><div class="utc">(UTC 12:00)</div></div>
+</div>
+</div>`;
+}
 </script>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
