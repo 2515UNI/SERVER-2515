@@ -78,8 +78,6 @@ canvas {
   border-radius:20px;
   border:2px solid #000;
   background:#fff;
-
-  /* ⭐ 줄바꿈 개선 */
   word-break:keep-all;
   line-break:strict;
 }
@@ -88,8 +86,6 @@ canvas {
   font-size:17px;
   line-height:1.8;
   font-weight:700;
-
-  /* ⭐ 줄바꿈 핵심 */
   word-break:keep-all;
   overflow-wrap:break-word;
 }
@@ -132,6 +128,49 @@ canvas {
 
 /* 하단 */
 .footer{text-align:center;margin:60px 0 30px;font-size:14px;color:#777;}
+
+/* 🔥 팝업 */
+#popup {
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.8);
+  z-index:9999;
+}
+
+.popup-content {
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%, -50%);
+  width:95%;
+  max-width:900px;
+  height:80%;
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+.popup-header {
+  text-align:right;
+  padding:10px;
+  background:#f1f1f1;
+}
+
+.close-btn {
+  background:none;
+  border:none;
+  font-size:20px;
+  cursor:pointer;
+}
+
+iframe {
+  flex:1;
+  width:100%;
+  border:none;
+}
 </style>
 </head>
 
@@ -147,6 +186,7 @@ canvas {
 
 <div class="menu">
   <div class="btn" onclick="goLink()">💬 이민 문의</div>
+  <div class="btn" onclick="openForm()">📋 이민 신청</div>
   <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">🛡 UNI 연맹</div>
   <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON 연맹</div>
 </div>
@@ -229,9 +269,28 @@ canvas {
 
 <div class="footer">Made by 우짱</div>
 
+<!-- 🔥 구글폼 팝업 -->
+<div id="popup">
+  <div class="popup-content">
+    <div class="popup-header">
+      <button class="close-btn" onclick="closeForm()">❌</button>
+    </div>
+
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSewbQiBZ_FCCYRGijla7nwDp7t_CiH7jcaFhvneQHoEDqfm8Q/viewform?embedded=true"></iframe>
+  </div>
+</div>
+
 <script>
 function goLink(){
   window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
+}
+
+function openForm(){
+  document.getElementById("popup").style.display="block";
+}
+
+function closeForm(){
+  document.getElementById("popup").style.display="none";
 }
 
 function selectTeam(team){
