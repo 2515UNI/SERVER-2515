@@ -50,7 +50,7 @@ canvas {
   flex-wrap:wrap;
 }
 .btn {
-  min-width:220px;
+  min-width:180px;
   padding:20px;
   border-radius:18px;
   font-size:20px;
@@ -129,6 +129,20 @@ canvas {
 /* 하단 */
 .footer{text-align:center;margin:60px 0 30px;font-size:14px;color:#777;}
 
+.hero-images{
+  width:95%;
+  max-width:1000px;
+  margin:20px auto;
+}
+.poster{
+  width:100%;
+  display:block;
+  margin:25px auto;
+  border-radius:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+
+
 /* 🔥 팝업 */
 #popup {
   display:none;
@@ -180,7 +194,7 @@ iframe {
 
 <div class="title">
   <div class="title-main">White Out Survival</div>
-  <div class="title-sub">S2515 UNI&WON</div>
+  <div class="title-sub">S2515 IMMIGRATION</div>
   <div class="title-line"></div>
 </div>
 
@@ -189,9 +203,28 @@ iframe {
   <div class="btn" onclick="openForm()">📋 이민 신청</div>
   <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">🛡 UNI 연맹</div>
   <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON 연맹</div>
+  <div class="btn" id="rokBtn" onclick="selectTeam('ROK')">🚩 ROK 연맹</div>
+</div>
+
+
+<div class="hero-images">
+
+<img src="img/2515모집중.png" class="poster">
+
+<img src="img/2515소개.png" class="poster">
+
+<div style="text-align:center;font-size:28px;font-weight:900;margin:30px auto;padding:20px;max-width:900px;border:2px solid #000;border-radius:20px;background:#fff;">
+🏆 서버전 15전 12승 · 🌙 달 2개 · ⭐ 별 1개
+</div>
+
+<img src="img/명예의길.png" class="poster">
+
+<img src="img/지심탐험.png" class="poster">
+
 </div>
 
 <div class="info-section" id="infoSection">
+
 
 <div class="info-card">
 <div class="info-title">💙모집 대상💙</div><br><br>
@@ -302,7 +335,8 @@ function selectTeam(team){
   document.getElementById("content").innerHTML="";
 
   if(team==="UNI") renderUNI();
-  else renderWON();
+  else if(team==="WON") renderWON();
+  else if(team==="ROK") renderROK();
 }
 
 function renderUNI(){
