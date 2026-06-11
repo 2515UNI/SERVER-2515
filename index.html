@@ -186,6 +186,30 @@ iframe {
   width:100%;
   border:none;
 }
+
+.achievement-tabs{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+margin:25px 0;
+}
+.achievement-card{
+width:180px;
+padding:20px;
+border-radius:18px;
+border:2px solid #000;
+background:#fff;
+font-weight:900;
+cursor:pointer;
+transition:.2s;
+text-align:center;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+.achievement-card:hover{
+transform:translateY(-4px);
+}
+
 </style>
 </head>
 
@@ -208,23 +232,38 @@ iframe {
 </div>
 
 
+
 <div class="hero-images">
 
 <img src="img/2515모집중.png" class="poster">
 
-<img src="img/2515소개.png" class="poster">
-
-<div style="text-align:center;font-size:28px;font-weight:900;margin:30px auto;padding:20px;max-width:900px;border:2px solid #000;border-radius:20px;background:#fff;">
+<div style="text-align:center;font-size:24px;font-weight:900;margin:25px auto;padding:15px;max-width:600px;border:2px solid #000;border-radius:15px;background:#fff;">
 🏆 서버전 15전 12승 · 🌙 달 2개 · ⭐ 별 1개
 </div>
 
-<img src="img/명예의길.png" class="poster">
+<h2 style="text-align:center;margin-top:40px;">🏆 S2515 성과</h2>
 
-<img src="img/지심탐험.png" class="poster">
+<div class="achievement-tabs">
+  <div class="achievement-card" onclick="showAchievement('honor')">
+    🏆<br>명예의길
+  </div>
+  <div class="achievement-card" onclick="showAchievement('frost')">
+    ❄<br>서리병기 4위
+  </div>
+  <div class="achievement-card" onclick="showAchievement('explore')">
+    🔥<br>지심탐험
+  </div>
+</div>
+
+<div id="achievementContent" style="text-align:center;"></div>
+
+<h2 style="text-align:center;margin-top:50px;">📋 S2515 소개</h2>
+<img src="img/2515소개.png" class="poster">
 
 </div>
 
 <div class="info-section" id="infoSection">
+ id="infoSection">
 
 
 <div class="info-card">
@@ -441,6 +480,16 @@ if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
 requestAnimationFrame(draw);
 }
 draw();
+
+function showAchievement(type){
+ let img='';
+ if(type==='honor') img='img/명예의길.png';
+ if(type==='frost') img='img/서리병기4위.png';
+ if(type==='explore') img='img/지심탐험.png';
+ document.getElementById('achievementContent').innerHTML =
+ '<img src="'+img+'" class="poster">';
+}
+
 </script>
 
 </body>
