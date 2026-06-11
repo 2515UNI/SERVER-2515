@@ -226,6 +226,11 @@ transform:translateY(-4px);
 <div class="menu">
   <div class="btn" onclick="goLink()">💬 이민 문의</div>
   <div class="btn" onclick="openForm()">📋 이민 신청</div>
+  <div class="btn" onclick="showRecruit()">📋 모집정보</div>
+  <div class="btn" onclick="showAchievementMenu()">🏆 성과</div>
+</div>
+
+<div class="menu">
   <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">🛡 UNI 연맹</div>
   <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON 연맹</div>
   <div class="btn" id="rokBtn" onclick="selectTeam('ROK')">🚩 ROK 연맹</div>
@@ -233,36 +238,25 @@ transform:translateY(-4px);
 
 
 
-<div class="hero-images">
-
-<img src="img/2515모집중.png" class="poster">
 
 <div style="text-align:center;font-size:24px;font-weight:900;margin:25px auto;padding:15px;max-width:600px;border:2px solid #000;border-radius:15px;background:#fff;">
 🏆 서버전 15전 12승 · 🌙 달 2개 · ⭐ 별 1개
 </div>
 
-<h2 style="text-align:center;margin-top:40px;">🏆 S2515 성과</h2>
+<div id="mainView" style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;width:95%;margin:30px auto;">
+<img src="img/2515모집중.png" class="poster" style="width:45%;min-width:300px;">
+<img src="img/2515소개.png" class="poster" style="width:45%;min-width:300px;">
+</div>
 
+<div id="achievementMenuArea" style="display:none;text-align:center;">
 <div class="achievement-tabs">
-  <div class="achievement-card" onclick="showAchievement('honor')">
-    🏆<br>명예의길
-  </div>
-  <div class="achievement-card" onclick="showAchievement('frost')">
-    ❄<br>서리병기 4위
-  </div>
-  <div class="achievement-card" onclick="showAchievement('explore')">
-    🔥<br>지심탐험
-  </div>
+<div class="achievement-card" onclick="showAchievement('honor')">🏆<br>명예의길</div>
+<div class="achievement-card" onclick="showAchievement('frost')">❄<br>서리병기 4위</div>
+<div class="achievement-card" onclick="showAchievement('explore')">🔥<br>지심탐험</div>
 </div>
-
-<div id="achievementContent" style="text-align:center;"></div>
-
-<h2 style="text-align:center;margin-top:50px;">📋 S2515 소개</h2>
-<img src="img/2515소개.png" class="poster">
-
+<div id="achievementContent"></div>
 </div>
-
-<div class="info-section" id="infoSection">
+<div class="info-section" id="infoSection" style="display:none">
  id="infoSection">
 
 
@@ -480,6 +474,23 @@ if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
 requestAnimationFrame(draw);
 }
 draw();
+
+
+function hideMain(){
+ document.getElementById('mainView').style.display='none';
+}
+function showRecruit(){
+ hideMain();
+ document.getElementById('achievementMenuArea').style.display='none';
+ document.getElementById('content').innerHTML='';
+ document.getElementById('infoSection').style.display='grid';
+}
+function showAchievementMenu(){
+ hideMain();
+ document.getElementById('infoSection').style.display='none';
+ document.getElementById('achievementMenuArea').style.display='block';
+ document.getElementById('content').innerHTML='';
+}
 
 function showAchievement(type){
  let img='';
