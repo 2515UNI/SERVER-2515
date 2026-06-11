@@ -353,6 +353,31 @@ document.getElementById("content").innerHTML=`
 </div>`;
 }
 
+function renderROK(){
+document.getElementById("content").innerHTML=`
+<div class="grid">
+<div class="card"><div class="card-header">🐻 곰</div>
+<div class="time-box"><div class="time">곰 1 - 21:30</div><div class="utc">(UTC 12:30)</div></div>
+<div class="time-box"><div class="time">곰 2 - 22:30</div><div class="utc">(UTC 13:30)</div></div>
+</div>
+
+<div class="card"><div class="card-header">⚙ 무공</div>
+<div class="time-box"><div class="time">1군(참여도 순) - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+<div class="time-box"><div class="time">2군(참여도 순) - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+</div>
+
+<div class="card"><div class="card-header">🏔 협곡</div>
+<div class="time-box"><div class="time">1군(참여도 순) - 21:00</div><div class="utc">(UTC 12:00)</div></div>
+<div class="time-box"><div class="time">2군(참여도 순) - 23:00</div><div class="utc">(UTC 14:00)</div></div>
+</div>
+
+<div class="card"><div class="card-header">🎉 조이</div>
+<div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 12:00)</div></div>
+</div>
+</div>`;
+}  
+
+
 /* 눈꽃 */
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
