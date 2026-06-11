@@ -223,7 +223,7 @@ transform:translateY(-4px);
   <div class="title-line"></div>
 </div>
 <div style="text-align:center;font-size:24px;font-weight:900;margin:25px auto;padding:15px;max-width:600px;border:2px solid #000;border-radius:15px;background:#fff;">
-🏆 서버전 15전 12승 · 🌙 달 2개 · ⭐ 별 1개
+🏆 서버전 15전 12승<br>🌙 달 2개 · ⭐ 별 1개
 </div>
 
 <div class="menu">
@@ -366,6 +366,7 @@ function closeForm(){
 function selectTeam(team){
   document.getElementById("infoSection").style.display="none";
   document.getElementById("content").innerHTML="";
+  document.getElementById('achievementMenuArea').style.display='none';
 
   if(team==="UNI") renderUNI();
   else if(team==="WON") renderWON();
@@ -458,7 +459,7 @@ window.addEventListener("resize",resizeCanvas);
 
 let flakes=[];
 for(let i=0;i<60;i++){
-flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*8+5,speed:Math.random()*1});
+flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*10+8,speed:Math.random()*1});
 }
 
 function draw(){
@@ -494,7 +495,7 @@ function showAchievementMenu(){
 function showAchievement(type){
  let img='';
  if(type==='honor') img='img/명예의길.png';
- if(type==='frost') img='img/서리병기4위.png';
+ if(type==='frost') img='img/서리병기 4위.png';
  if(type==='explore') img='img/지심탐험.png';
  document.getElementById('achievementContent').innerHTML =
  '<img src="'+img+'" class="poster">';
