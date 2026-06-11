@@ -24,7 +24,7 @@ canvas {
   position:fixed;
   top:0;
   left:0;
-  z-index:-1;
+  z-index:1;
   pointer-events:none;
 }
 
@@ -37,8 +37,8 @@ canvas {
   text-shadow:2px 2px 8px rgba(0,0,0,0.35);
   display:inline-block;
 }
-.title-main {font-size:48px;}
-.title-sub {font-size:90px;transform:skewX(-5deg);}
+.title-main {font-size:38px;}
+.title-sub {font-size:70px;transform:skewX(-5deg);}
 .title-line{width:120px;height:3px;margin:20px auto;background:#ccc;}
 
 /* 메뉴 */
@@ -222,12 +222,15 @@ transform:translateY(-4px);
   <div class="title-sub">S2515 IMMIGRATION</div>
   <div class="title-line"></div>
 </div>
+<div style="text-align:center;font-size:24px;font-weight:900;margin:25px auto;padding:15px;max-width:600px;border:2px solid #000;border-radius:15px;background:#fff;">
+🏆 서버전 15전 12승 · 🌙 달 2개 · ⭐ 별 1개
+</div>
 
 <div class="menu">
   <div class="btn" onclick="goLink()">💬 이민 문의</div>
   <div class="btn" onclick="openForm()">📋 이민 신청</div>
   <div class="btn" onclick="showRecruit()">📋 모집정보</div>
-  <div class="btn" onclick="showAchievementMenu()">🏆 성과</div>
+  <div class="btn" onclick="showAchievementMenu()">🏆 2515 성과</div>
 </div>
 
 <div class="menu">
@@ -239,9 +242,7 @@ transform:translateY(-4px);
 
 
 
-<div style="text-align:center;font-size:24px;font-weight:900;margin:25px auto;padding:15px;max-width:600px;border:2px solid #000;border-radius:15px;background:#fff;">
-🏆 서버전 15전 12승 · 🌙 달 2개 · ⭐ 별 1개
-</div>
+
 
 <div id="mainView" style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;width:95%;margin:30px auto;">
 <img src="img/2515모집중.png" class="poster" style="width:45%;min-width:300px;">
