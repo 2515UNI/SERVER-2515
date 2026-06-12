@@ -134,7 +134,7 @@ canvas {
   max-width:1000px;
   margin:20px auto;
 }
-.poster{width:48%;max-width:none;display:block;margin:0;}
+.poster{width:42%;max-width:600px;display:block;margin:0;}
 
 /* 🔥 팝업 */
 #popup {
@@ -215,7 +215,8 @@ transform:translateY(-4px);
 .menu-grid-small{width:95%;max-width:900px;margin:15px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
 .menu-grid .btn,.menu-grid-small .btn{min-width:auto;}
 @media(max-width:700px){.menu-grid{grid-template-columns:repeat(2,1fr);} .hero-title{font-size:48px;}}
-
+@media(max-width:768px){#mainView{flex-direction:column;align-items:center}.poster{width:95%;max-width:500px}}
+  
 </style>
 </head>
 
@@ -262,7 +263,7 @@ transform:translateY(-4px);
 
 
 
-<div id="mainView" style="display:flex;justify-content:center;gap:10px;flex-wrap:nowrap;width:95%;margin:30px auto;">
+<div id="mainView" style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;width:95%;margin:30px auto;">
 <img src="img/2515모집중.png" class="poster" style="width:48%;">
 <img src="img/2515소개.png" class="poster" style="width:48%;">
 </div>
