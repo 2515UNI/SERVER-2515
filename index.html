@@ -210,6 +210,20 @@ box-shadow:0 4px 12px rgba(0,0,0,.08);
 transform:translateY(-4px);
 }
 
+
+.hero{text-align:center;padding:30px 20px;}
+.hero-top{font-size:22px;font-weight:900;color:#fff;-webkit-text-stroke:2px #000;}
+.hero-title{font-size:72px;font-weight:900;font-style:italic;color:#fff;-webkit-text-stroke:2px #333;}
+.hero-sub{font-size:20px;font-weight:800;margin-top:15px;}
+.hero-tags{margin-top:10px;color:#555;}
+.hero-record{width:300px;margin:25px auto;background:#fff;border-radius:20px;padding:20px;box-shadow:0 5px 20px rgba(0,0,0,.12);}
+.record-title{font-weight:900;color:#4f6485;}
+.record-main{font-size:42px;font-weight:900;}
+.menu-row{display:flex;justify-content:center;gap:15px;margin-bottom:15px;flex-wrap:wrap}.menu-row-center{justify-content:center}.menu-row .btn{width:180px}
+.menu-grid-small{width:95%;max-width:900px;margin:15px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
+.menu-grid .btn,.menu-grid-small .btn{min-width:auto;}
+@media(max-width:700px){.menu-grid{grid-template-columns:repeat(2,1fr);} .hero-title{font-size:48px;}}
+
 </style>
 </head>
 
@@ -217,27 +231,39 @@ transform:translateY(-4px);
 
 <canvas id="snow"></canvas>
 
-<div class="title">
-  <div class="title-main">White Out Survival</div>
-  <div class="title-sub">S2515 IMMIGRATION</div>
+
+<div class="hero">
+  <div class="hero-top">White Out Survival</div>
+  <div class="hero-title">S2515 IMMIGRATION</div>
   <div class="title-line"></div>
-</div>
-<div style="text-align:center;font-size:24px;font-weight:900;margin:25px auto;padding:15px;max-width:600px;border:2px solid #000;border-radius:15px;background:#fff;">
-🏆 서버전 15전 12승<br>🌙 달 2개 · ⭐ 별 1개
+  <div class="hero-sub">Fight Together. Grow Together.</div>
+  <div class="hero-tags">🔥 단체이민 적극 환영 · 💙 안정적인 정착 지원 · ⚔ 서버전 적극 참여</div>
+  <div class="hero-record">
+    <div class="record-title">SERVER WAR</div>
+    <div class="record-main">15전 12승</div>
+    <div class="record-star">🌙🌙⭐</div>
+  </div>
 </div>
 
-<div class="menu">
+
+
+<div class="menu-row">
   <div class="btn" onclick="goLink()">💬 이민 문의</div>
   <div class="btn" onclick="openForm()">📋 이민 신청</div>
   <div class="btn" onclick="showRecruit()">📋 모집정보</div>
-  <div class="btn" onclick="showAchievementMenu()">🏆 2515 성과</div>
 </div>
 
-<div class="menu">
-  <div class="btn" id="uniBtn" onclick="selectTeam('UNI')">🛡 UNI 연맹</div>
-  <div class="btn" id="wonBtn" onclick="selectTeam('WON')">⚔ WON 연맹</div>
-  <div class="btn" id="rokBtn" onclick="selectTeam('ROK')">🚩 ROK 연맹</div>
+<div class="menu-row menu-row-center">
+  <div class="btn" onclick="showAchievementMenu()">🏆 2515 성과</div>
+  <div class="btn" onclick="toggleAlliance()">🛡 연맹정보</div>
 </div>
+
+<div id="allianceMenu" class="menu-grid-small" style="display:none;">
+  <div class="btn" onclick="selectTeam('UNI')">🛡 UNI</div>
+  <div class="btn" onclick="selectTeam('WON')">⚔ WON</div>
+  <div class="btn" onclick="selectTeam('ROK')">🚩 ROK</div>
+</div>
+
 
 
 
@@ -351,7 +377,18 @@ transform:translateY(-4px);
 </div>
 
 <script>
+
+function toggleAlliance(){
+ const menu=document.getElementById('allianceMenu');
+ document.getElementById('infoSection').style.display='none';
+ document.getElementById('achievementMenuArea').style.display='none';
+ document.getElementById('content').innerHTML='';
+ document.getElementById('mainView').style.display='none';
+ menu.style.display=(menu.style.display==='grid')?'none':'grid';
+}
+
 function goLink(){
+
   window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
 }
 
@@ -479,13 +516,13 @@ draw();
 function hideMain(){
  document.getElementById('mainView').style.display='none';
 }
-function showRecruit(){
+function showRecruit(){document.getElementById('allianceMenu').style.display='none';
  hideMain();
  document.getElementById('achievementMenuArea').style.display='none';
  document.getElementById('content').innerHTML='';
  document.getElementById('infoSection').style.display='grid';
 }
-function showAchievementMenu(){
+function showAchievementMenu(){document.getElementById('allianceMenu').style.display='none';
  hideMain();
  document.getElementById('infoSection').style.display='none';
  document.getElementById('achievementMenuArea').style.display='block';
