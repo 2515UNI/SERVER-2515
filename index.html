@@ -208,7 +208,7 @@ transform:translateY(-4px);
 .hero-top{font-size:32px;font-weight:900;color:#fff;-webkit-text-stroke:2px #000;}
 .hero-title{font-size:62px;font-weight:900;font-style:italic;color:#fff;-webkit-text-stroke:2px #333;}
 .hero-sub{font-size:20px;font-weight:800;margin-top:15px;}
-.hero-tags{margin-top:10px;color:#555;}
+.hero-tags{margin-top:10px;color:#555;font-size:22px;font-weight:700;}
 .hero-record{width:300px;margin:25px auto;background:#fff;border-radius:20px;padding:20px;box-shadow:0 5px 20px rgba(0,0,0,.12);}
 .record-title{font-weight:900;color:#4f6485;}
 .record-main{font-size:42px;font-weight:900;}
@@ -217,6 +217,11 @@ transform:translateY(-4px);
 .menu-grid .btn,.menu-grid-small .btn{min-width:auto;}
 @media(max-width:700px){.menu-grid{grid-template-columns:repeat(2,1fr);} .hero-title{font-size:48px;}}
 @media(max-width:768px){#mainView{flex-direction:column;align-items:center}.poster{width:98%;max-width:650px}}
+.hero-tags span{
+    display:block;
+    margin:8px 0;
+  }
+}
   
 </style>
 </head>
@@ -231,7 +236,11 @@ transform:translateY(-4px);
   <div class="hero-title">S2515 IMMIGRATION</div>
   <div class="title-line"></div>
   <div class="hero-sub">Fight Together. Grow Together.</div>
-  <div class="hero-tags">🔥 단체이민 적극 환영 · 💙 안정적인 정착 지원 · ⚔ 서버전 적극 참여</div>
+  <div class="hero-tags">
+  <span>🔥 단체이민 적극 환영</span>
+  <span>💙 안정적인 정착 지원</span>
+  <span>⚔ 서버전 적극 참여</span>
+</div>
   <div class="hero-record">
     <div class="record-title">SERVER WAR</div>
     <div class="record-main">15전 12승</div>
