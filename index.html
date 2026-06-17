@@ -228,279 +228,6 @@ transform:translateY(-4px);
 .menu-grid-small .btn{white-space:nowrap;}
   
 
-/* === V4.2 UI Polish === */
-.btn{
-  transition:all .30s ease!important;
-}
-.btn:hover{
-  background:linear-gradient(135deg,#5da8ff,#2f63c7)!important;
-  color:#fff!important;
-  transform:translateY(-3px);
-  box-shadow:0 12px 24px rgba(47,99,199,.30);
-}
-.btn.active{
-  background:linear-gradient(135deg,#2f63c7,#1f4f9c)!important;
-  color:#fff!important;
-  box-shadow:0 14px 28px rgba(31,79,156,.38);
-}
-.hero-record,.server,.server-box{
-  border-radius:18px!important;
-  box-shadow:0 12px 28px rgba(0,0,0,.12)!important;
-}
-.achievement-card,.alliance-card,.tile{
-  transition:all .28s ease!important;
-}
-.achievement-card:hover,.alliance-card:hover,.tile:hover{
-  transform:translateY(-4px) scale(1.02);
-  box-shadow:0 14px 28px rgba(0,0,0,.16);
-}
-
-
-/* ===== V4 Ultimate Polish ===== */
-.server,.hero-record,.server-box{
- background:linear-gradient(135deg,#1d4f9c,#3b82f6)!important;
- color:#fff!important;
- border:1px solid rgba(255,255,255,.18)!important;
- position:relative;
- overflow:hidden;
-}
-.server::before,.hero-record::before,.server-box::before{
- content:"👑 SERVER WAR";
- display:block;
- font-size:12px;
- letter-spacing:2px;
-  color:#fff;
-  text-shadow:0 2px 8px rgba(0,0,0,.35);
- opacity:.9;
- margin-bottom:8px;
-}
-.server::after,.hero-record::after,.server-box::after{
- content:"WIN RATE 80%";
- position:absolute;
- right:14px;
- top:12px;
- font-size:11px;
- background:rgba(255,255,255,.18);
- padding:5px 10px;
- border-radius:999px;
-}
-
-.poster,.poster-card{
- background:rgba(255,255,255,.16)!important;
- backdrop-filter:blur(14px);
- -webkit-backdrop-filter:blur(14px);
- border:1px solid rgba(255,255,255,.28);
- box-shadow:0 18px 38px rgba(0,0,0,.18);
-}
-
-.achievement-card,.alliance-card,.tile{
- border-radius:18px!important;
- border:1px solid #dce6f6!important;
- background:linear-gradient(180deg,#ffffff,#f5f9ff)!important;
- box-shadow:0 10px 24px rgba(0,0,0,.10)!important;
-}
-
-.fade-view{
- animation:fadeIn .35s ease;
-}
-@keyframes fadeIn{
- from{opacity:0;transform:translateY(10px)}
- to{opacity:1;transform:translateY(0)}
-}
-
-
-/* === V4.5 Premium Finish === */
-.server,.hero-record,.server-box{
-  border:2px solid #f4d35e!important;
-}
-.server .gauge,.hero-record .gauge{
- width:64px;height:64px;border-radius:50%;
- background:conic-gradient(#f4d35e 0 80%, rgba(255,255,255,.18) 80% 100%);
- display:flex;align-items:center;justify-content:center;
- margin:10px auto;
-}
-.server .gauge span,.hero-record .gauge span{
- width:48px;height:48px;border-radius:50%;
- background:#1d4f9c;color:#fff;font-size:12px;
- display:flex;align-items:center;justify-content:center;
-}
-
-.achievement-card,.tile{
- position:relative;overflow:hidden;
-}
-.achievement-card::before,.tile::before{
- content:"🏆";
- position:absolute;left:12px;top:10px;font-size:18px;opacity:.9;
-}
-.achievement-card::after,.tile::after{
- content:"";
- position:absolute;top:-40%;left:-120%;
- width:70%;height:180%;
- transform:rotate(25deg);
- background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
- transition:left .7s;
-}
-.achievement-card:hover::after,.tile:hover::after{left:170%;}
-
-.alliance-card.uni,[data-team="UNI"]{border-left:5px solid #2f63c7!important;}
-.alliance-card.won,[data-team="WON"]{border-left:5px solid #27ae60!important;}
-.alliance-card.rok,[data-team="ROK"]{border-left:5px solid #d35400!important;}
-
-.poster,.poster-card{
- position:relative;
- overflow:hidden;
- transition:transform .35s ease, box-shadow .35s ease;
-}
-.poster:hover,.poster-card:hover{
- transform:scale(1.03);
- box-shadow:0 24px 40px rgba(0,0,0,.22);
-}
-.poster::after,.poster-card::after{
- content:"";
- position:absolute;
- top:-120%;left:-40%;
- width:45%;height:320%;
- transform:rotate(25deg);
- background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);
- transition:left .8s;
-}
-.poster:hover::after,.poster-card:hover::after{left:150%;}
-
-@media(max-width:768px){
- .btn{padding:12px 10px!important;font-size:14px!important}
- .achievement-card,.alliance-card,.tile{margin:6px!important}
- .poster,.poster-card{margin-bottom:12px!important}
-}
-
-
-/* ===== V4.6 Premium Polish ===== */
-.server,.hero-record,.server-box{
-  background:linear-gradient(135deg,#234a8f,#356fd8)!important;
-  border:1px solid rgba(244,211,94,.8)!important;
-  box-shadow:0 18px 40px rgba(25,45,90,.28)!important;
-}
-.server::before,.hero-record::before,.server-box::before{
-  content:"👑 SERVER WAR ELITE";
-  font-size:13px;
-  font-weight:700;
-  letter-spacing:2px;
-}
-.server::after,.hero-record::after,.server-box::after{
-  content:"★ 15 Battles • 12 Wins";
-  background:linear-gradient(135deg,#f4d35e,#f8e08a);
-  color:#2d3b55;
-  font-weight:700;
-  border-radius:999px;
-}
-.gauge{display:none!important;}
-
-.btn,.achievement-card,.alliance-card,.tile,.poster,.poster-card{
-  box-shadow:0 12px 28px rgba(28,43,70,.12)!important;
-}
-.btn:hover,.achievement-card:hover,.alliance-card:hover,.tile:hover,.poster:hover,.poster-card:hover{
-  box-shadow:0 18px 36px rgba(28,43,70,.18)!important;
-}
-
-h1,h2,h3{
-  letter-spacing:.4px;
-}
-.server strong,.server b{
-  font-weight:800;
-}
-
-.fade-smooth{
-  animation:fadeSmooth .45s cubic-bezier(.22,.61,.36,1);
-}
-@keyframes fadeSmooth{
-  from{opacity:0;transform:translateY(14px) scale(.985)}
-  to{opacity:1;transform:translateY(0) scale(1)}
-}
-
-
-/* ==== V5 Premium Theme ==== */
-:root{
- --primary:#2f63c7;
- --primary2:#5ca8ff;
- --gold:#f4d35e;
- --panel:#ffffff;
- --shadow:0 14px 32px rgba(27,46,78,.14);
-}
-.server,.hero-record,.server-box{
- background:
- radial-gradient(circle at top right,rgba(255,255,255,.18),transparent 35%),
- linear-gradient(135deg,#204c96,#3f86ff)!important;
- border:2px solid var(--gold)!important;
- border-radius:22px!important;
- box-shadow:0 18px 40px rgba(22,42,78,.30)!important;
-}
-.server::before,.hero-record::before,.server-box::before{
- color:#fff!important;
- font-size:14px!important;
- font-weight:800;
- text-shadow:0 2px 10px rgba(0,0,0,.35);
-}
-.server::after,.hero-record::after,.server-box::after{
- background:linear-gradient(135deg,#ffe08a,#f4d35e)!important;
- color:#334!important;
- font-weight:800;
-}
-
-.achievement-card,.alliance-card,.tile{
- position:relative;
- border-radius:18px!important;
- background:linear-gradient(180deg,#fff,#f7faff)!important;
- box-shadow:var(--shadow)!important;
- overflow:hidden;
-}
-.achievement-card::before,.tile::before{
- content:"🏆";
- position:absolute;
- top:12px;left:14px;
- font-size:20px;
-}
-.alliance-card::before{
- content:"🛡";
- position:absolute;
- top:12px;left:14px;
- font-size:20px;
-}
-.achievement-card::after,.alliance-card::after,.tile::after{
- content:"";
- position:absolute;
- inset:0;
- background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);
- transform:translateX(-140%);
- transition:transform .8s ease;
- pointer-events:none;
-}
-.achievement-card:hover::after,.alliance-card:hover::after,.tile:hover::after{
- transform:translateX(140%);
-}
-
-.poster,.poster-card{
- border-radius:22px!important;
- overflow:hidden;
- transition:transform .35s ease, box-shadow .35s ease;
-}
-.poster:hover,.poster-card:hover{
- transform:translateY(-6px) scale(1.025);
- box-shadow:0 22px 44px rgba(0,0,0,.20)!important;
-}
-
-.btn{
- border-radius:14px!important;
-}
-
-@media (max-width:768px){
- body{padding:10px!important;}
- .menu-row,.menu-row-center{gap:8px!important;}
- .btn{padding:11px 10px!important;font-size:14px!important;}
- .server,.hero-record,.server-box{padding:14px!important;}
- .poster,.poster-card{margin-bottom:10px!important;}
- .achievement-card,.alliance-card,.tile{margin:5px!important;padding:14px!important;}
-}
-
-
 /* ===== V5 PREMIUM GAME UI ===== */
 .server,.hero-record,.server-box{
   position:relative;
@@ -768,6 +495,43 @@ box-shadow:0 10px 24px rgba(0,0,0,.15)!important;
 transform:translateY(-6px) scale(1.04)!important;
 }
 
+
+/* ===== PREMIUM IMMIGRATION UPGRADE ===== */
+body::before{
+ content:"";
+ position:fixed;
+ inset:0;
+ background:radial-gradient(circle at center, rgba(47,99,199,.08), transparent 45%);
+ pointer-events:none;
+ z-index:0;
+}
+.hero-title{
+ text-shadow:0 0 12px rgba(255,215,100,.55),0 0 30px rgba(255,215,100,.25),2px 2px 0 rgba(0,0,0,.25);
+}
+.record-badges{
+ margin-top:12px;
+ font-size:15px;
+ font-weight:800;
+ color:#ffe082;
+}
+.poster{
+ border:3px solid #f4d35e;
+ border-radius:18px;
+ box-shadow:0 16px 32px rgba(0,0,0,.18);
+}
+.btn{flex-direction:column;gap:4px;}
+.btn small{font-size:11px;opacity:.75;font-weight:700;}
+.achievement-card{
+ background:linear-gradient(180deg,#fff8d6,#fff1b3)!important;
+}
+@keyframes slideUp{
+ from{opacity:0;transform:translateY(20px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.info-card,.card,.achievement-card{
+ animation:slideUp .4s ease;
+}
+
 </style>
 </head>
 
@@ -787,21 +551,21 @@ transform:translateY(-6px) scale(1.04)!important;
   <span>⚔ 서버전 적극 참여</span>
 </div>
   <div class="hero-record">
-    <div class="record-title">👑 SERVER WAR ELITE</div><div class="record-main">15전 12승</div><div class="circular-gauge"><div class="circular-gauge-inner"><div style="font-size:28px">80%</div><div style="font-size:11px">WIN RATE</div></div></div><div class="record-star">🏆⚔️🏆</div>
+    <div class="record-title">👑 SERVER WAR ELITE</div><div class="record-main">15전 12승</div><div class="circular-gauge"><div class="circular-gauge-inner"><div style="font-size:28px">80%</div><div style="font-size:11px">WIN RATE</div></div></div><div class="record-star">🏆⚔️🏆</div><div class="record-badges">🏆 달 2개 · ⭐ 별 1개</div>
   </div>
 </div>
 
 
 
 <div class="menu-row">
-  <div class="btn" onclick="goLink()">💬 이민 문의</div>
-  <div class="btn" onclick="openForm()">📋 이민 신청</div>
-  <div class="btn" onclick="showRecruit()">📋 모집정보</div>
+  <div class="btn" onclick="goLink()">💬 이민 문의<small>OPEN CHAT</small></div>
+  <div class="btn" onclick="openForm()">📋 이민 신청<small>GOOGLE FORM</small></div>
+  <div class="btn" onclick="showRecruit()">📋 모집정보<small>SERVER INFO</small></div>
 </div>
 
 <div class="menu-row menu-row-center">
-  <div class="btn" onclick="showAchievementMenu()">🏆 2515 성과</div>
-  <div class="btn" onclick="toggleAlliance()">🛡 연맹정보</div>
+  <div class="btn" onclick="showAchievementMenu()">🏆 2515 성과<small>RECORD</small></div>
+  <div class="btn" onclick="toggleAlliance()">🛡 연맹정보<small>ALLIANCE</small></div>
 </div>
 
 <div id="allianceMenu" class="menu-grid-small" style="display:none;">
