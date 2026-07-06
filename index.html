@@ -6,560 +6,282 @@
 
 <title>White Out Survival S2515</title>
 
+<!-- 가독성 좋은 본문용 프리텐다드 & 웅장한 게임 감성용 Oswald 폰트 로드 -->
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
+/* ===== 1. 시네마틱 다크 레이아웃 & 리셋 ===== */
 html, body {
   margin:0;
   padding:0;
-  font-family:'Pretendard';
-  background:#fff;
-  color:#111;
+  font-family:'Pretendard', sans-serif;
+  background: radial-gradient(circle at center, #0d1f3d 0%, #050b14 100%);
+  color:#e2e8f0;
   overflow-x:hidden;
   height:auto;
   -webkit-overflow-scrolling: touch;
 }
-
 canvas {
   position:fixed;
-  top:0;
-  left:0;
+  top:0; left:0;
   z-index:1;
   pointer-events:none;
+  opacity: 0.85;
 }
 
-/* 타이틀 */
-.title {text-align:center;margin-top:60px;}
-.title-main, .title-sub {
-  font-weight:900;
-  color:#fff;
-  -webkit-text-stroke:2px #000;
-  text-shadow:2px 2px 8px rgba(0,0,0,0.35);
-  display:inline-block;
+/* ===== 2. 타이틀 및 히어로 섹션 (시네마틱 튜닝) ===== */
+.hero { text-align:center; padding:50px 20px; position:relative; z-index:2; }
+.hero-top { 
+  font-family: 'Oswald', sans-serif;
+  font-size:26px; 
+  font-weight:700; 
+  color:#93c5fd; 
+  letter-spacing: 4px;
+  text-shadow: 0 0 10px rgba(147,197,253,0.5);
 }
-.title-main {font-size:38px;}
-.title-sub {font-size:70px;transform:skewX(-5deg);}
-.title-line{width:120px;height:3px;margin:20px auto;background:#ccc;}
+.hero-title { 
+  font-family: 'Oswald', sans-serif;
+  font-size:68px; 
+  font-weight:700; 
+  font-style:italic; 
+  letter-spacing: 1px;
+  background: linear-gradient(180deg, #ffffff 30%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(165,180,252,0.4));
+}
+.title-line { width:80px; height:4px; margin:20px auto; background:linear-gradient(90deg, transparent, #f4d35e, transparent); }
+.hero-sub { font-size:22px; font-weight:700; color:#cbd5e1; letter-spacing: 1px; }
+.hero-tags { margin-top:20px; font-size:20px; font-weight:700; }
+.hero-tags span { display:inline-block; margin:5px 12px; background:rgba(255,255,255,0.05); padding:6px 16px; border-radius:50px; border:1px solid rgba(255,255,255,0.1); color:#94a3b8; }
 
-/* 메뉴 */
-.menu {
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  margin-top:40px;
-  flex-wrap:wrap;
-}
+/* ===== 3. 프리미엄 메뉴 및 버튼 UI ===== */
+.menu-row { display:flex; justify-content:center; gap:18px; margin-bottom:18px; flex-wrap:wrap; position:relative; z-index:2; }
+.menu-row-center { justify-content:center; }
+.menu-row .btn { width:190px; }
+.menu-grid-small { width:95%; max-width:900px; margin:15px auto; display:grid; grid-template-columns:repeat(3,1fr); gap:15px; position:relative; z-index:2; }
+.menu-grid-small .btn { white-space:nowrap; width:100%; min-width:auto; }
+
 .btn {
-  min-width:180px;
-  padding:20px;
-  border-radius:18px;
-  font-size:20px;
-  font-weight:900;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:1px solid rgba(0,0,0,0.1);
-  background:linear-gradient(180deg,#ffffff,#eef5ff);transition:.25s;box-shadow:0 6px 16px rgba(0,0,0,.08);
-}
-.btn.active{background:#2d5da8;color:#fff;box-shadow:0 10px 20px rgba(45,93,168,.35)}
-.btn:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(0,0,0,.16)}
-
-/* 정보 */
-.info-section {
-  width:95%;
-  max-width:1300px;
-  margin:40px auto;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:30px;
-}
-.info-card {
-  padding:30px;
-  border-radius:20px;
-  border:1px solid #d9e3ef;
-  background:#fff;
-  box-shadow:0 8px 20px rgba(0,0,0,.08);
-  word-break:keep-all;
-  line-break:strict;
-}
-.info-title {font-size:28px;font-weight:900;}
-.info-content {
-  font-size:17px;
-  line-height:1.8;
+  min-width:190px;
+  padding:18px;
+  border-radius:14px;
+  font-size:18px;
   font-weight:700;
-  word-break:keep-all;
-  overflow-wrap:break-word;
-}
-
-/* 이벤트 */
-.grid {
-  width:95%;
-  margin:40px auto;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
-}
-.card {
-  padding:25px;
-  border-radius:20px;
-  border:1px solid #d9e3ef;
-  background:#fff;
-  box-shadow:0 8px 20px rgba(0,0,0,.08);
-}
-.card-header {font-size:24px;font-weight:900;margin-bottom:15px;}
-.time-box {
-  border:1px solid #000;
-  border-radius:12px;
-  padding:12px;
-  margin-bottom:10px;
-  display:flex;
-  justify-content:space-between;
-}
-.time {font-size:20px;font-weight:900;}
-.utc {font-size:14px;color:#777;}
-
-/* 모바일 */
-@media(max-width:900px){
-  .grid{grid-template-columns:repeat(2,1fr);}
-  .info-section{grid-template-columns:1fr;}
-}
-@media(max-width:500px){
-  .grid{grid-template-columns:1fr;}
-  .title-sub{font-size:50px;}
-}
-
-/* 하단 */
-.footer{text-align:center;margin:60px 0 30px;font-size:14px;color:#777;}
-
-.hero-images{
-  width:95%;
-  max-width:1000px;
-  margin:20px auto;
-}
-.poster{width:40%;max-width:500px;display:block;margin:0;}
-.achievement-poster{width:55%;max-width:700px;display:block;margin:20px auto;}
-  
-/* 🔥 팝업 */
-#popup {
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.8);
-  z-index:9999;
-}
-
-.popup-content {
-  position:absolute;
-  top:50%; left:50%;
-  transform:translate(-50%, -50%);
-  width:95%;
-  max-width:900px;
-  height:80%;
-  background:#fff;
-  border-radius:12px;
-  overflow:hidden;
+  cursor:pointer;
   display:flex;
   flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  color: #fff;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
 }
+/* 버튼 호버 시 빛이 베고 지나가는 효과 */
+.btn::after {
+  content: ""; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: skewX(-20deg); transition: none;
+}
+.btn:hover::after { left: 150%; transition: all 0.6s ease; }
+.btn:hover {
+  transform: translateY(-4px);
+  border-color: #f4d35e !important;
+  box-shadow: 0 0 15px rgba(244, 211, 94, 0.4), 0 8px 24px rgba(0,0,0,0.4) !important;
+}
+.btn:active { transform: translateY(1px) !important; }
+.btn small { font-family: 'Oswald', sans-serif; font-size:11px; opacity:.6; letter-spacing: 1px; }
 
-.popup-header {
-  text-align:right;
-  padding:10px;
-  background:#f1f1f1;
-}
-
-.close-btn {
-  background:none;
-  border:none;
-  font-size:20px;
-  cursor:pointer;
-}
-
-iframe {
-  flex:1;
-  width:100%;
-  border:none;
-}
-
-.achievement-tabs{
-display:grid;
-grid-template-columns:repeat(2,minmax(180px,220px));
-justify-content:center;
-gap:15px;
-margin:25px 0;
-}
-.achievement-card{
-width:180px;
-padding:20px;
-border-radius:18px;
-border:2px solid #000;
-background:#fff;
-font-weight:900;
-cursor:pointer;
-transition:.2s;
-text-align:center;
-box-shadow:0 4px 12px rgba(0,0,0,.08);
-}
-.achievement-card:hover{
-transform:translateY(-4px);
-}
-
-.hero{text-align:center;padding:30px 20px;}
-.hero-top{font-size:32px;font-weight:900;color:#fff;-webkit-text-stroke:2px #000;}
-.hero-title{font-size:62px;font-weight:900;font-style:italic;color:#fff;-webkit-text-stroke:2px #333;}
-.hero-sub{font-size:24px;font-weight:700;}
-.hero-tags{margin-top:10px;color:#555;font-size:22px;font-weight:700;}
-.hero-record{width:300px;margin:25px auto;background:#fff;border-radius:20px;padding:20px;box-shadow:0 5px 20px rgba(0,0,0,.12);}
-.record-title{font-weight:900;color:#4f6485;}
-.record-main{font-size:42px;font-weight:900;}
-.menu-row{display:flex;justify-content:center;gap:15px;margin-bottom:15px;flex-wrap:wrap}.menu-row-center{justify-content:center}.menu-row .btn{width:180px}
-.menu-grid-small{width:95%;max-width:900px;margin:15px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
-.menu-grid .btn,.menu-grid-small .btn{min-width:auto;}
-@media(max-width:700px){.menu-grid{grid-template-columns:repeat(2,1fr);} .hero-title{font-size:48px;}}
-@media(max-width:768px){#mainView{flex-direction:column;align-items:center}.poster{width:98%;max-width:650px}}
-.hero-tags span{
-    display:block;
-    margin:8px 0;
-}
-.menu-grid-small .btn{white-space:nowrap;}
-  
-
-/* ===== V5 PREMIUM GAME UI ===== */
-.server,.hero-record,.server-box{
-  position:relative;
-  color:#fff!important;
-  border:3px solid #d9b65a!important;
-  background:
-    radial-gradient(circle at top left,rgba(255,255,255,.15),transparent 30%),
-    repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 8px,rgba(0,0,0,.03) 8px 16px),
-    linear-gradient(135deg,#204b92,#356fd8)!important;
-}
-.server::before,.hero-record::before,.server-box::before{
-  content:"👑 SERVER WAR ELITE";
-  color:#fff!important;
-  font-size:15px!important;
-  font-weight:900!important;
-  text-shadow:0 2px 8px rgba(0,0,0,.7),0 0 2px #000;
-}
-.server::after,.hero-record::after,.server-box::after{
-  content:"🏅 16 Battles • 13 Wins";
-  position: absolute;
-  right: 18px;
-  top: 16px;
-  font-size: 12px;
-  font-weight: 700;
-}
-.server .emblem,.hero-record .emblem,.server-box .emblem{
- position:absolute;
- left:18px;
- bottom:14px;
- width:56px;
- height:56px;
- border-radius:50%;
- background:radial-gradient(circle,#f9e7a0,#c79b2d);
- border:2px solid #fff3c2;
- display:flex;
- align-items:center;
- justify-content:center;
- font-size:28px;
- box-shadow:0 6px 18px rgba(0,0,0,.3);
-}
-
-.achievement-card,.alliance-card,.tile,.poster,.poster-card{
-  background-image:
-    radial-gradient(rgba(255,255,255,.22) 1px,transparent 1px),
-    linear-gradient(180deg,#fff,#f7faff)!important;
-  background-size:18px 18px,100% 100%;
-}
-
-.btn{
-  background:linear-gradient(#fafcff,#d9e7ff)!important;
-  border:1px solid #7ea6e8!important;
-  box-shadow:
-    inset 0 2px 0 rgba(255,255,255,.9),
-    0 6px 14px rgba(0,0,0,.15)!important;
-  font-weight:700;
-}
-.btn:hover{
-  background:linear-gradient(#6fb1ff,#2f63c7)!important;
-}
-.btn:active{
-  transform:translateY(2px)!important;
-  box-shadow:inset 0 3px 8px rgba(0,0,0,.25)!important;
-}
-
-/* ==== HOTFIX SERVER WAR ==== */
-.server,.hero-record,.server-box{position:relative!important;padding-top:54px!important;}
-.server::before,.hero-record::before,.server-box::before{
- content:"";
- position:absolute!important;
- left:22px!important;
- top:18px!important;
- z-index:5!important;
- color:#fff!important;
- font-size:16px!important;
- font-weight:900!important;
- text-shadow:0 2px 6px rgba(0,0,0,.8)!important;
-}
-.server h1,.server h2,.server h3,
-.hero-record h1,.hero-record h2,.hero-record h3,
-.server-box h1,.server-box h2,.server-box h3{
- margin-top:8px!important;
- color:#fff!important;
- text-align:center!important;
-}
-
-/* metal corners */
-.server .corner,.hero-record .corner,.server-box .corner{
- position:absolute;width:20px;height:20px;border:3px solid #f4d35e;
-}
-.corner.tl{left:8px;top:8px;border-right:none;border-bottom:none}
-.corner.tr{right:8px;top:8px;border-left:none;border-bottom:none}
-.corner.bl{left:8px;bottom:8px;border-right:none;border-top:none}
-.corner.br{right:8px;bottom:8px;border-left:none;border-top:none}
-
-/* glow */
-.server,.hero-record,.server-box,
-.achievement-card,.alliance-card,.tile{
- box-shadow:0 0 0 1px rgba(244,211,94,.35),0 0 18px rgba(244,211,94,.18),0 16px 34px rgba(0,0,0,.18)!important;
-}
-
-/* medal ribbon */
-.achievement-card{overflow:hidden}
-.achievement-card .ribbon{
- position:absolute;right:-34px;top:12px;
- transform:rotate(45deg);
- background:linear-gradient(135deg,#f7d774,#c7961d);
- color:#3b2a00;
- padding:4px 36px;
- font-size:11px;
- font-weight:800;
- box-shadow:0 2px 8px rgba(0,0,0,.2);
-}
-
-/* ===== V5 ULTIMATE GAME STYLE ===== */
-
-/* Server card */
-.server,.hero-record,.server-box{
-  position:relative;
+/* ===== 4. 신화 등급 게임 카드 테마 (Glow & Glassmorphism) ===== */
+.server, .hero-record, .server-box {
+  position:relative!important;
   overflow:hidden;
+  padding-top:54px!important;
+  color:#fff!important;
   border:2px solid #d8b04c!important;
-  border-radius:22px!important;
+  border-radius:24px!important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   background:
-    radial-gradient(circle at top right,rgba(255,255,255,.10),transparent 35%),
-    repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 8px,rgba(0,0,0,.03) 8px 16px),
-    linear-gradient(135deg,#234b93,#356fd8)!important;
+    radial-gradient(circle at top right, rgba(244,211,94,0.15), transparent 45%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0 8px, rgba(0,0,0,0.05) 8px 16px),
+    linear-gradient(135deg, rgba(21, 46, 91, 0.75), rgba(11, 25, 51, 0.9))!important;
+  box-shadow: 
+    0 0 25px rgba(216, 176, 76, 0.25), 
+    inset 0 0 20px rgba(255, 255, 255, 0.05),
+    0 20px 40px rgba(0,0,0,0.5)!important;
+}
+.server::before, .hero-record::before, .server-box::before {
+  content:"🛡"; position:absolute; right:15px; bottom:5px; font-size:130px; opacity:.04; color:#fff; pointer-events: none;
+}
+.server::after, .hero-record::after, .server-box::after {
+  content:"🏅 16 Battles • 13 Wins";
+  font-family: 'Oswald', sans-serif;
+  position:absolute!important; right:20px!important; top:18px!important; z-index:6!important;
+  font-size:12px; font-weight:700; color: #ffd54f; letter-spacing: 0.5px;
+}
+.server h1, .server h2, .server h3,
+.hero-record h1, .hero-record h2, .hero-record h3,
+.server-box h1, .server-box h2, .server-box h3 {
+  margin-top:8px!important; color:#fff!important; text-align:center!important;
 }
 
-/* Progress bar */
-.winrate-bar{
-  margin-top:12px;
-  height:12px;
-  border-radius:999px;
-  background:rgba(255,255,255,.18);
-  overflow:hidden;
+/* 장식 코너 테두리 디테일 */
+.corner { position:absolute; width:18px; height:18px; border:3px solid #f4d35e!important; opacity: 0.85; }
+.corner.tl { left:10px; top:10px; border-right:none; border-bottom:none; }
+.corner.tr { right:10px; top:10px; border-left:none; border-bottom:none; }
+.corner.bl { left:10px; bottom:10px; border-right:none; border-top:none; }
+.corner.br { right:10px; bottom:10px; border-left:none; border-top:none; }
+
+/* 대시보드 스펙 구역 */
+.hero-record { width:320px; margin:35px auto 15px; padding:24px; }
+.record-title { font-family: 'Oswald', sans-serif; font-weight:700; color:#f4d35e!important; letter-spacing: 1px; }
+.record-main { font-family: 'Oswald', sans-serif; font-size:46px; font-weight:700; margin: 5px 0; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+.record-badges { margin-top:12px; font-size:15px; font-weight:800; color:#ffe082; }
+
+/* 게이지 디자인 보완 */
+.winrate-bar { margin-top:15px; height:10px; border-radius:999px; background:rgba(255,255,255,0.1); overflow:hidden; border: 1px solid rgba(255,255,255,0.05); }
+.winrate-fill { width:81%; height:100%; border-radius:999px; background:linear-gradient(90deg, #ffe082, #f4c542); box-shadow:0 0 15px rgba(244,197,66,0.8); }
+
+.circular-gauge { width:135px; height:135px; margin:20px auto; border-radius:50%; background:conic-gradient(#ffd54f 0 81%, rgba(255,255,255,0.08) 81%); display:flex; align-items:center; justify-content:center; box-shadow: 0 0 15px rgba(255,213,79,0.2); }
+.circular-gauge-inner { width:105px; height:105px; border-radius:50%; background:#0f1d3a; color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.circular-gauge-inner div:first-child { font-family: 'Oswald', sans-serif; font-weight:700; }
+.circular-gauge-inner div:last-child { font-family: 'Oswald', sans-serif; opacity: 0.6; }
+
+/* ===== 5. 정보 요강 및 이벤트 일정 카드 (다크모드 스타일 튜닝) ===== */
+.info-section { width:95%; max-width:1300px; margin:40px auto; display:grid; grid-template-columns:1fr 1fr; gap:30px; position:relative; z-index:2; }
+.info-card {
+  padding:35px; border-radius:24px!important; border-top: 4px solid #f4d35e!important;
+  background: linear-gradient(180deg, #111c30 0%, #0b1220 100%)!important;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.4)!important; word-break:keep-all; line-break:strict; position:relative; overflow:hidden;
+  border: 1px solid rgba(255,255,255,0.05);
 }
-.winrate-fill{
-  width:80%;
-  height:100%;
-  border-radius:999px;
-  background:linear-gradient(90deg,#ffe082,#f4c542);
-  box-shadow:0 0 12px rgba(255,224,130,.6);
+.info-card:before { content:"📜"; position:absolute; right:20px; top:20px; font-size:46px; opacity:.05; }
+.info-title { color:#f4d35e!important; font-size:26px!important; font-weight:800; padding-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.1); text-align: center; }
+.info-content { font-size:16px; line-height:1.9; font-weight:600; color:#cbd5e1; }
+
+/* 연맹 스케줄 카드 */
+.grid { width:95%; max-width:1300px; margin:40px auto; display:grid; grid-template-columns:repeat(4,1fr); gap:20px; position:relative; z-index:2; }
+.card {
+  padding:25px; border-radius:20px!important; border:1px solid rgba(244,211,94,0.3)!important;
+  background: linear-gradient(135deg, #162238 0%, #0f1826 100%)!important;
+  box-shadow:0 15px 35px rgba(0,0,0,0.4)!important; color:#fff; position:relative; overflow:hidden;
+}
+/* 카드 내 흐르는 레이저 애니메이션 효과 */
+.card:before {
+  content:""; position:absolute; top:-50%; left:-120%; width:50%; height:200%; transform:rotate(25deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent); animation:cardshine 6s infinite;
+}
+@keyframes cardshine { 0%{left:-120%} 100%{left:180%} }
+
+.card-header { font-family: 'Oswald', sans-serif; font-size:26px!important; font-weight:700; color:#ffd54f; text-shadow:0 2px 6px rgba(0,0,0,0.3); text-align:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:12px; margin-bottom:15px; }
+.time-box { background:rgba(255,255,255,0.04)!important; border:1px solid rgba(255,255,255,0.08)!important; border-radius:12px; padding:12px 16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; }
+.time { font-size:18px; font-weight:800; color:#f8fafc; }
+.utc { font-family: 'Oswald', sans-serif; font-size:13px; color:#94a3b8!important; font-weight:500; }
+
+/* 성과 갤러리 탭 */
+.achievement-tabs { display:grid; grid-template-columns:repeat(4,1fr); justify-content:center; gap:15px; margin:35px auto; max-width:900px; position:relative; z-index:2; }
+.achievement-card {
+  padding:22px 10px; border-radius:16px; text-align:center; font-weight:800; cursor:pointer; transition:all 0.3s ease;
+  background:linear-gradient(180deg, #243554 0%, #17243c 100%)!important; border:1px solid rgba(244,211,94,0.4)!important;
+  color: #fff; box-shadow:0 10px 20px rgba(0,0,0,0.3)!important; overflow: hidden;
+}
+.achievement-card:hover { transform:translateY(-6px); border-color:#f4d35e!important; box-shadow: 0 0 15px rgba(244,211,94,0.4), 0 12px 24px rgba(0,0,0,0.4)!important; }
+.achievement-card .ribbon {
+  position:absolute; right:-33px; top:10px; transform:rotate(45deg);
+  background:linear-gradient(135deg,#f4d35e,#c7961d); color:#221500;
+  padding:2px 30px; font-size:10px; font-weight:900; box-shadow:0 2px 6px rgba(0,0,0,0.3);
 }
 
-/* Metal corners */
-.corner{
-  border-color:#f4d35e!important;
-}
+/* 이미지 연동 요소 */
+.hero-images { width:95%; max-width:1100px; margin:20px auto; position:relative; z-index:2; }
+.poster { width:48%; max-width:500px; border:2px solid rgba(244,211,94,0.5); border-radius:18px; box-shadow:0 20px 40px rgba(0,0,0,0.5); transition:all 0.3s; }
+.poster:hover { transform: scale(1.02); border-color: #f4d35e; box-shadow: 0 0 20px rgba(244,211,94,0.3); }
+.achievement-poster { width:55%; max-width:700px; border-radius:14px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
 
-/* Premium buttons */
-.btn{
-  background:linear-gradient(#fefefe,#dce8ff)!important;
-  border:1px solid #7da3df!important;
-  box-shadow:inset 0 2px 0 rgba(255,255,255,.9),0 8px 16px rgba(0,0,0,.15)!important;
-}
-.btn:hover{
-  transform:translateY(-2px);
-}
-.btn:active{
-  transform:translateY(2px);
-}
+/* ===== 6. 팝업 및 모달/유틸리티 ===== */
+#popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; backdrop-filter: blur(8px); }
+.popup-content { position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:95%; max-width:900px; height:80%; background:#1e293b; border-radius:20px; overflow:hidden; display:flex; flex-direction:column; border:1px solid rgba(255,255,255,0.1); }
+.popup-header { text-align:right; padding:12px; background:#111827; border-bottom:1px solid rgba(255,255,255,0.1); }
+.close-btn { background:none; border:none; font-size:22px; cursor:pointer; color:#fff; }
+iframe { flex:1; width:100%; border:none; background: #fff; }
+.footer { text-align:center; margin:80px 0 40px; font-size:14px; color:#475569; font-weight: 500; position:relative; z-index:2; }
 
-/* Card shine */
-.achievement-card,.alliance-card,.tile{
-  position:relative;
-}
-.achievement-card::after,.alliance-card::after,.tile::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);
-  transform:translateX(-150%);
-  transition:transform .8s;
-}
-.achievement-card:hover::after,.alliance-card:hover::after,.tile:hover::after{
-  transform:translateX(150%);
-}
+/* 부드러운 등장 애니메이션 */
+@keyframes slideUp { from{opacity:0;transform:translateY(25px)} to{opacity:1;transform:translateY(0)} }
+.info-card, .card, .achievement-card, #mainView { animation:slideUp 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
 
-.record-title{color:#fff!important}.hero-record{background:linear-gradient(135deg,#183a75,#2f63c7)!important;border:2px solid #f4d35e!important}.circular-gauge{width:140px;height:140px;margin:15px auto;border-radius:50%;background:conic-gradient(#ffd54f 0 80%,rgba(255,255,255,.12) 80%);display:flex;align-items:center;justify-content:center}.circular-gauge-inner{width:102px;height:102px;border-radius:50%;background:#244f9d;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900}
-/* PREMIUM EVENT CARDS */
-.card{
-background:
-radial-gradient(circle at top left, rgba(255,255,255,.15), transparent 30%),
-linear-gradient(135deg,#1d3f7a,#2f63c7)!important;
-border:2px solid #f4d35e!important;
-border-radius:22px!important;
-box-shadow:0 12px 28px rgba(0,0,0,.22)!important;
-color:#fff;
-position:relative;
-overflow:hidden;
+/* ===== 7. 완벽한 반응형 웹 ===== */
+@media(max-width:900px){
+  .grid { grid-template-columns:repeat(2,1fr); width:95%; }
+  .info-section { grid-template-columns:1fr; }
+  .achievement-tabs { grid-template-columns:repeat(2,1fr); width:95%; }
 }
-.card:before{
-content:"";
-position:absolute;
-top:-50%;
-left:-120%;
-width:60%;
-height:220%;
-transform:rotate(25deg);
-background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
-animation:cardshine 5s infinite;
+@media(max-width:768px){
+  .hero { padding:35px 15px; }
+  .hero-top { font-size:18px!important; letter-spacing: 2px; }
+  .hero-title { font-size:46px!important; }
+  .hero-sub { font-size:16px!important; }
+  .hero-tags span { font-size:14px; margin:4px 6px; padding:4px 12px; }
+  .hero-record { width:90%!important; max-width:340px; padding:20px; }
+  .menu-row { flex-direction:column; align-items:center; gap:12px; }
+  .menu-row .btn, .menu-grid-small .btn { width:100%!important; max-width:340px; }
+  .menu-grid-small { grid-template-columns:1fr!important; gap:10px; }
+  .poster { width:100%!important; max-width:340px!important; margin: 0 auto 15px !important; display:block; }
+  #mainView { flex-direction:column; align-items:center; gap: 0!important; }
+  .grid { grid-template-columns:1fr!important; gap:15px; }
+  .info-card, .card { padding:22px!important; }
+  .card-header { font-size:22px!important; }
+  .info-title { font-size:22px!important; }
+  .info-content { font-size:15px!important; line-height:1.8; }
+  .achievement-tabs { grid-template-columns:1fr!important; gap:12px; }
+  .achievement-card { width:100%!important; max-width:300px; margin:0 auto; padding:18px 10px; }
+  .achievement-poster { width:95%!important; max-width:100%!important; }
 }
-@keyframes cardshine{
-0%{left:-120%}
-100%{left:180%}
+@media(max-width:500px){
+  .hero-title { font-size:38px!important; }
 }
-.card-header{
-font-size:28px!important;
-color:#ffd54f;
-text-shadow:0 2px 8px rgba(0,0,0,.4);
-text-align:center;
-border-bottom:1px solid rgba(255,255,255,.15);
-padding-bottom:10px;
-}
-.time-box{
-background:rgba(255,255,255,.08)!important;
-border:1px solid rgba(255,255,255,.15)!important;
-color:#fff;
-}
-.utc{color:#d9e8ff!important}
-
-/* PREMIUM INFO BOX */
-.info-card{
-background:linear-gradient(180deg,#ffffff,#f7faff)!important;
-border-left:6px solid #f4d35e!important;
-border-radius:22px!important;
-box-shadow:0 12px 28px rgba(0,0,0,.12)!important;
-position:relative;
-}
-.info-card:before{
-content:"🛡";
-position:absolute;
-right:20px;
-top:15px;
-font-size:42px;
-opacity:.08;
-}
-.info-title{
-color:#234b93!important;
-font-size:30px!important;
-padding-bottom:12px;
-border-bottom:2px solid #e5eefc;
-}
-
-/* ACHIEVEMENT CARDS */
-.achievement-card{
-background:linear-gradient(180deg,#fffdf6,#fff3c8)!important;
-border:2px solid #d9b65a!important;
-box-shadow:0 10px 24px rgba(0,0,0,.15)!important;
-}
-.achievement-card:hover{
-transform:translateY(-6px) scale(1.04)!important;
-}
-
-/* ===== PREMIUM IMMIGRATION UPGRADE ===== */
-body::before{
- content:"";
- position:fixed;
- inset:0;
- background:radial-gradient(circle at center, rgba(47,99,199,.08), transparent 45%);
- pointer-events:none;
- z-index:0;
-}
-.hero-title{
- text-shadow:0 0 12px rgba(255,215,100,.55),0 0 30px rgba(255,215,100,.25),2px 2px 0 rgba(0,0,0,.25);
-}
-.record-badges{
- margin-top:12px;
- font-size:15px;
- font-weight:800;
- color:#ffe082;
-}
-.poster{
- border:3px solid #f4d35e;
- border-radius:18px;
- box-shadow:0 16px 32px rgba(0,0,0,.18);
-}
-.btn{flex-direction:column;gap:4px;}
-.btn small{font-size:11px;opacity:.75;font-weight:700;}
-.achievement-card{
- background:linear-gradient(180deg,#fff8d6,#fff1b3)!important;
-}
-@keyframes slideUp{
- from{opacity:0;transform:translateY(20px)}
- to{opacity:1;transform:translateY(0)}
-}
-.info-card,.card,.achievement-card{
- animation:slideUp .4s ease;
-}
-
-
-@media (max-width:768px){
-.hero{padding:20px 12px;}
-.hero-top{font-size:24px!important;}
-.hero-title{font-size:42px!important;}
-.hero-sub{font-size:18px!important;}
-.hero-tags{font-size:16px!important;}
-.hero-record{width:92%!important;max-width:340px;}
-.menu-row{flex-direction:column;align-items:center;}
-.menu-row .btn,.menu-grid-small .btn{width:100%!important;max-width:360px;}
-.menu-grid-small{grid-template-columns:1fr!important;}
-.poster{width:100%!important;max-width:100%!important;margin-bottom:15px;}
-.info-section,.grid{grid-template-columns:1fr!important;}
-.info-card,.card{padding:20px!important;}
-.card-header{font-size:22px!important;}
-.info-title{font-size:24px!important;}
-.info-content{font-size:15px!important;}
-.achievement-tabs{grid-template-columns:1fr!important;}
-.achievement-card{width:100%!important;max-width:320px;margin:0 auto;}
-}
-
-@media (max-width:768px){.achievement-poster{width:96%!important;max-width:100%!important;}}
-  
 </style>
 </head>
 
 <body>
 
+<!-- 눈꽃 애니메이션 캔버스 배경 -->
 <canvas id="snow"></canvas>
 
+<!-- 히어로 영역 -->
 <div class="hero">
-  <div class="hero-top">White Out Survival</div>
+  <div class="hero-top">WHITE OUT SURVIVAL</div>
   <div class="hero-title">S2515 IMMIGRATION</div>
   <div class="title-line"></div>
   <div class="hero-sub">Fight Together. Grow Together.</div>
   <div class="hero-tags">
-  <span>🔥 단체이민 적극 환영</span>
-  <span>💙 안정적인 정착 지원</span>
-  <span>⚔ 서버전 적극 참여</span>
-</div>
+    <span>🔥 단체이민 적극 환영</span>
+    <span>💙 안정적인 정착 지원</span>
+    <span>⚔️ 서버전 적극 참여</span>
+  </div>
+  
   <div class="hero-record">
-    <div class="record-title">👑 SERVER WAR ELITE</div><div class="record-main">16전 13승</div><div class="circular-gauge"><div class="circular-gauge-inner"><div style="font-size:28px">81%</div><div style="font-size:11px">WIN RATE</div></div></div><div class="record-star">🏆⚔️🏆</div><div class="record-badges">🏆 달 2개 · ⭐ 별 2개</div>
+    <div class="record-title">👑 SERVER WAR ELITE</div>
+    <div class="record-main">16전 13승</div>
+    <div class="circular-gauge">
+      <div class="circular-gauge-inner">
+        <div style="font-size:30px">81%</div>
+        <div style="font-size:11px; letter-spacing:1px;">WIN RATE</div>
+      </div>
+    </div>
+    <div class="record-star" style="font-size:18px; margin-bottom:5px;">🏆 ⚔️ 🏆</div>
+    <div class="record-badges">🏆 달 2개 · ⭐ 별 2개</div>
   </div>
 </div>
 
+<!-- 상단 네비게이션 대시보드 -->
 <div class="menu-row">
   <div class="btn" onclick="goLink()">💬 이민 문의<small>OPEN CHAT</small></div>
   <div class="btn" onclick="openForm()">📋 이민 신청<small>GOOGLE FORM</small></div>
@@ -571,124 +293,118 @@ body::before{
   <div class="btn" onclick="toggleAlliance()">🛡 연맹정보<small>ALLIANCE</small></div>
 </div>
 
+<!-- 하위 연맹 메뉴 슬라이드 -->
 <div id="allianceMenu" class="menu-grid-small" style="display:none;">
   <div class="btn" onclick="selectTeam('UNI')">🛡 UNI</div>
   <div class="btn" onclick="selectTeam('WON')">⚔ WON</div>
   <div class="btn" onclick="selectTeam('ROK')">🚩 ROK</div>
 </div>
 
-<div id="mainView" style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;width:95%;margin:30px auto;">
-<img src="img/2515모집중.png" class="poster" style="width:48%;">
-<img src="img/2515소개.png" class="poster" style="width:48%;">
+<!-- 메인 인트로 스크린 이미지 구역 -->
+<div id="mainView" style="display:flex;justify-content:center;gap:25px;flex-wrap:wrap;width:95%;margin:30px auto;">
+  <img src="img/2515모집중.png" class="poster">
+  <img src="img/2515소개.png" class="poster">
 </div>
 
+<!-- 성과 보기 구역 -->
 <div id="achievementMenuArea" style="display:none;text-align:center;">
-<div style="max-width:900px;margin:0 auto 20px;">
-<h2 style="color:#234b93;margin-bottom:8px;">🏆 2515 Achievement Hall</h2>
-<div style="color:#666;font-weight:600;">2515 서버의 주요 전적과 성과<br><small>Last Update : 2026.07.06</small></div>
+  <div style="max-width:900px;margin:0 auto 20px; padding:0 15px;">
+    <h2 style="color:#ffd54f; font-family:'Oswald',sans-serif; font-size:32px; margin-bottom:8px; letter-spacing:1px;">🏆 2515 ACHIEVEMENT HALL</h2>
+    <div style="color:#94a3b8; font-weight:600; font-size:15px;">2515 서버의 눈부신 주요 전적과 성과 기록 리스트<br><small style="color:#64748b;">Last Update : 2026.07.06</small></div>
+  </div>
+  <div class="achievement-tabs">
+    <div class="achievement-card" onclick="showAchievement('honor')">🏆<br>명예의길</div>
+    <div class="achievement-card" onclick="showAchievement('frost')">❄<br>서리병기 4위</div>
+    <div class="achievement-card" onclick="showAchievement('explore')">🔥<br>지심탐험</div>
+    <div class="achievement-card" onclick="showAchievement('dragon')">👑<br>드래곤 엠페러</div>
+  </div>
+  <div id="achievementContent" style="text-align:center; min-height:100px;"></div>
 </div>
-<div class="achievement-tabs">
-<div class="achievement-card" onclick="showAchievement('honor')">🏆<br>명예의길</div>
-<div class="achievement-card" onclick="showAchievement('frost')">❄<br>서리병기 4위</div>
-<div class="achievement-card" onclick="showAchievement('explore')">🔥<br>지심탐험</div>
-<div class="achievement-card" onclick="showAchievement('dragon')">👑<br>드래곤 엠페러</div>
-</div>
-<div id="achievementContent" style="text-align:center;"></div>
-</div>
+
+<!-- 모집 요강 인포메이션 카드 -->
 <div class="info-section" id="infoSection" style="display:none">
+  <div class="info-card">
+    <div class="info-title">💙 모집 대상 💙</div><br>
+    <div class="info-content">
+      · 개인 / 소규모 / 단체 이민 모두 환영합니다.<br>
+      · 7월 이민 마감 / 8월 이민 예상범위 2251~2680<br>
+      · 8월 단체이민 문의받습니다 / ROK연맹 단체이민 가능합니다.<br><br>
+        
+      · ROK / WON : 단체 인원 수용 가능(최소 20명 최대 50명~)<br>
+      · 뜻 맞는 분들과 함께 성장하실 분이라면 누구나 환영합니다:)<br><br>
+      
+      · 8월~9월 연계 단체 이민 예정이신 분들 (8월 특초 2장가능)<br>
+      · WON연맹 합병(20~30명) 적극 환영<br>
+      · 7월 신규연맹 ROK 합병(50명~) 단체 이동 적극 환영<br><br>
+        
+      <strong>💙 연맹 소개 💙</strong><br><br>
+      · WON : 행성 1명 / 유성 7명 보유 <br>
+      · UNI : 행성 5명 / 유성 5명 보유 <br>
+      · ROK : 행성 1명 / 유성 2명 보유 (7월 신규연맹) <br><br>
+      
+      <strong>💙 2515 서버, 이런 분들께 추천드립니다 💙</strong><br>
+      “평소에는 평화롭게, 전투와 전쟁 때는 확실하게.”<br><br>
+      · 한국어 소통이 편한 서버를 찾는 분<br>
+      · 단체 이민이 가능한 환경을 원하는 분<br>
+      · 서버전에 진심으로 참여하실 분<br>
+      · 초기 정착 지원이 필요한 분<br>
+      · 안정적인 연맹에서 플레이하고 싶은 분<br>
+      · 다국적 서버 환경을 선호하는 분 (인도네시아 / 대만 유저 활동)<br>
+      · 협력 중심 플레이를 즐기시는 분 (디스코드 및 오픈채팅 운영)
+    </div>
+  </div>
 
-<div class="info-card">
-<div class="info-title">💙모집 대상💙</div><br><br>
-<div class="info-content">
-
-· 개인 / 소규모 / 단체 이민 모두 환영합니다.<br>
-· 7월 이민 마감 / 8월 이민 예상범위 2251~2680<br>
-· 8월 단체이민 문의받습니다 / ROK연맹 단체이민 가능합니다.<br><br>
-  
-· ROK / WON : 단체 인원 수용 가능(최소 20명 최대 50명~)<br>
-· 뜻 맞는 분들과 함께 성장하실 분이라면 누구나 환영합니다:)<br><br>
-
-· 8월~9월 연계 단체 이민 예정이신 분들 (8월 특초 2장가능)<br>
-· WON연맹 합병(20~30명) 적극 환영<br>
-· 7월 신규연맹 ROK 합병(50명~) 단체 이동 적극 환영<br><br>
-  
-💙연맹 소개💙<br><br>
-
-· WON : 행성 1명 / 유성 7명 보유 <br>
-· UNI : 행성 5명 / 유성 5명 보유 <br>
-· ROK : 행성 1명 / 유성 2명 보유 (7월 신규연맹) <br><br>
-
-💙2515 서버, 이런 분들께 추천드립니다💙<br><br>
-
-“평소에는 평화롭게, 전투와 전쟁 때는 확실하게.”<br><br>
-
-· 한국어 소통이 편한 서버를 찾는 분<br>
-· 단체 이민이 가능한 환경을 원하는 분<br>
-· 서버전에 진심으로 참여하실 분<br>
-· 초기 정착 지원이 필요한 분<br>
-· 안정적인 연맹에서 플레이하고 싶은 분<br>
-· 다국적 서버 환경을 선호하는 분 (인도네시아 / 대만 유저 활동)<br>
-· 협력 중심 플레이를 즐기시는 분 (디스코드 및 오픈채팅 운영)
-
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-title">💙2515 서버에서 약속드릴 수 있는 부분💙</div><br><br>
-<div class="info-content">
-
-1. 엔센 12개 보장 (4레벨 포함)<br>
-· 4레벨 엔센 포함 총 12개 보장<br>
-· 단체 이민 시 최소 기반 없이 시작하지 않도록 안정적인 출발 지원<br><br>
-
-2. 요새 / 성채 분배<br>
-· 요새 4개 / 성채 1개 제공<br>
-· 초기 정착 이후 서버 안정화 시<br>
-· 기여도, 점수, 랭킹 기준으로 합리적 재분배 진행<br><br>
-
-3. 서버전 메인 참여 / 카랠 협력 운영<br>
-· 서버전에 진심으로 참여하는 구조<br>
-· 강성 서버와의 전투에서도 승리 경험 보유<br>
-· 전적 : 16전 13승 달 2개 별2개 (※별 1개는 타 연맹 보유)<br><br>
-
-4. 서리 / 드엠 협력 가능<br>
-· 연맹 간 협의를 통한 유동적 협력 운영<br>
-· 첫 서리 이벤트에서도 연합 운영 경험 보유<br>
-· 서리 서버 연합 단합으로 4강 진출 달성<br>
-· 드엠 서버 연합 체제로 출전해 연맹 1위 / 개인(2위/ 4위) 기록<br><br>
-  
-5. 연구 만렙 연맹 제공 가능<br>
-· 연구 만렙 빈 연맹 2개 보유<br>
-· WON 연맹(행성 1 / 유성 7)<br> 
-→ 합병 형태 참여 가능<br>
-→ 단체 이민 시 매우 유리한 선택지<br><br>
-
-6. 초기 정착 전폭 지원<br>
-· 깃발 / 센터 / 인원 부족 등 초기 문제 적극 지원<br>
-· 단체 이민 시 발생하는 정착 스트레스 최소화<br>
-· 안정적으로 자리 잡을 수 있도록 지속 지원
-
-</div>
+  <div class="info-card">
+    <div class="info-title">💙 2515 서버의 확실한 보장 💙</div><br>
+    <div class="info-content">
+      <strong>1. 엔센 12개 보장 (4레벨 포함)</strong><br>
+      · 4레벨 엔센 포함 총 12개 보장<br>
+      · 단체 이민 시 최소 기반 없이 시작하지 않도록 안정적인 출발 지원<br><br>
+      
+      <strong>2. 요새 / 성채 분배</strong><br>
+      · 요새 4개 / 성채 1개 제공<br>
+      · 초기 정착 이후 서버 안정화 시 기여도, 점수, 랭킹 기준으로 합리적 재분배 진행<br><br>
+      
+      <strong>3. 서버전 메인 참여 / 카랠 협력 운영</strong><br>
+      · 서버전에 진심으로 참여하는 구조<br>
+      · 강성 서버와의 전투에서도 승리 경험 보유<br>
+      · 전적 : 16전 13승 달 2개 별2개 (※별 1개는 타 연맹 보유)<br><br>
+      
+      <strong>4. 서리 / 드엠 협력 가능</strong><br>
+      · 연맹 간 협의를 통한 유동적 협력 운영<br>
+      · 첫 서리 이벤트에서도 연합 운영 경험 보유<br>
+      · 서리 서버 연합 단합으로 4강 진출 달성<br>
+      · 드엠 서버 연합 체제로 출전해 연맹 1위 / 개인(2위/ 4위) 기록<br><br>
+        
+      <strong>5. 연구 만렙 연맹 제공 가능</strong><br>
+      · 연구 만렙 빈 연맹 2개 보유<br>
+      · WON 연맹(행성 1 / 유성 7) 합병 형태 참여 가능 (단체 이민 시 매우 유리)<br><br>
+      
+      <strong>6. 초기 정착 전폭 지원</strong><br>
+      · 깃발 / 센터 / 인원 부족 등 초기 문제 적극 지원<br>
+      · 단체 이민 시 발생하는 정착 스트레스 최소화 및 안정적 안착 지원
+    </div>
+  </div>
 </div>
 
-</div>
-
+<!-- 연맹 세부 스케줄 동적 렌더링 존 -->
 <div id="content"></div>
 
-<div class="footer">Made by 우짱</div>
+<!-- 푸터 구역 -->
+<div class="footer">Made by 우짱 | White Out Survival Fan Site</div>
 
+<!-- 🔥 구글 설문지 팝업창 -->
 <div id="popup">
   <div class="popup-content">
     <div class="popup-header">
       <button class="close-btn" onclick="closeForm()">❌</button>
     </div>
-
     <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSewbQiBZ_FCCYRGijla7nwDp7t_CiH7jcaFhvneQHoEDqfm8Q/viewform?embedded=true"></iframe>
   </div>
 </div>
 
+<!-- ===== 스크립트 기능 구역 ===== -->
 <script>
-
 function toggleAlliance(){
  const menu=document.getElementById('allianceMenu');
  document.getElementById('infoSection').style.display='none';
@@ -699,7 +415,6 @@ function toggleAlliance(){
 }
 
 function goLink(){
-
   window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
 }
 
@@ -728,17 +443,14 @@ document.getElementById("content").innerHTML=`
 <div class="time-box"><div class="time">곰 1 - 20:30</div><div class="utc">(UTC 11:30)</div></div>
 <div class="time-box"><div class="time">곰 2 - 22:00</div><div class="utc">(UTC 13:00)</div></div>
 </div>
-
 <div class="card"><div class="card-header">⚙ 무공</div>
 <div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
 <div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
 </div>
-
 <div class="card"><div class="card-header">🏔 협곡</div>
 <div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
 <div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
 </div>
-
 <div class="card"><div class="card-header">🎉 조이</div>
 <div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
 </div>
@@ -752,17 +464,14 @@ document.getElementById("content").innerHTML=`
 <div class="time-box"><div class="time">곰 1 - 23:40</div><div class="utc">(UTC 14:40)</div></div>
 <div class="time-box"><div class="time">곰 2 - 22:20</div><div class="utc">(UTC 13:20)</div></div>
 </div>
-
 <div class="card"><div class="card-header">⚙ 무공</div>
 <div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
 <div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
 </div>
-
 <div class="card"><div class="card-header">🏔 협곡</div>
 <div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
 <div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
 </div>
-
 <div class="card"><div class="card-header">🎉 조이</div>
 <div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
 </div>
@@ -776,24 +485,21 @@ document.getElementById("content").innerHTML=`
 <div class="time-box"><div class="time">곰 1 - 21:30</div><div class="utc">(UTC 12:30)</div></div>
 <div class="time-box"><div class="time">곰 2 - 22:30</div><div class="utc">(UTC 13:30)</div></div>
 </div>
-
 <div class="card"><div class="card-header">⚙ 무공</div>
 <div class="time-box"><div class="time">1군(참여도 순) - 21:00</div><div class="utc">(UTC 12:00)</div></div>
 <div class="time-box"><div class="time">2군(참여도 순) - 23:00</div><div class="utc">(UTC 14:00)</div></div>
 </div>
-
 <div class="card"><div class="card-header">🏔 협곡</div>
 <div class="time-box"><div class="time">1군(참여도 순) - 21:00</div><div class="utc">(UTC 12:00)</div></div>
 <div class="time-box"><div class="time">2군(참여도 순) - 23:00</div><div class="utc">(UTC 14:00)</div></div>
 </div>
-
 <div class="card"><div class="card-header">🎉 조이</div>
 <div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 12:00)</div></div>
 </div>
 </div>`;
 }  
 
-/* 눈꽃 */
+/* 실시간 떨어지는 인터랙션 눈송이 이펙트 스크립트 */
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
 
@@ -805,15 +511,15 @@ resizeCanvas();
 window.addEventListener("resize",resizeCanvas);
 
 let flakes=[];
-for(let i=0;i<60;i++){
-flakes.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,size:Math.random()*10+8,speed:Math.random()*1});
+for(let i=0; i<45; i++){
+  flakes.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, size:Math.random()*7+6, speed:Math.random()*0.8+0.3});
 }
 
 function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 flakes.forEach(f=>{
 ctx.font=f.size+"px Arial";
-ctx.fillStyle="#6ec6ff";
+ctx.fillStyle="rgba(174, 219, 255, 0.5)";
 ctx.fillText("❄",f.x,f.y);
 f.y+=f.speed;
 if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
@@ -825,13 +531,15 @@ draw();
 function hideMain(){
  document.getElementById('mainView').style.display='none';
 }
-function showRecruit(){document.getElementById('allianceMenu').style.display='none';
+function showRecruit(){
+ document.getElementById('allianceMenu').style.display='none';
  hideMain();
  document.getElementById('achievementMenuArea').style.display='none';
  document.getElementById('content').innerHTML='';
  document.getElementById('infoSection').style.display='grid';
 }
-function showAchievementMenu(){document.getElementById('allianceMenu').style.display='none';
+function showAchievementMenu(){
+ document.getElementById('allianceMenu').style.display='none';
  hideMain();
  document.getElementById('infoSection').style.display='none';
  document.getElementById('achievementMenuArea').style.display='block';
@@ -846,41 +554,35 @@ function showAchievement(type){
 document.getElementById('achievementContent').innerHTML=`<div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;width:95%;margin:20px auto;">
 <img src="img/드래곤엠페러1.png" class="poster" style="width:48%;">
 <img src="img/드래곤엠페러2.png" class="poster" style="width:48%;">
-</div>`;return;}
+</div>`; 
+setTimeout(initLightbox, 100);
+return;
+}
  if(type==='explore') img='img/지심탐험.png';
- document.getElementById('achievementContent').innerHTML='<img src="'+img+'" class="achievement-poster" style="width:min(80vw,900px);max-width:96%;height:auto;display:block;margin:20px auto;">';
+ document.getElementById('achievementContent').innerHTML='<img src="'+img+'" class="achievement-poster" style="width:min(80vw,700px);max-width:95%;height:auto;display:block;margin:20px auto;">';
+ setTimeout(initLightbox, 100);
 }
-
 </script>
 
-<div id="imgModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9999;align-items:center;justify-content:center" onclick="this.style.display='none'">
-<img id="modalImage" style="max-width:92%;max-height:92%;border-radius:16px">
+<!-- 🔥 라이트박스 이미지 팝업용 모달 인프라 구조 -->
+<div id="imgModal" style="display:none;position:fixed;inset:0;background:rgba(3,7,18,0.9);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(8px);" onclick="this.style.display='none'">
+<img id="modalImage" style="max-width:92%;max-height:92%;border-radius:16px;box-shadow: 0 25px 50px rgba(0,0,0,0.7); border:1px solid rgba(255,255,255,0.15)">
 </div>
-<script>
-document.querySelectorAll('img').forEach(i=>{i.style.cursor='zoom-in';i.onclick=()=>{modalImage.src=i.src;imgModal.style.display='flex';};});
-</script>
 
 <script>
-function animateSection(id){
- const el=document.getElementById(id); if(!el) return;
- el.classList.remove('fade-smooth'); void el.offsetWidth; el.classList.add('fade-smooth');
+function initLightbox(){
+  document.querySelectorAll('img:not(#modalImage)').forEach(i=>{
+    i.style.cursor='zoom-in';
+    i.onclick=()=>{
+      modalImage.src=i.src;
+      imgModal.style.display='flex';
+    };
+  });
 }
-['showRecruit','showAchievementMenu','toggleAlliance','selectTeam'].forEach(fn=>{
- if(window[fn]){
-   const old=window[fn];
-   window[fn]=function(){const r=old.apply(this,arguments);['infoSection','achievementMenuArea','allianceMenu','content'].forEach(animateSection);return r;}
- }
-});
+document.addEventListener('DOMContentLoaded', initLightbox);
 </script>
 
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
- document.querySelectorAll('.achievement-card,.alliance-card,.tile,.poster,.poster-card').forEach(el=>{
-   el.addEventListener('mouseenter',()=>el.style.transition='all .3s ease');
- });
-});
-</script>
-
+<!-- 카드 가변 코너 모서리 장식 자동 빌더 -->
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
  document.querySelectorAll('.server,.hero-record,.server-box').forEach(card=>{
@@ -903,24 +605,13 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 </script>
 
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
- document.querySelectorAll('.server,.hero-record,.server-box').forEach(card=>{
-   if(!card.querySelector('.winrate-bar')){
-      const bar=document.createElement('div');
-      bar.className='winrate-bar';
-      bar.innerHTML='<div class="winrate-fill"></div>';
-      card.appendChild(bar);
-   }
- });
-});
-</script>
-
-
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;right:20px;bottom:20px;display:none;padding:12px 16px;border:none;border-radius:999px;background:#2d5da8;color:#fff;font-weight:700;cursor:pointer;z-index:9999;">▲ TOP</button>
+<!-- 부드러운 화면 최상단 원터치 스크롤업 트랙패드 -->
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;right:25px;bottom:25px;display:none;padding:14px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:999px;background:#1e3a8a;color:#fff;font-weight:700;cursor:pointer;z-index:9999;box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition:all 0.2s;">▲ TOP</button>
 <script>
 const topBtn=document.getElementById('topBtn');
-window.addEventListener('scroll',()=>{topBtn.style.display=window.scrollY>200?'block':'none';},{passive:true});
+window.addEventListener('scroll',()=>{topBtn.style.display=window.scrollY>250?'block':'none';},{passive:true});
+topBtn.addEventListener('mouseenter',()=>topBtn.style.background='#2563eb');
+topBtn.addEventListener('mouseleave',()=>topBtn.style.background='#1e3a8a');
 </script>
 
 </body>
