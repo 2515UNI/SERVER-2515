@@ -6,7 +6,6 @@
 
 <title>White Out Survival S2515</title>
 
-<!-- 가독성 좋은 본문용 프리텐다드 & 웅장한 게임 감성용 Oswald 폰트 로드 -->
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 
@@ -16,8 +15,8 @@ html, body {
   margin:0;
   padding:0;
   font-family:'Pretendard', sans-serif;
-  background: radial-gradient(circle at center, #0d1f3d 0%, #050b14 100%);
-  color:#e2e8f0;
+  background: radial-gradient(circle at center, #0d1f3d 0%, #050b14 100%) !important;
+  color:#e2e8f0 !important;
   overflow-x:hidden;
   height:auto;
   -webkit-overflow-scrolling: touch;
@@ -36,7 +35,7 @@ canvas {
   font-family: 'Oswald', sans-serif;
   font-size:26px; 
   font-weight:700; 
-  color:#93c5fd; 
+  color:#93c5fd !important; 
   letter-spacing: 4px;
   text-shadow: 0 0 10px rgba(147,197,253,0.5);
 }
@@ -50,17 +49,18 @@ canvas {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 15px rgba(165,180,252,0.4));
+  margin: 10px 0;
 }
 .title-line { width:80px; height:4px; margin:20px auto; background:linear-gradient(90deg, transparent, #f4d35e, transparent); }
-.hero-sub { font-size:22px; font-weight:700; color:#cbd5e1; letter-spacing: 1px; }
+.hero-sub { font-size:22px; font-weight:700; color:#cbd5e1 !important; letter-spacing: 1px; }
 .hero-tags { margin-top:20px; font-size:20px; font-weight:700; }
-.hero-tags span { display:inline-block; margin:5px 12px; background:rgba(255,255,255,0.05); padding:6px 16px; border-radius:50px; border:1px solid rgba(255,255,255,0.1); color:#94a3b8; }
+.hero-tags span { display:inline-block; margin:5px 12px; background:rgba(255,255,255,0.05); padding:6px 16px; border-radius:50px; border:1px solid rgba(255,255,255,0.1); color:#94a3b8 !important; }
 
 /* ===== 3. 프리미엄 메뉴 및 버튼 UI ===== */
-.menu-row { display:flex; justify-content:center; gap:18px; margin-bottom:18px; flex-wrap:wrap; position:relative; z-index:2; }
+.menu-row { display:flex; justify-content:center; gap:18px; margin-bottom:18px; flex-wrap:wrap; position:relative; z-index:3; }
 .menu-row-center { justify-content:center; }
 .menu-row .btn { width:190px; }
-.menu-grid-small { width:95%; max-width:900px; margin:15px auto; display:grid; grid-template-columns:repeat(3,1fr); gap:15px; position:relative; z-index:2; }
+.menu-grid-small { width:95%; max-width:900px; margin:15px auto; display:grid; grid-template-columns:repeat(3,1fr); gap:15px; position:relative; z-index:3; }
 .menu-grid-small .btn { white-space:nowrap; width:100%; min-width:auto; }
 
 .btn {
@@ -75,7 +75,7 @@ canvas {
   align-items:center;
   justify-content:center;
   gap:4px;
-  color: #fff;
+  color: #fff !important;
   background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
@@ -96,82 +96,73 @@ canvas {
   box-shadow: 0 0 15px rgba(244, 211, 94, 0.4), 0 8px 24px rgba(0,0,0,0.4) !important;
 }
 .btn:active { transform: translateY(1px) !important; }
-.btn small { font-family: 'Oswald', sans-serif; font-size:11px; opacity:.6; letter-spacing: 1px; }
+.btn small { font-family: 'Oswald', sans-serif; font-size:11px; opacity:.6; letter-spacing: 1px; color: #94a3b8 !important; }
 
-/* ===== 4. 신화 등급 게임 카드 테마 (Glow & Glassmorphism) ===== */
-.server, .hero-record, .server-box {
-  position:relative!important;
-  overflow:hidden;
-  padding-top:54px!important;
-  color:#fff!important;
-  border:2px solid #d8b04c!important;
-  border-radius:24px!important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background:
-    radial-gradient(circle at top right, rgba(244,211,94,0.15), transparent 45%),
-    repeating-linear-gradient(135deg, rgba(255,255,255,0.02) 0 8px, rgba(0,0,0,0.05) 8px 16px),
-    linear-gradient(135deg, rgba(21, 46, 91, 0.75), rgba(11, 25, 51, 0.9))!important;
+/* ===== 4. 신화 등급 게임 카드 테마 (Glow & Glassmorphism 강제 적용) ===== */
+.server, .hero-record, .server-box, .achievement-card, .card, .info-card {
+  display: block !important;
+  position:relative !important;
+  overflow:hidden !important;
+  box-sizing: border-box !important;
+}
+
+.hero-record {
+  width:320px !important; 
+  margin:35px auto 15px !important; 
+  padding:24px 20px 20px !important;
+  color:#fff !important;
+  border:2px solid #d8b04c !important;
+  border-radius:24px !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  background: linear-gradient(135deg, rgba(21, 46, 91, 0.85), rgba(11, 25, 51, 0.95)) !important;
   box-shadow: 
-    0 0 25px rgba(216, 176, 76, 0.25), 
+    0 0 25px rgba(216, 176, 76, 0.3), 
     inset 0 0 20px rgba(255, 255, 255, 0.05),
-    0 20px 40px rgba(0,0,0,0.5)!important;
-}
-.server::before, .hero-record::before, .server-box::before {
-  content:"🛡"; position:absolute; right:15px; bottom:5px; font-size:130px; opacity:.04; color:#fff; pointer-events: none;
-}
-.server::after, .hero-record::after, .server-box::after {
-  content:"🏅 16 Battles • 13 Wins";
-  font-family: 'Oswald', sans-serif;
-  position:absolute!important; right:20px!important; top:18px!important; z-index:6!important;
-  font-size:12px; font-weight:700; color: #ffd54f; letter-spacing: 0.5px;
-}
-.server h1, .server h2, .server h3,
-.hero-record h1, .hero-record h2, .hero-record h3,
-.server-box h1, .server-box h2, .server-box h3 {
-  margin-top:8px!important; color:#fff!important; text-align:center!important;
+    0 20px 40px rgba(0,0,0,0.6) !important;
+  z-index: 2;
 }
 
-/* 장식 코너 테두리 디테일 */
-.corner { position:absolute; width:18px; height:18px; border:3px solid #f4d35e!important; opacity: 0.85; }
-.corner.tl { left:10px; top:10px; border-right:none; border-bottom:none; }
-.corner.tr { right:10px; top:10px; border-left:none; border-bottom:none; }
-.corner.bl { left:10px; bottom:10px; border-right:none; border-top:none; }
-.corner.br { right:10px; bottom:10px; border-left:none; border-top:none; }
-
-/* 대시보드 스펙 구역 */
-.hero-record { width:320px; margin:35px auto 15px; padding:24px; }
-.record-title { font-family: 'Oswald', sans-serif; font-weight:700; color:#f4d35e!important; letter-spacing: 1px; }
-.record-main { font-family: 'Oswald', sans-serif; font-size:46px; font-weight:700; margin: 5px 0; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-.record-badges { margin-top:12px; font-size:15px; font-weight:800; color:#ffe082; }
+.record-title { font-family: 'Oswald', sans-serif; font-weight:700; color:#f4d35e !important; letter-spacing: 1px; margin: 0 !important; }
+.record-main { font-family: 'Oswald', sans-serif; font-size:46px; font-weight:700; margin: 8px 0 !important; text-shadow: 0 0 10px rgba(255,255,255,0.2); color: #ffffff !important; }
+.record-badges { margin-top:12px; font-size:15px; font-weight:800; color:#ffe082 !important; }
 
 /* 게이지 디자인 보완 */
 .winrate-bar { margin-top:15px; height:10px; border-radius:999px; background:rgba(255,255,255,0.1); overflow:hidden; border: 1px solid rgba(255,255,255,0.05); }
 .winrate-fill { width:81%; height:100%; border-radius:999px; background:linear-gradient(90deg, #ffe082, #f4c542); box-shadow:0 0 15px rgba(244,197,66,0.8); }
 
 .circular-gauge { width:135px; height:135px; margin:20px auto; border-radius:50%; background:conic-gradient(#ffd54f 0 81%, rgba(255,255,255,0.08) 81%); display:flex; align-items:center; justify-content:center; box-shadow: 0 0 15px rgba(255,213,79,0.2); }
-.circular-gauge-inner { width:105px; height:105px; border-radius:50%; background:#0f1d3a; color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-.circular-gauge-inner div:first-child { font-family: 'Oswald', sans-serif; font-weight:700; }
-.circular-gauge-inner div:last-child { font-family: 'Oswald', sans-serif; opacity: 0.6; }
+.circular-gauge-inner { width:105px; height:105px; border-radius:50%; background:#0f1d3a; color:#fff !important; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.circular-gauge-inner div:first-child { font-family: 'Oswald', sans-serif; font-weight:700; color: #ffffff !important; }
+.circular-gauge-inner div:last-child { font-family: 'Oswald', sans-serif; opacity: 0.6; color: #94a3b8 !important; }
+
+/* 장식 코너 테두리 디테일 */
+.corner { position:absolute; width:18px; height:18px; border:3px solid #f4d35e !important; opacity: 0.85; z-index: 5; pointer-events: none; }
+.corner.tl { left:10px; top:10px; border-right:none !important; border-bottom:none !important; }
+.corner.tr { right:10px; top:10px; border-left:none !important; border-bottom:none !important; }
+.corner.bl { left:10px; bottom:10px; border-right:none !important; border-top:none !important; }
+.corner.br { right:10px; bottom:10px; border-left:none !important; border-top:none !important; }
 
 /* ===== 5. 정보 요강 및 이벤트 일정 카드 (다크모드 스타일 튜닝) ===== */
-.info-section { width:95%; max-width:1300px; margin:40px auto; display:grid; grid-template-columns:1fr 1fr; gap:30px; position:relative; z-index:2; }
+.info-section { width:95%; max-width:1300px; margin:40px auto; display:none; grid-template-columns:1fr 1fr; gap:30px; position:relative; z-index:2; }
 .info-card {
-  padding:35px; border-radius:24px!important; border-top: 4px solid #f4d35e!important;
-  background: linear-gradient(180deg, #111c30 0%, #0b1220 100%)!important;
-  box-shadow: 0 20px 45px rgba(0,0,0,0.4)!important; word-break:keep-all; line-break:strict; position:relative; overflow:hidden;
-  border: 1px solid rgba(255,255,255,0.05);
+  padding:35px; border-radius:24px !important; border-top: 4px solid #f4d35e !important;
+  background: linear-gradient(180deg, #111c30 0%, #0b1220 100%) !important;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.4) !important; word-break:keep-all; line-break:strict; position:relative; overflow:hidden;
+  border-left: 1px solid rgba(255,255,255,0.05) !important;
+  border-right: 1px solid rgba(255,255,255,0.05) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
 }
 .info-card:before { content:"📜"; position:absolute; right:20px; top:20px; font-size:46px; opacity:.05; }
-.info-title { color:#f4d35e!important; font-size:26px!important; font-weight:800; padding-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.1); text-align: center; }
-.info-content { font-size:16px; line-height:1.9; font-weight:600; color:#cbd5e1; }
+.info-title { color:#f4d35e !important; font-size:26px !important; font-weight:800; padding-bottom:15px; border-bottom:1px solid rgba(255,255,255,0.1); text-align: center; margin: 0 !important; }
+.info-content { font-size:16px; line-height:1.9; font-weight:600; color:#cbd5e1 !important; margin-top: 15px; }
 
 /* 연맹 스케줄 카드 */
 .grid { width:95%; max-width:1300px; margin:40px auto; display:grid; grid-template-columns:repeat(4,1fr); gap:20px; position:relative; z-index:2; }
 .card {
-  padding:25px; border-radius:20px!important; border:1px solid rgba(244,211,94,0.3)!important;
-  background: linear-gradient(135deg, #162238 0%, #0f1826 100%)!important;
-  box-shadow:0 15px 35px rgba(0,0,0,0.4)!important; color:#fff; position:relative; overflow:hidden;
+  padding:25px; border-radius:20px !important; border:1px solid rgba(244,211,94,0.3) !important;
+  background: linear-gradient(135deg, #162238 0%, #0f1826 100%) !important;
+  box-shadow:0 15px 35px rgba(0,0,0,0.4) !important; color:#fff !important; position:relative; overflow:hidden;
 }
 /* 카드 내 흐르는 레이저 애니메이션 효과 */
 .card:before {
@@ -180,23 +171,23 @@ canvas {
 }
 @keyframes cardshine { 0%{left:-120%} 100%{left:180%} }
 
-.card-header { font-family: 'Oswald', sans-serif; font-size:26px!important; font-weight:700; color:#ffd54f; text-shadow:0 2px 6px rgba(0,0,0,0.3); text-align:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:12px; margin-bottom:15px; }
-.time-box { background:rgba(255,255,255,0.04)!important; border:1px solid rgba(255,255,255,0.08)!important; border-radius:12px; padding:12px 16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; }
-.time { font-size:18px; font-weight:800; color:#f8fafc; }
-.utc { font-family: 'Oswald', sans-serif; font-size:13px; color:#94a3b8!important; font-weight:500; }
+.card-header { font-family: 'Oswald', sans-serif; font-size:26px !important; font-weight:700; color:#ffd54f !important; text-shadow:0 2px 6px rgba(0,0,0,0.3); text-align:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:12px; margin-bottom:15px; }
+.time-box { background:rgba(255,255,255,0.04) !important; border:1px solid rgba(255,255,255,0.08) !important; border-radius:12px; padding:12px 16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; }
+.time { font-size:18px; font-weight:800; color:#f8fafc !important; }
+.utc { font-family: 'Oswald', sans-serif; font-size:13px; color:#94a3b8 !important; font-weight:500; }
 
 /* 성과 갤러리 탭 */
 .achievement-tabs { display:grid; grid-template-columns:repeat(4,1fr); justify-content:center; gap:15px; margin:35px auto; max-width:900px; position:relative; z-index:2; }
 .achievement-card {
-  padding:22px 10px; border-radius:16px; text-align:center; font-weight:800; cursor:pointer; transition:all 0.3s ease;
-  background:linear-gradient(180deg, #243554 0%, #17243c 100%)!important; border:1px solid rgba(244,211,94,0.4)!important;
-  color: #fff; box-shadow:0 10px 20px rgba(0,0,0,0.3)!important; overflow: hidden;
+  padding:22px 10px; border-radius:16px !important; text-align:center; font-weight:800; cursor:pointer; transition:all 0.3s ease;
+  background:linear-gradient(180deg, #243554 0%, #17243c 100%) !important; border:1px solid rgba(244,211,94,0.4) !important;
+  color: #fff !important; box-shadow:0 10px 20px rgba(0,0,0,0.3) !important; position: relative; overflow: hidden;
 }
-.achievement-card:hover { transform:translateY(-6px); border-color:#f4d35e!important; box-shadow: 0 0 15px rgba(244,211,94,0.4), 0 12px 24px rgba(0,0,0,0.4)!important; }
+.achievement-card:hover { transform:translateY(-6px); border-color:#f4d35e !important; box-shadow: 0 0 15px rgba(244,211,94,0.4), 0 12px 24px rgba(0,0,0,0.4) !important; }
 .achievement-card .ribbon {
   position:absolute; right:-33px; top:10px; transform:rotate(45deg);
-  background:linear-gradient(135deg,#f4d35e,#c7961d); color:#221500;
-  padding:2px 30px; font-size:10px; font-weight:900; box-shadow:0 2px 6px rgba(0,0,0,0.3);
+  background:linear-gradient(135deg,#f4d35e,#c7961d); color:#221500 !important;
+  padding:2px 30px; font-size:10px; font-weight:900; box-shadow:0 2px 6px rgba(0,0,0,0.3); z-index: 4;
 }
 
 /* 이미지 연동 요소 */
@@ -209,9 +200,9 @@ canvas {
 #popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; backdrop-filter: blur(8px); }
 .popup-content { position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:95%; max-width:900px; height:80%; background:#1e293b; border-radius:20px; overflow:hidden; display:flex; flex-direction:column; border:1px solid rgba(255,255,255,0.1); }
 .popup-header { text-align:right; padding:12px; background:#111827; border-bottom:1px solid rgba(255,255,255,0.1); }
-.close-btn { background:none; border:none; font-size:22px; cursor:pointer; color:#fff; }
+.close-btn { background:none; border:none; font-size:22px; cursor:pointer; color:#fff !important; }
 iframe { flex:1; width:100%; border:none; background: #fff; }
-.footer { text-align:center; margin:80px 0 40px; font-size:14px; color:#475569; font-weight: 500; position:relative; z-index:2; }
+.footer { text-align:center; margin:80px 0 40px; font-size:14px; color:#475569 !important; font-weight: 500; position:relative; z-index:2; }
 
 /* 부드러운 등장 애니메이션 */
 @keyframes slideUp { from{opacity:0;transform:translateY(25px)} to{opacity:1;transform:translateY(0)} }
@@ -252,10 +243,8 @@ iframe { flex:1; width:100%; border:none; background: #fff; }
 
 <body>
 
-<!-- 눈꽃 애니메이션 캔버스 배경 -->
 <canvas id="snow"></canvas>
 
-<!-- 히어로 영역 -->
 <div class="hero">
   <div class="hero-top">WHITE OUT SURVIVAL</div>
   <div class="hero-title">S2515 IMMIGRATION</div>
@@ -281,7 +270,6 @@ iframe { flex:1; width:100%; border:none; background: #fff; }
   </div>
 </div>
 
-<!-- 상단 네비게이션 대시보드 -->
 <div class="menu-row">
   <div class="btn" onclick="goLink()">💬 이민 문의<small>OPEN CHAT</small></div>
   <div class="btn" onclick="openForm()">📋 이민 신청<small>GOOGLE FORM</small></div>
@@ -293,20 +281,17 @@ iframe { flex:1; width:100%; border:none; background: #fff; }
   <div class="btn" onclick="toggleAlliance()">🛡 연맹정보<small>ALLIANCE</small></div>
 </div>
 
-<!-- 하위 연맹 메뉴 슬라이드 -->
 <div id="allianceMenu" class="menu-grid-small" style="display:none;">
   <div class="btn" onclick="selectTeam('UNI')">🛡 UNI</div>
   <div class="btn" onclick="selectTeam('WON')">⚔ WON</div>
   <div class="btn" onclick="selectTeam('ROK')">🚩 ROK</div>
 </div>
 
-<!-- 메인 인트로 스크린 이미지 구역 -->
 <div id="mainView" style="display:flex;justify-content:center;gap:25px;flex-wrap:wrap;width:95%;margin:30px auto;">
   <img src="img/2515모집중.png" class="poster">
   <img src="img/2515소개.png" class="poster">
 </div>
 
-<!-- 성과 보기 구역 -->
 <div id="achievementMenuArea" style="display:none;text-align:center;">
   <div style="max-width:900px;margin:0 auto 20px; padding:0 15px;">
     <h2 style="color:#ffd54f; font-family:'Oswald',sans-serif; font-size:32px; margin-bottom:8px; letter-spacing:1px;">🏆 2515 ACHIEVEMENT HALL</h2>
@@ -321,298 +306,6 @@ iframe { flex:1; width:100%; border:none; background: #fff; }
   <div id="achievementContent" style="text-align:center; min-height:100px;"></div>
 </div>
 
-<!-- 모집 요강 인포메이션 카드 -->
-<div class="info-section" id="infoSection" style="display:none">
+<div class="info-section" id="infoSection">
   <div class="info-card">
-    <div class="info-title">💙 모집 대상 💙</div><br>
-    <div class="info-content">
-      · 개인 / 소규모 / 단체 이민 모두 환영합니다.<br>
-      · 7월 이민 마감 / 8월 이민 예상범위 2251~2680<br>
-      · 8월 단체이민 문의받습니다 / ROK연맹 단체이민 가능합니다.<br><br>
-        
-      · ROK / WON : 단체 인원 수용 가능(최소 20명 최대 50명~)<br>
-      · 뜻 맞는 분들과 함께 성장하실 분이라면 누구나 환영합니다:)<br><br>
-      
-      · 8월~9월 연계 단체 이민 예정이신 분들 (8월 특초 2장가능)<br>
-      · WON연맹 합병(20~30명) 적극 환영<br>
-      · 7월 신규연맹 ROK 합병(50명~) 단체 이동 적극 환영<br><br>
-        
-      <strong>💙 연맹 소개 💙</strong><br><br>
-      · WON : 행성 1명 / 유성 7명 보유 <br>
-      · UNI : 행성 5명 / 유성 5명 보유 <br>
-      · ROK : 행성 1명 / 유성 2명 보유 (7월 신규연맹) <br><br>
-      
-      <strong>💙 2515 서버, 이런 분들께 추천드립니다 💙</strong><br>
-      “평소에는 평화롭게, 전투와 전쟁 때는 확실하게.”<br><br>
-      · 한국어 소통이 편한 서버를 찾는 분<br>
-      · 단체 이민이 가능한 환경을 원하는 분<br>
-      · 서버전에 진심으로 참여하실 분<br>
-      · 초기 정착 지원이 필요한 분<br>
-      · 안정적인 연맹에서 플레이하고 싶은 분<br>
-      · 다국적 서버 환경을 선호하는 분 (인도네시아 / 대만 유저 활동)<br>
-      · 협력 중심 플레이를 즐기시는 분 (디스코드 및 오픈채팅 운영)
-    </div>
-  </div>
-
-  <div class="info-card">
-    <div class="info-title">💙 2515 서버의 확실한 보장 💙</div><br>
-    <div class="info-content">
-      <strong>1. 엔센 12개 보장 (4레벨 포함)</strong><br>
-      · 4레벨 엔센 포함 총 12개 보장<br>
-      · 단체 이민 시 최소 기반 없이 시작하지 않도록 안정적인 출발 지원<br><br>
-      
-      <strong>2. 요새 / 성채 분배</strong><br>
-      · 요새 4개 / 성채 1개 제공<br>
-      · 초기 정착 이후 서버 안정화 시 기여도, 점수, 랭킹 기준으로 합리적 재분배 진행<br><br>
-      
-      <strong>3. 서버전 메인 참여 / 카랠 협력 운영</strong><br>
-      · 서버전에 진심으로 참여하는 구조<br>
-      · 강성 서버와의 전투에서도 승리 경험 보유<br>
-      · 전적 : 16전 13승 달 2개 별2개 (※별 1개는 타 연맹 보유)<br><br>
-      
-      <strong>4. 서리 / 드엠 협력 가능</strong><br>
-      · 연맹 간 협의를 통한 유동적 협력 운영<br>
-      · 첫 서리 이벤트에서도 연합 운영 경험 보유<br>
-      · 서리 서버 연합 단합으로 4강 진출 달성<br>
-      · 드엠 서버 연합 체제로 출전해 연맹 1위 / 개인(2위/ 4위) 기록<br><br>
-        
-      <strong>5. 연구 만렙 연맹 제공 가능</strong><br>
-      · 연구 만렙 빈 연맹 2개 보유<br>
-      · WON 연맹(행성 1 / 유성 7) 합병 형태 참여 가능 (단체 이민 시 매우 유리)<br><br>
-      
-      <strong>6. 초기 정착 전폭 지원</strong><br>
-      · 깃발 / 센터 / 인원 부족 등 초기 문제 적극 지원<br>
-      · 단체 이민 시 발생하는 정착 스트레스 최소화 및 안정적 안착 지원
-    </div>
-  </div>
-</div>
-
-<!-- 연맹 세부 스케줄 동적 렌더링 존 -->
-<div id="content"></div>
-
-<!-- 푸터 구역 -->
-<div class="footer">Made by 우짱 | White Out Survival Fan Site</div>
-
-<!-- 🔥 구글 설문지 팝업창 -->
-<div id="popup">
-  <div class="popup-content">
-    <div class="popup-header">
-      <button class="close-btn" onclick="closeForm()">❌</button>
-    </div>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSewbQiBZ_FCCYRGijla7nwDp7t_CiH7jcaFhvneQHoEDqfm8Q/viewform?embedded=true"></iframe>
-  </div>
-</div>
-
-<!-- ===== 스크립트 기능 구역 ===== -->
-<script>
-function toggleAlliance(){
- const menu=document.getElementById('allianceMenu');
- document.getElementById('infoSection').style.display='none';
- document.getElementById('achievementMenuArea').style.display='none';
- document.getElementById('content').innerHTML='';
- document.getElementById('mainView').style.display='none';
- menu.style.display=(menu.style.display==='grid')?'none':'grid';
-}
-
-function goLink(){
-  window.open("https://open.kakao.com/o/sL7u8cYh","_blank");
-}
-
-function openForm(){
-  document.getElementById("popup").style.display="block";
-}
-
-function closeForm(){
-  document.getElementById("popup").style.display="none";
-}
-
-function selectTeam(team){
-  document.getElementById("infoSection").style.display="none";
-  document.getElementById("content").innerHTML="";
-  document.getElementById('achievementMenuArea').style.display='none';
-
-  if(team==="UNI") renderUNI();
-  else if(team==="WON") renderWON();
-  else if(team==="ROK") renderROK();
-}
-
-function renderUNI(){
-document.getElementById("content").innerHTML=`
-<div class="grid">
-<div class="card"><div class="card-header">🐻 곰</div>
-<div class="time-box"><div class="time">곰 1 - 20:30</div><div class="utc">(UTC 11:30)</div></div>
-<div class="time-box"><div class="time">곰 2 - 22:00</div><div class="utc">(UTC 13:00)</div></div>
-</div>
-<div class="card"><div class="card-header">⚙ 무공</div>
-<div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-<div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-</div>
-<div class="card"><div class="card-header">🏔 협곡</div>
-<div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-<div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-</div>
-<div class="card"><div class="card-header">🎉 조이</div>
-<div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
-</div>
-</div>`;
-}
-
-function renderWON(){
-document.getElementById("content").innerHTML=`
-<div class="grid">
-<div class="card"><div class="card-header">🐻 곰</div>
-<div class="time-box"><div class="time">곰 1 - 23:40</div><div class="utc">(UTC 14:40)</div></div>
-<div class="time-box"><div class="time">곰 2 - 22:20</div><div class="utc">(UTC 13:20)</div></div>
-</div>
-<div class="card"><div class="card-header">⚙ 무공</div>
-<div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-<div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-</div>
-<div class="card"><div class="card-header">🏔 협곡</div>
-<div class="time-box"><div class="time">1군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-<div class="time-box"><div class="time">2군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-</div>
-<div class="card"><div class="card-header">🎉 조이</div>
-<div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
-</div>
-</div>`;
-}
-
-function renderROK(){
-document.getElementById("content").innerHTML=`
-<div class="grid">
-<div class="card"><div class="card-header">🐻 곰</div>
-<div class="time-box"><div class="time">곰 1 - 21:30</div><div class="utc">(UTC 12:30)</div></div>
-<div class="time-box"><div class="time">곰 2 - 22:30</div><div class="utc">(UTC 13:30)</div></div>
-</div>
-<div class="card"><div class="card-header">⚙ 무공</div>
-<div class="time-box"><div class="time">1군(참여도 순) - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-<div class="time-box"><div class="time">2군(참여도 순) - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-</div>
-<div class="card"><div class="card-header">🏔 협곡</div>
-<div class="time-box"><div class="time">1군(참여도 순) - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-<div class="time-box"><div class="time">2군(참여도 순) - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-</div>
-<div class="card"><div class="card-header">🎉 조이</div>
-<div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 12:00)</div></div>
-</div>
-</div>`;
-}  
-
-/* 실시간 떨어지는 인터랙션 눈송이 이펙트 스크립트 */
-const canvas=document.getElementById("snow");
-const ctx=canvas.getContext("2d");
-
-function resizeCanvas(){
-  canvas.width=window.innerWidth;
-  canvas.height=window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener("resize",resizeCanvas);
-
-let flakes=[];
-for(let i=0; i<45; i++){
-  flakes.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, size:Math.random()*7+6, speed:Math.random()*0.8+0.3});
-}
-
-function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-flakes.forEach(f=>{
-ctx.font=f.size+"px Arial";
-ctx.fillStyle="rgba(174, 219, 255, 0.5)";
-ctx.fillText("❄",f.x,f.y);
-f.y+=f.speed;
-if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
-});
-requestAnimationFrame(draw);
-}
-draw();
-
-function hideMain(){
- document.getElementById('mainView').style.display='none';
-}
-function showRecruit(){
- document.getElementById('allianceMenu').style.display='none';
- hideMain();
- document.getElementById('achievementMenuArea').style.display='none';
- document.getElementById('content').innerHTML='';
- document.getElementById('infoSection').style.display='grid';
-}
-function showAchievementMenu(){
- document.getElementById('allianceMenu').style.display='none';
- hideMain();
- document.getElementById('infoSection').style.display='none';
- document.getElementById('achievementMenuArea').style.display='block';
- document.getElementById('content').innerHTML='';
-}
-
-function showAchievement(type){
- let img='';
- if(type==='honor') img='img/명예의길.png';
- if(type==='frost') img='img/서리병기 4위.png';
- if(type==='dragon'){
-document.getElementById('achievementContent').innerHTML=`<div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;width:95%;margin:20px auto;">
-<img src="img/드래곤엠페러1.png" class="poster" style="width:48%;">
-<img src="img/드래곤엠페러2.png" class="poster" style="width:48%;">
-</div>`; 
-setTimeout(initLightbox, 100);
-return;
-}
- if(type==='explore') img='img/지심탐험.png';
- document.getElementById('achievementContent').innerHTML='<img src="'+img+'" class="achievement-poster" style="width:min(80vw,700px);max-width:95%;height:auto;display:block;margin:20px auto;">';
- setTimeout(initLightbox, 100);
-}
-</script>
-
-<!-- 🔥 라이트박스 이미지 팝업용 모달 인프라 구조 -->
-<div id="imgModal" style="display:none;position:fixed;inset:0;background:rgba(3,7,18,0.9);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(8px);" onclick="this.style.display='none'">
-<img id="modalImage" style="max-width:92%;max-height:92%;border-radius:16px;box-shadow: 0 25px 50px rgba(0,0,0,0.7); border:1px solid rgba(255,255,255,0.15)">
-</div>
-
-<script>
-function initLightbox(){
-  document.querySelectorAll('img:not(#modalImage)').forEach(i=>{
-    i.style.cursor='zoom-in';
-    i.onclick=()=>{
-      modalImage.src=i.src;
-      imgModal.style.display='flex';
-    };
-  });
-}
-document.addEventListener('DOMContentLoaded', initLightbox);
-</script>
-
-<!-- 카드 가변 코너 모서리 장식 자동 빌더 -->
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
- document.querySelectorAll('.server,.hero-record,.server-box').forEach(card=>{
-   ['tl','tr','bl','br'].forEach(c=>{
-     if(!card.querySelector('.corner.'+c)){
-       const d=document.createElement('div');
-       d.className='corner '+c;
-       card.appendChild(d);
-     }
-   });
- });
- document.querySelectorAll('.achievement-card').forEach(card=>{
-   if(!card.querySelector('.ribbon')){
-     const r=document.createElement('div');
-     r.className='ribbon';
-     r.textContent='MEDAL';
-     card.appendChild(r);
-   }
- });
-});
-</script>
-
-<!-- 부드러운 화면 최상단 원터치 스크롤업 트랙패드 -->
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;right:25px;bottom:25px;display:none;padding:14px 18px;border:1px solid rgba(255,255,255,0.1);border-radius:999px;background:#1e3a8a;color:#fff;font-weight:700;cursor:pointer;z-index:9999;box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition:all 0.2s;">▲ TOP</button>
-<script>
-const topBtn=document.getElementById('topBtn');
-window.addEventListener('scroll',()=>{topBtn.style.display=window.scrollY>250?'block':'none';},{passive:true});
-topBtn.addEventListener('mouseenter',()=>topBtn.style.background='#2563eb');
-topBtn.addEventListener('mouseleave',()=>topBtn.style.background='#1e3a8a');
-</script>
-
-</body>
-</html>
+    <div class="info-
