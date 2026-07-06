@@ -288,8 +288,8 @@ iframe { flex:1; width:100%; border:none; background: #fff; }
 </div>
 
 <div id="mainView" style="display:flex;justify-content:center;gap:25px;flex-wrap:wrap;width:95%;margin:30px auto;">
-  <img src="img/2515모집중.png" class="poster">
-  <img src="img/2515소개.png" class="poster">
+  <img src="img/2515모집중.png" class="poster" alt="2515 모집중">
+  <img src="img/2515소개.png" class="poster" alt="2515 소개">
 </div>
 
 <div id="achievementMenuArea" style="display:none;text-align:center;">
@@ -303,9 +303,126 @@ iframe { flex:1; width:100%; border:none; background: #fff; }
     <div class="achievement-card" onclick="showAchievement('explore')">🔥<br>지심탐험</div>
     <div class="achievement-card" onclick="showAchievement('dragon')">👑<br>드래곤 엠페러</div>
   </div>
-  <div id="achievementContent" style="text-align:center; min-height:100px;"></div>
+  <div id="achievementContent" style="text-align:center; min-height:100px; margin-top:20px;"></div>
 </div>
 
 <div class="info-section" id="infoSection">
   <div class="info-card">
-    <div class="info-
+    <div class="info-title">📜 2515 서버 이민 요강</div>
+    <div class="info-content">
+      1. 단체 이민 및 개인 투력 보유자 정착 자금 및 연맹 서포트 지원.<br>
+      2. 주요 연맹 간의 마찰 없는 유기적인 협동 시스템 가동 중.<br>
+      3. 고투력 전력 유저분들을 위한 맞춤형 이민 케어 제공 전략 시스템 완비.
+    </div>
+  </div>
+  <div class="info-card">
+    <div class="info-title">⚔️ SVS 서버전 행동 강령</div>
+    <div class="info-content">
+      * 서버 최고의 전투원들로 구성된 연합 엘리트 스쿼드 편성.<br>
+      * 승률 81%의 강력한 지휘부 오더에 따른 완벽한 전술 수행.<br>
+      * 참여율에 따른 공정한 보상 분배 규칙 준수 및 격려 제도 지원.
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  &copy; White Out Survival S2515 Immigration Page. All Rights Reserved.
+</div>
+
+<div id="popup">
+  <div class="popup-content">
+    <div class="popup-header">
+      <button class="close-btn" onclick="closePopup()">❌</button>
+    </div>
+    <iframe id="popupFrame" src=""></iframe>
+  </div>
+</div>
+
+<script>
+// 1. 시네마틱 스노우 효과 스크립트 구동
+const canvas = document.getElementById('snow');
+const ctx = canvas.getContext('2d');
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
+const flakes = [];
+
+for (let i = 0; i < 90; i++) {
+  flakes.push({
+    x: Math.random() * width,
+    y: Math.random() * height,
+    r: Math.random() * 3 + 1,
+    d: Math.random() * 1
+  });
+}
+
+function drawSnow() {
+  ctx.clearRect(0, 0, width, height);
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+  ctx.beginPath();
+  for (let i = 0; i < 90; i++) {
+    const f = flakes[i];
+    ctx.moveTo(f.x, f.y);
+    ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+    f.y += Math.cos(f.d) + 1 + f.r / 2;
+    f.x += Math.sin(f.d) * 0.5;
+    if (f.y > height) {
+      flakes[i] = { x: Math.random() * width, y: 0, r: f.r, d: f.d };
+    }
+  }
+  ctx.fill();
+  requestAnimationFrame(drawSnow);
+}
+
+window.addEventListener('resize', () => {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+});
+drawSnow();
+
+// 2. 버튼 클릭 인터랙션 기능 함수들 정의
+function goLink() {
+  // 오픈채팅방 링크 주소를 넣어주세요.
+  window.open('https://open.kakao.com/o/xxxxxx', '_blank');
+}
+
+function openForm() {
+  // 구글 폼 링크 주소를 넣어주세요.
+  window.open('https://forms.gle/xxxxxx', '_blank');
+}
+
+function showRecruit() {
+  document.getElementById('infoSection').style.display = 'grid';
+  document.getElementById('achievementMenuArea').style.display = 'none';
+  window.scrollTo({ top: document.getElementById('infoSection').offsetTop - 30, behavior: 'smooth' });
+}
+
+function showAchievementMenu() {
+  document.getElementById('achievementMenuArea').style.display = 'block';
+  document.getElementById('infoSection').style.display = 'none';
+  window.scrollTo({ top: document.getElementById('achievementMenuArea').offsetTop - 30, behavior: 'smooth' });
+}
+
+function showAchievement(type) {
+  const content = document.getElementById('achievementContent');
+  if(type === 'honor') content.innerHTML = '<img src="img/honor.png" class="achievement-poster" alt="명예의길">';
+  if(type === 'frost') content.innerHTML = '<img src="img/frost.png" class="achievement-poster" alt="서리병기">';
+  if(type === 'explore') content.innerHTML = '<img src="img/explore.png" class="achievement-poster" alt="지심탐험">';
+  if(type === 'dragon') content.innerHTML = '<img src="img/dragon.png" class="achievement-poster" alt="드래곤엠페러">';
+}
+
+function toggleAlliance() {
+  const menu = document.getElementById('allianceMenu');
+  menu.style.display = menu.style.display === 'none' ? 'grid' : 'none';
+}
+
+function selectTeam(teamName) {
+  alert(teamName + " 연맹 세부 정보 페이지는 연맹장 연동 대기 중입니다.");
+}
+
+function closePopup() {
+  document.getElementById('popup').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
