@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>White Out Survival S2515
+<title>White Out Survival S2515</title>
 
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
 
@@ -206,7 +206,6 @@ box-shadow:0 4px 12px rgba(0,0,0,.08);
 transform:translateY(-4px);
 }
 
-
 .hero{text-align:center;padding:30px 20px;}
 .hero-top{font-size:32px;font-weight:900;color:#fff;-webkit-text-stroke:2px #000;}
 .hero-title{font-size:62px;font-weight:900;font-style:italic;color:#fff;-webkit-text-stroke:2px #333;}
@@ -287,7 +286,6 @@ transform:translateY(-4px);
   box-shadow:inset 0 3px 8px rgba(0,0,0,.25)!important;
 }
 
-
 /* ==== HOTFIX SERVER WAR ==== */
 .server,.hero-record,.server-box{position:relative!important;padding-top:54px!important;}
 .server::before,.hero-record::before,.server-box::before{
@@ -341,7 +339,6 @@ transform:translateY(-4px);
  font-weight:800;
  box-shadow:0 2px 8px rgba(0,0,0,.2);
 }
-
 
 /* ===== V5 ULTIMATE GAME STYLE ===== */
 
@@ -495,7 +492,6 @@ box-shadow:0 10px 24px rgba(0,0,0,.15)!important;
 transform:translateY(-6px) scale(1.04)!important;
 }
 
-
 /* ===== PREMIUM IMMIGRATION UPGRADE ===== */
 body::before{
  content:"";
@@ -539,7 +535,6 @@ body::before{
 
 <canvas id="snow"></canvas>
 
-
 <div class="hero">
   <div class="hero-top">White Out Survival</div>
   <div class="hero-title">S2515 IMMIGRATION</div>
@@ -554,8 +549,6 @@ body::before{
     <div class="record-title">👑 SERVER WAR ELITE</div><div class="record-main">16전 13승</div><div class="circular-gauge"><div class="circular-gauge-inner"><div style="font-size:28px">81%</div><div style="font-size:11px">WIN RATE</div></div></div><div class="record-star">🏆⚔️🏆</div><div class="record-badges">🏆 달 2개 · ⭐ 별 2개</div>
   </div>
 </div>
-
-
 
 <div class="menu-row">
   <div class="btn" onclick="goLink()">💬 이민 문의<small>OPEN CHAT</small></div>
@@ -573,12 +566,6 @@ body::before{
   <div class="btn" onclick="selectTeam('WON')">⚔ WON</div>
   <div class="btn" onclick="selectTeam('ROK')">🚩 ROK</div>
 </div>
-
-
-
-
-
-
 
 <div id="mainView" style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;width:95%;margin:30px auto;">
 <img src="img/2515모집중.png" class="poster" style="width:48%;">
@@ -619,7 +606,7 @@ body::before{
 
 · WON : 행성 1명 / 유성 7명 보유 <br>
 · UNI : 행성 5명 / 유성 5명 보유 <br>
-· ROK : 행성 1명 / 유성 2명 보유 (7월 신규연맹) <br><br>
+· ROK : 행성 1명 / 유성 2명 보유 (6월 신규연맹) <br><br>
 
 💙2515 서버, 이런 분들께 추천드립니다💙<br><br>
 
@@ -647,20 +634,23 @@ body::before{
 2. 요새 / 성채 분배<br>
 · 요새 4개 / 성채 1개 제공<br>
 · 초기 정착 이후 서버 안정화 시<br>
-· 기여도, 점수, 랭킹 기준으로 합리적 재분배 진행<br><br>
+기여도, 점수, 랭킹 기준으로 합리적 재분배 진행<br><br>
 
 3. 서버전 메인 참여 / 카랠 협력 운영<br>
 · 서버전에 진심으로 참여하는 구조<br>
 · 강성 서버와의 전투에서도 승리 경험 보유<br>
-· 전적 : 16전 13승 달 2개 별2개 (※별 1개는 타 연맹 보유)<br><br>
+· 전적 : 15전 12승 달 2개 별1개 (※별 1개는 타 연맹 보유)<br><br>
 
 4. 서리 / 드엠 협력 가능<br>
 · 연맹 간 협의를 통한 유동적 협력 운영<br>
+· 첫 서리 이벤트에서도 연합 운영 경험 보유<br>
 · 서리 서버 연합 단합으로 4강 진출 달성<br>
-· 드엠 서버 연합 체제로 출전해 연맹 1위 / 개인(2위/ 4위) 기록<br><br>
+· 드엠 서버 연합 체제로 출전해 연맹 4위 / 개인(7위) 기록<br><br>
   
 5. 연구 만렙 연맹 제공 가능<br>
 · 연구 만렙 빈 연맹 2개 보유<br>
+· WON 연맹(행성 1 / 유성 7)<br> 
+→ 합병 형태 참여 가능<br>
 → 단체 이민 시 매우 유리한 선택지<br><br>
 
 6. 초기 정착 전폭 지원<br>
@@ -794,7 +784,6 @@ document.getElementById("content").innerHTML=`
 </div>`;
 }  
 
-
 /* 눈꽃 */
 const canvas=document.getElementById("snow");
 const ctx=canvas.getContext("2d");
@@ -823,7 +812,6 @@ if(f.y>canvas.height){f.y=0;f.x=Math.random()*canvas.width;}
 requestAnimationFrame(draw);
 }
 draw();
-
 
 function hideMain(){
  document.getElementById('mainView').style.display='none';
@@ -857,16 +845,12 @@ document.getElementById('achievementContent').innerHTML=`<div style="display:fle
 
 </script>
 
-
 <div id="imgModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:9999;align-items:center;justify-content:center" onclick="this.style.display='none'">
 <img id="modalImage" style="max-width:92%;max-height:92%;border-radius:16px">
 </div>
 <script>
 document.querySelectorAll('img').forEach(i=>{i.style.cursor='zoom-in';i.onclick=()=>{modalImage.src=i.src;imgModal.style.display='flex';};});
 </script>
-
-
-
 
 <script>
 function animateSection(id){
@@ -888,7 +872,6 @@ document.addEventListener('DOMContentLoaded',()=>{
  });
 });
 </script>
-
 
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
@@ -923,6 +906,13 @@ document.addEventListener('DOMContentLoaded',()=>{
    }
  });
 });
+</script>
+
+
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;right:20px;bottom:20px;display:none;padding:12px 16px;border:none;border-radius:999px;background:#2d5da8;color:#fff;font-weight:700;cursor:pointer;z-index:9999;">▲ TOP</button>
+<script>
+const topBtn=document.getElementById('topBtn');
+window.addEventListener('scroll',()=>{topBtn.style.display=window.scrollY>200?'block':'none';},{passive:true});
 </script>
 
 </body>
