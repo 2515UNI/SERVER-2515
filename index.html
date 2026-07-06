@@ -184,10 +184,10 @@ iframe {
 }
 
 .achievement-tabs{
-display:flex;
+display:grid;
+grid-template-columns:repeat(2,minmax(180px,220px));
 justify-content:center;
 gap:15px;
-flex-wrap:wrap;
 margin:25px 0;
 }
 .achievement-card{
@@ -586,6 +586,10 @@ body::before{
 </div>
 
 <div id="achievementMenuArea" style="display:none;text-align:center;">
+<div style="max-width:900px;margin:0 auto 20px;">
+<h2 style="color:#234b93;margin-bottom:8px;">🏆 2515 Achievement Hall</h2>
+<div style="color:#666;font-weight:600;">2515 서버의 주요 전적과 성과<br><small>Last Update : 2026.07.06</small></div>
+</div>
 <div class="achievement-tabs">
 <div class="achievement-card" onclick="showAchievement('honor')">🏆<br>명예의길</div>
 <div class="achievement-card" onclick="showAchievement('frost')">❄<br>서리병기 4위</div>
@@ -844,6 +848,11 @@ function showAchievement(type){
  let img='';
  if(type==='honor') img='img/명예의길.png';
  if(type==='frost') img='img/서리병기 4위.png';
+ if(type==='dragon'){
+document.getElementById('achievementContent').innerHTML=`<div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;width:95%;margin:20px auto;">
+<img src="img/드래곤엠페러1.png" class="poster" style="width:48%;">
+<img src="img/드래곤엠페러2.png" class="poster" style="width:48%;">
+</div>`;return;}
  if(type==='explore') img='img/지심탐험.png';
  document.getElementById('achievementContent').innerHTML =
  '<img src="'+img+'" class="achievement-poster">';
