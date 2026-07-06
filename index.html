@@ -222,7 +222,6 @@ transform:translateY(-4px);
 .hero-tags span{
     display:block;
     margin:8px 0;
-  }
 }
 .menu-grid-small .btn{white-space:nowrap;}
   
@@ -246,6 +245,11 @@ transform:translateY(-4px);
 }
 .server::after,.hero-record::after,.server-box::after{
   content:"🏅 16 Battles • 13 Wins";
+  position: absolute;
+  right: 18px;
+  top: 16px;
+  font-size: 12px;
+  font-weight: 700;
 }
 .server .emblem,.hero-record .emblem,.server-box .emblem{
  position:absolute;
@@ -299,11 +303,6 @@ transform:translateY(-4px);
  font-weight:900!important;
  text-shadow:0 2px 6px rgba(0,0,0,.8)!important;
 }
-.server::after,.hero-record::after,.server-box::after{
- right:18px!important;
- top:16px!important;
- z-index:6!important;
-}
 .server h1,.server h2,.server h3,
 .hero-record h1,.hero-record h2,.hero-record h3,
 .server-box h1,.server-box h2,.server-box h3{
@@ -352,18 +351,6 @@ transform:translateY(-4px);
     radial-gradient(circle at top right,rgba(255,255,255,.10),transparent 35%),
     repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 8px,rgba(0,0,0,.03) 8px 16px),
     linear-gradient(135deg,#234b93,#356fd8)!important;
-}
-
-/* Shield watermark */
-.server::before,.hero-record::before,.server-box::before{
-  content:"🛡";
-  position:absolute;
-  right:18px;
-  bottom:10px;
-  font-size:120px;
-  opacity:.05;
-  color:#fff;
-  text-shadow:none;
 }
 
 /* Progress bar */
@@ -690,7 +677,6 @@ body::before{
 
 <div class="footer">Made by 우짱</div>
 
-<!-- 🔥 구글폼 팝업 -->
 <div id="popup">
   <div class="popup-content">
     <div class="popup-header">
