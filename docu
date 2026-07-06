@@ -862,8 +862,7 @@ document.getElementById('achievementContent').innerHTML=`<div style="display:fle
 <img src="img/드래곤엠페러2.png" class="poster" style="width:48%;">
 </div>`;return;}
  if(type==='explore') img='img/지심탐험.png';
- document.getElementById('achievementContent').innerHTML =
- '<img src="'+img+'" class="achievement-poster">';
+ document.getElementById('achievementContent').innerHTML='<img src="'+img+'" class="achievement-poster" style="width:min(80vw,900px);max-width:96%;height:auto;display:block;margin:20px auto;">';
 }
 
 </script>
