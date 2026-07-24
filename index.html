@@ -460,7 +460,7 @@ width: 95%;
 max-width: 900px;
 margin: 15px auto;
 display: grid;
-grid-template-columns: repeat(3, 1fr);
+grid-template-columns: repeat(2, 1fr);
 gap: 15px;
 }
 .menu-grid-small .btn {
@@ -991,7 +991,6 @@ VICTORIES
 <div id="allianceMenu" class="menu-grid-small" style="display:none;">
 <div class="btn" onclick="selectTeam('UNI')">🛡 UNI</div>
 <div class="btn" onclick="selectTeam('WON')">⚔ WON</div>
-<div class="btn" onclick="selectTeam('ROK')">🚩 ROK</div>
 </div>
 <div id="mainView" style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;width:95%;margin:30px auto;">
 <img loading="lazy" src="img/2515모집중.png" class="poster">
@@ -1055,13 +1054,12 @@ VICTORIES
 </button>
 <div id="recruitDetail" class="promise-detail">
 · 개인 / 소규모 / 단체 이민 모두 환영합니다.<br>
-· 7월 이민 마감 / 8월 이민 예상범위 2251~2680<br>
-· 8월 단체이민 문의받습니다.<br>
-· ROK 연맹 단체이민 가능합니다.<br><br>
+· 8월 이민 예상범위 2251~2680<br>
+· 8월 ~ 9월 단체이민 문의받습니다.<br>
+· WON 연맹 단체이민 가능합니다.(최대 25~30자리)<br><br>
 💙 연맹 소개 💙<br><br>
-· WON : 행성 1명 / 유성 7명 보유<br>
-· UNI : 행성 5명 / 유성 5명 보유<br>
-· ROK : 행성 1명 / 유성 2명 보유<br><br>
+· WON : 행성 4명 / 유성 다수 보유<br>
+· UNI : 행성 6명 / 유성 다수 보유<br><br>
 💙2515 서버 추천 대상💙<br><br>
 · 한국어 소통이 편한 서버를 찾는 분<br>
 · 단체 이민 가능한 환경을 원하는 분<br>
@@ -1133,7 +1131,7 @@ VICTORIES
 3. 서버전 메인 참여 / 카랠 협력 운영<br>
 · 서버전에 진심으로 참여하는 구조<br>
 · 강성 서버와의 전투에서도 승리 경험 보유<br>
-· 전적 : 16전 13승 달 2개 별2개<br>
+· 전적 : 17전 14승 달2개 별3개<br>
 (※별 1개는 타 연맹 보유)<br><br>
 4. 서리 / 드엠 협력 가능<br>
 · 연맹 간 협의를 통한 유동적 협력 운영<br>
@@ -1143,7 +1141,7 @@ VICTORIES
 · 연맹 1위 / 개인(2위·4위) 기록<br><br>
 5. 연구 만렙 연맹 제공 가능<br>
 · 연구 만렙 빈 연맹 2개 보유<br>
-· WON 연맹(행성 1 / 유성 7)<br>
+· WON 연맹(행성 4 / 유성 다수)<br>
 → 합병 형태 참여 가능<br>
 → 단체 이민 시 매우 유리한 선택지<br><br>
 6. 초기 정착 전폭 지원<br>
@@ -1372,8 +1370,6 @@ function selectTeam(team){
         renderUNI();
     }else if(team==="WON"){
         renderWON();
-    }else{
-        renderROK();
     }
 
     window.scrollTo({
@@ -1422,26 +1418,6 @@ document.getElementById("content").innerHTML=`
 </div>
 <div class="card"><div class="card-header">🎉 조이</div>
 <div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 13:00)</div></div>
-</div>
-</div>`;
-}
-function renderROK(){
-document.getElementById("content").innerHTML=`
-<div class="grid">
-<div class="card"><div class="card-header">🐻 곰</div>
-<div class="time-box"><div class="time">곰 1 - 21:30</div><div class="utc">(UTC 12:30)</div></div>
-<div class="time-box"><div class="time">곰 2 - 22:30</div><div class="utc">(UTC 13:30)</div></div>
-</div>
-<div class="card"><div class="card-header">⚙ 무공</div>
-<div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-<div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-</div>
-<div class="card"><div class="card-header">🏔 협곡</div>
-<div class="time-box"><div class="time">1군 - 21:00</div><div class="utc">(UTC 12:00)</div></div>
-<div class="time-box"><div class="time">2군 - 23:00</div><div class="utc">(UTC 14:00)</div></div>
-</div>
-<div class="card"><div class="card-header">🎉 조이</div>
-<div class="time-box"><div class="time">22:00</div><div class="utc">(UTC 12:00)</div></div>
 </div>
 </div>`;
 }
