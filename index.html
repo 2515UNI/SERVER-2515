@@ -364,39 +364,71 @@ display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:18px;
 }
-.achievement-card {
-padding:2px;
-text-align:center;
-font-size:22px;
-font-weight:900;
-border-radius:20px;
-background:
-linear-gradient(
-180deg,
-#ffffff,
-#e8f2ff
-);
-border:2px solid var(--gold);
-border:2px solid #9ed8ff;
-box-shadow:0 10px 24px rgba(0,0,0,.15);
-cursor:pointer;
-position:relative;
-overflow:hidden;
-transition:.2s;
+.achievement-card{
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    padding:28px 18px;
+    border-radius:22px;
+    background:linear-gradient(180deg,#ffffff,#eef7ff,#dceeff);
+    border:2px solid #9fd8ff;
+    box-shadow:0 12px 28px rgba(0,0,0,.15),inset 0 0 15px rgba(255,255,255,.8);
+    transition:.35s;
 }
-.achievement-card:hover {
-transform: translateY(-6px) scale(1.04);
+
+.achievement-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.45) 50%,transparent 80%);
+    transform:translateX(-160%);
 }
-.achievement-card::after {
-content: "";
-position: absolute;
-inset: 0;
-background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.35) 50%, transparent 65%);
-transform: translateX(-150%);
-transition: transform .8s;
+
+.achievement-card:hover::before{
+    animation:shine .8s forwards;
 }
-.achievement-card:hover::after {
-transform: translateX(150%);
+
+@keyframes shine{
+    to{
+        transform:translateX(160%);
+    }
+}
+
+.achievement-card:hover{
+    transform:translateY(-8px) scale(1.03);
+    box-shadow:0 20px 40px rgba(0,0,0,.2),0 0 20px rgba(120,200,255,.45);
+}
+
+.achievement-icon{
+    font-size:48px;
+    margin-bottom:14px;
+    transition:.3s;
+}
+
+.achievement-card:hover .achievement-icon{
+    transform:scale(1.15);
+}
+
+.achievement-title{
+    font-size:23px;
+    font-weight:900;
+    color:#17345f;
+    line-height:1.2;
+}
+
+.achievement-line{
+    width:70px;
+    height:2px;
+    margin:16px auto;
+    background:linear-gradient(90deg,#9ed8ff,#fff,#9ed8ff);
+}
+
+.achievement-sub{
+    margin-top:10px;
+    font-size:11px;
+    letter-spacing:3px;
+    color:#6f8fb3;
+    font-weight:800;
 }
 .poster {
 border:3px solid var(--gold);
@@ -998,14 +1030,58 @@ VICTORIES
 </div>
 <div id="achievementMenuArea" style="display:none;text-align:center;">
 <div style="max-width:900px;margin:0 auto 20px;">
-<h2 style="color:#17345f;margin-bottom:8px;">🏆 2515 Achievement Hall</h2>
+<h2 style="
+font-size:38px;
+font-weight:900;
+letter-spacing:4px;
+color:#17345f;
+margin-bottom:6px;
+text-shadow:0 0 12px rgba(120,200,255,.35);
+">
+ACHIEVEMENT HALL
+</h2>
+
+<div style="
+font-size:16px;
+font-weight:800;
+letter-spacing:3px;
+color:#7b93b8;
+margin-bottom:18px;
+">
+S2515 SERVER RECORD
+</div>
 <div style="color:#666;font-weight:600;">2515 서버의 주요 전적과 성과<br><small>Last Update : 2026.07.06</small></div>
 </div>
 <div class="achievement-tabs">
-<div class="achievement-card" onclick="showAchievement('honor')">🏆<br>명예의길</div>
-<div class="achievement-card" onclick="showAchievement('frost')">❄<br>서리병기 4위</div>
-<div class="achievement-card" onclick="showAchievement('explore')">🔥<br>지심탐험</div>
-<div class="achievement-card" onclick="showAchievement('dragon')">👑<br>드래곤 엠페러</div>
+
+<div class="achievement-card" onclick="showAchievement('honor')">
+<div class="achievement-icon">🏆</div>
+<div class="achievement-title">명예의 길</div>
+<div class="achievement-line"></div>
+<div class="achievement-sub">ACHIEVEMENT</div>
+</div>
+
+<div class="achievement-card" onclick="showAchievement('frost')">
+<div class="achievement-icon">❄</div>
+<div class="achievement-title">서리병기</div>
+<div class="achievement-line"></div>
+<div class="achievement-sub">TOP 4</div>
+</div>
+
+<div class="achievement-card" onclick="showAchievement('explore')">
+<div class="achievement-icon">🔥</div>
+<div class="achievement-title">지심탐험</div>
+<div class="achievement-line"></div>
+<div class="achievement-sub">EXPLORATION</div>
+</div>
+
+<div class="achievement-card" onclick="showAchievement('dragon')">
+<div class="achievement-icon">👑</div>
+<div class="achievement-title">드래곤 엠페러</div>
+<div class="achievement-line"></div>
+<div class="achievement-sub">DRAGON EMPEROR</div>
+</div>
+
 </div>
 <div id="achievementContent" style="text-align:center;"></div>
 </div>
